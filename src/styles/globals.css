@@ -36,7 +36,7 @@ h1 {
   font-weight: 700;
 }
 
-:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl) {
   margin-block: 0;
 }
 
@@ -44,6 +44,35 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+.container {
+  max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: var(--container-width-tab);
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: var(--container-width-desktop);
+  }
+}
+
+.section {
+  padding-block-end: 16px;
+}
+
+@media (min-width: 1440px) {
+  .section {
+    padding-inline-end: 32px;
+    padding-block-end: 0;
+  }
 }
 
 button {

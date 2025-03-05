@@ -25,7 +25,7 @@ function App() {
           <Route
             path="tracker"
             element={
-              <PrivateRoute redirectTo="/signin">
+              <PrivateRoute redirectTo="/tracker">
                 <TrackerPage />
               </PrivateRoute>
             }
@@ -33,7 +33,7 @@ function App() {
           <Route
             path="signup"
             element={
-              <RestrictedRoute redirectTo="/tracker">
+              <RestrictedRoute redirectTo="/signup">
                 <SignUpPage />
               </RestrictedRoute>
             }
@@ -41,7 +41,7 @@ function App() {
           <Route
             path="signin"
             element={
-              <RestrictedRoute redirectTo="/tracker">
+              <RestrictedRoute redirectTo="/signin">
                 <SignInPage />
               </RestrictedRoute>
             }
