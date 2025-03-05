@@ -1,0 +1,10 @@
+.section {
+  padding-block-end: 16px;
+}
+
+@media (min-width: 1440px) {
+  .section {
+    padding-inline-end: 32px;
+    padding-block-end: 0;
+  }
+}

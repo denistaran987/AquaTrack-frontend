@@ -1,0 +1,25 @@
+.container {
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  color: red;
+  margin-bottom: 10px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  color: inherit;
+  width: 200px;
+  font-size: 18px;
+  text-decoration: none;
+  text-align: center;
+  transition: color 0.3s ease-in-out;
+}
+
+.link:hover {
+  color: red;
+}

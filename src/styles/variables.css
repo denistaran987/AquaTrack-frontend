@@ -1,0 +1,30 @@
+:root {
+  --color-main: #323f47;
+  --color-secondary: #2f2f2f;
+  --color-light: #ffffff;
+  --color-accent: #9be1a0;
+  --color-gray: #f0eff4;
+
+  --font-family-main: 'Poppins', sans-serif;
+  --font-family-secondary: 'Gilroy', sans-serif;
+
+  --container-width: 343px;
+  --container-width-tab: 736px;
+  --container-width-desktop: 1376px;
+
+  --container-padding-x: 16px;
+
+  --input-height: 59px;
+  --button-height: 68px;
+
+  --transition-duration: 0.2s;
+
+  --desktop-above: 1440px;
+  --desktop: 1439px;
+
+  --tablet-above: 768px;
+  --tablet: 767px;
+
+  --mobile-above: 375px;
+  --mobile: 374px;
+}
