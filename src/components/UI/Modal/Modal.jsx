@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import css from './Modal.module.css';
-import sprite from '/public/images/icons.svg';
+import sprite from '/images/icons.svg';
 import { useEffect } from 'react';
 
 // для прикладу, викликається ось так <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
