@@ -6,13 +6,13 @@
 
 @media (min-width: 768px) {
   .container {
-    max-width: var(--container-width-tab);
+    max-width: calc(var(--container-width-tab) + var(--container-padding-x) * 2);
   }
 }
 
 @media (min-width: 1440px) {
   .container {
-    max-width: var(--container-width-desktop);
+    max-width: calc(var(--container-width-desktop) + var(--container-padding-x) * 2);
   }
 }
 
