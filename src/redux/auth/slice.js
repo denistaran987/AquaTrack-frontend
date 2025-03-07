@@ -14,7 +14,7 @@ const initialState = {
 export const slice = createSlice({
   name: 'auth',
   initialState,
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase();
   },
 });
