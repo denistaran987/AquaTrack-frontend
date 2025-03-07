@@ -1,9 +1,13 @@
 import React from 'react';
+import UserBar from '../UserBar/UserBar.jsx';
+import css from './UserPanel.module.css';
 
 const UserPanel = () => {
   return (
-    <div>
-      <h2>Hello, Nadia!</h2>
+    <div className={css.wrapper}>
+      <h2 className={css.title}>
+        Hello<span className={css.titleSpan}>, Nadia!</span>
+      </h2>
       <UserBar />
     </div>
   );

@@ -1,8 +1,12 @@
+import DailyInfo from '../../components/UI/WaterUserInfo/DailyInfo/DailyInfo.jsx';
+import UserPanel from '../../components/UI/WaterUserPanel/UserPanel/UserPanel.jsx';
+
 const TrackerPage = () => {
   return (
-    <>
-      <h2>TrackerPage</h2>
-    </>
+    <div className="container">
+      <UserPanel />
+      <DailyInfo />
+    </div>
   );
 };
 

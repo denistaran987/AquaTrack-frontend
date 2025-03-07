@@ -1,0 +1,17 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  padding-top: 40px;
+}
+
+.title {
+  font-family: var(--font-family-secondary);
+  font-weight: 400;
+  font-size: 32px;
+}
+
+.titleSpan {
+  font-weight: 700;
+}
