@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  background: #b2e2a7;
+  background: #9be1a0;
   border-radius: 20px;
   max-width: 350px;
 
@@ -51,36 +51,6 @@
   }
 }
 
-.waterDailyNorma {
-  position: absolute;
-  height: 54px;
-  width: 102px;
-  top: 72px;
-  left: 16px;
-  background: white;
-  padding: 12px;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-  z-index: 2;
-}
-
-.normaValue {
-  font-weight: bold;
-  font-size: 14px;
-  align-self: flex-start;
-  margin-bottom: 4px;
-}
-
-.normaText {
-  font-size: 10px;
-  color: #2f2f2f99;
-  align-self: center;
-}
-
 .addWaterBtn {
   width: 140px;
   height: 46px;
@@ -105,22 +75,6 @@
   .title {
     font-size: 24px;
     margin: 32px 0 0 33px;
-  }
-
-  .waterDailyNorma {
-    height: 78px;
-    width: 129px;
-    top: 101px;
-    left: 32px;
-    padding: 14px 18px;
-  }
-
-  .normaValue {
-    font-size: 15px;
-  }
-
-  .normaText {
-    font-size: 12px;
   }
 
   .bottle {
@@ -148,10 +102,6 @@
 }
 
 @media (min-width: 1440px) {
-  .waterDailyNorma {
-    left: 64px;
-  }
-
   .bottle {
     background-image: url('/images/bottle.png');
     max-width: 472px;

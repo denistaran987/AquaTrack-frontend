@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './WaterMainInfo.module.css';
+import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma';
 
 const WaterMainInfo = () => {
   const handleAddWaterClick = () => {
@@ -13,11 +14,7 @@ const WaterMainInfo = () => {
       </header>
       <div className={s.bottleWrapper}>
         <div className={s.bottle}></div>
-
-        <div className={s.waterDailyNorma}>
-          <span className={s.normaValue}>1.5 L</span>
-          <span className={s.normaText}>My daily norma</span>
-        </div>
+        <WaterDailyNorma />
       </div>
 
       <button className={s.addWaterBtn} onClick={handleAddWaterClick}>
