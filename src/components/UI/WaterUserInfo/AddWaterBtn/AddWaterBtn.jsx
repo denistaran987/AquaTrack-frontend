@@ -4,9 +4,11 @@ import css from './AddWaterBtn.module.css';
 const AddWaterBtn = () => {
   return (
     <button className={css.button}>
-      <svg width="30" height="30" className={css.svg}>
-        <use href="/public/images/icons.svg#icon-plus"></use>
-      </svg>
+      <div className={css.svgWrapper}>
+        <svg width="20" height="20" className={css.svg}>
+          <use href="/public/images/icons.svg#icon-plus"></use>
+        </svg>
+      </div>
       <p className={css.text}>Add water</p>
     </button>
   );

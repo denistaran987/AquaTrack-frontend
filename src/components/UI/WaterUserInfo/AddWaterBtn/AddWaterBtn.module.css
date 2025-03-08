@@ -8,6 +8,17 @@
   padding: 0;
 }
 
+.svgWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #9be1a0;
+  border: none;
+}
 .svg {
   stroke: var(--color-main);
 }

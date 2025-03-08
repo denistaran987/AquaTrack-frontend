@@ -1,0 +1,25 @@
+.svg {
+  stroke: var(--color-main);
+  fill: none;
+}
+
+.cardWrapper {
+  display: flex;
+  gap: 10px;
+
+  padding: 18px 14px;
+
+  outline: 1px solid tomato;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.amount {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+}
