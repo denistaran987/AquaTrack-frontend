@@ -1,0 +1,168 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background: #b2e2a7;
+  border-radius: 20px;
+  max-width: 350px;
+
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+
+  text-align: left;
+  margin: 24px 0 0 16px;
+}
+
+.bottleWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.bottle {
+  background-image: url('/images/bottle-mob.png');
+  width: 100%;
+  max-width: 262px;
+  height: 335px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 6px;
+  margin-bottom: 30px;
+  z-index: 1;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .bottle {
+    background-image: url('/images/bottle-mob@2x.png');
+  }
+}
+
+.waterDailyNorma {
+  position: absolute;
+  height: 54px;
+  width: 102px;
+  top: 72px;
+  left: 16px;
+  background: white;
+  padding: 12px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.normaValue {
+  font-weight: bold;
+  font-size: 14px;
+  align-self: flex-start;
+  margin-bottom: 4px;
+}
+
+.normaText {
+  font-size: 10px;
+  color: #2f2f2f99;
+  align-self: center;
+}
+
+.addWaterBtn {
+  width: 140px;
+  height: 46px;
+  position: absolute;
+  bottom: 32px;
+  right: 16px;
+  background: black;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 704px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin: 32px 0 0 33px;
+  }
+
+  .waterDailyNorma {
+    height: 78px;
+    width: 129px;
+    top: 101px;
+    left: 32px;
+    padding: 14px 18px;
+  }
+
+  .normaValue {
+    font-size: 15px;
+  }
+
+  .normaText {
+    font-size: 12px;
+  }
+
+  .bottle {
+    background-image: url('/images/bottle-tab.png');
+    max-width: 374px;
+    height: 477px;
+    margin-top: 13px;
+    margin-bottom: 32px;
+  }
+
+  .addWaterBtn {
+    width: 178px;
+    height: 60px;
+    bottom: 64px;
+    right: 32px;
+    padding: 18px 30px;
+    font-size: 16px;
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .bottle {
+      background-image: url('/images/bottle-tab@2x.png');
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .waterDailyNorma {
+    left: 64px;
+  }
+
+  .bottle {
+    background-image: url('/images/bottle.png');
+    max-width: 472px;
+    height: 604px;
+    margin-top: 36px;
+    margin-bottom: 40px;
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .bottle {
+      background-image: url('/images/bottle@2x.png');
+    }
+  }
+}
