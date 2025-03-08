@@ -1,11 +1,8 @@
 .section {
   position: relative;
+  padding: 118px 16px 67px 16px;
   background-color: #f0eff4;
   border-radius: 30px;
-}
-
-.title-container {
-  padding: 118px 16px 67px 16px;
 }
 
 .subtitle {
@@ -51,6 +48,10 @@
 }
 
 @media (min-width: 768px) {
+  .section {
+    padding: 106px 93px 50px 64px;
+  }
+
   .subtitle {
     font-size: 16px;
     line-height: 1.5;
@@ -59,10 +60,6 @@
   .title {
     font-size: 64px;
     line-height: 1.1;
-  }
-
-  .title-container {
-    padding: 106px 93px 50px 64px;
   }
 
   .link {
@@ -79,16 +76,12 @@
 
 @media (min-width: 1440px) {
   .section {
-    max-width: calc((100% - 32px) / 2);
-  }
-
-  .title-container {
     padding: 188px 61px 188px 64px;
   }
 
   .title {
     font-size: 80px;
-    line-height: 1;
+    line-height: 0.95;
   }
 
   @media (hover: hover) {
