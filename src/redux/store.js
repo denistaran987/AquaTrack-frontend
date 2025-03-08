@@ -4,6 +4,10 @@ import waterListReducer from './waterList/slice';
 import todayWaterListReducer from './todayWaterList/slice';
 import monthDataReducer from './monthData/slice';
 import modalReducer from './modal/slice';
+import waterModalReducer from "./waterModal/slice";
+import waterReducer from "./waterSlice/slice";
+
+console.log(waterModalReducer);
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +16,7 @@ export const store = configureStore({
     todayWaterList: todayWaterListReducer,
     monthData: monthDataReducer,
     modal: modalReducer,
+    waterModal: waterModalReducer,    
+    water: waterReducer,              
   },
 });
