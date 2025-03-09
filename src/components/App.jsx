@@ -4,6 +4,7 @@ import SharedLayout from './Utils/SharedLayout/SharedLayout';
 import PrivateRoute from './Utils/PrivateRoute/PrivateRoute';
 import RestrictedRoute from './Utils/RestrictedRoute/RestrictedRoute';
 import { lazy, Suspense } from 'react';
+import Loader from './Utils/Loader/Loader';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage'));
@@ -14,7 +15,7 @@ const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
 function App() {
   return (
     <>
-      <Suspense fallback="Loading...">
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
             <Route
