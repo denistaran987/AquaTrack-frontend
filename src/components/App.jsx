@@ -22,7 +22,7 @@ function App() {
               element={
                 <RestrictedRoute redirectTo="/">
                   <HomePage />
-                </RestrictedRoute>
+                  </RestrictedRoute>
               }
             />
             <Route

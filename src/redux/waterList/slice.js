@@ -7,9 +7,9 @@ const initialState = {
 export const slice = createSlice({
   name: 'waterList',
   initialState,
-  extraReducers: builder => {
-    builder.addCase();
-  },
+  //extraReducers: builder => {
+   // builder.addCase();
+  //},
 });
 
 export default slice.reducer;

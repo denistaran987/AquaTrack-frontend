@@ -4,20 +4,19 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { addWater, updateWater } from "../../redux/waterSlice/slice.js";
 import { closeModal } from "../../redux/waterModal/slice.js";
+import css from "./WaterForm.module.css"; 
 
 const WaterForm = ({ type, initialValues }) => {
   const dispatch = useDispatch();
 
-  
   const validationSchema = Yup.object().shape({
     amount: Yup.number()
-      .min(50, "Минимальное значение 50 мл")
-      .max(2000, "Максимальное значение 2000 мл")
-      .required("Введите количество воды"),
-    time: Yup.string().required("Выберите время"),
+      .min(50, "min 50 ml")
+      .max(2000, "max 2000 ml")
+      .required("amount of water"),
+    time: Yup.string().required("time"),
   });
 
-  
   const formik = useFormik({
     initialValues: initialValues || { amount: "", time: "" },
     validationSchema,
@@ -32,9 +31,8 @@ const WaterForm = ({ type, initialValues }) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      
-      <label>
+    <form onSubmit={formik.handleSubmit} className={css.form}>
+      <label className={css.label}>
         Amount (ml):
         <input
           type="number"
@@ -42,14 +40,14 @@ const WaterForm = ({ type, initialValues }) => {
           value={formik.values.amount}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          className={css.input}
         />
         {formik.touched.amount && formik.errors.amount && (
-          <div className="error">{formik.errors.amount}</div>
+          <div className={css.error}>{formik.errors.amount}</div>
         )}
       </label>
 
-     
-      <label>
+      <label className={css.label}>
         Time:
         <input
           type="time"
@@ -57,14 +55,16 @@ const WaterForm = ({ type, initialValues }) => {
           value={formik.values.time}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          className={css.input}
         />
         {formik.touched.time && formik.errors.time && (
-          <div className="error">{formik.errors.time}</div>
+          <div className={css.error}>{formik.errors.time}</div>
         )}
       </label>
 
-     
-      <button type="submit">{type === "add" ? "Add" : "Save"}</button>
+      <button type="submit" className={css.button}>
+        {type === "add" ? "Add" : "Save"}
+      </button>
     </form>
   );
 };
