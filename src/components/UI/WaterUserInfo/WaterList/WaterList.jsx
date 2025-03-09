@@ -1,8 +1,6 @@
 import React from 'react';
 import WaterItem from '../WaterItem/WaterItem.jsx';
 import css from './WaterList.module.css';
-import SimpleBar from 'simplebar-react';
-import 'simplebar-react/dist/simplebar.min.css';
 
 const WaterList = () => {
   const arr = [
