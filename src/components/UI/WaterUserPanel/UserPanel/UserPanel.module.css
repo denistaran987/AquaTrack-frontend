@@ -15,3 +15,11 @@
 .titleSpan {
   font-weight: 700;
 }
+
+@media (min-width: 768px) {
+  .UserPanelWrapper {
+    flex-direction: row;
+    gap: 0px;
+    justify-content: space-between;
+  }
+}

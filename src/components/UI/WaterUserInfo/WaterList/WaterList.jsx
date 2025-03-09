@@ -32,18 +32,13 @@ const WaterList = () => {
 
   return (
     <div className={css.WaterListWrapper}>
-      {/* <SimpleBar
-        style={{
-          overflowX: 'auto',
-          paddingBottom: '35px',
-        }}
-      > */}
-      <div className={css.waterList}>
+      <ul className={css.waterList}>
         {arr.map(({ time, amount }) => (
-          <WaterItem key={crypto.randomUUID()} amount={amount} time={time} />
+          <li>
+            <WaterItem key={crypto.randomUUID()} amount={amount} time={time} />
+          </li>
         ))}
-      </div>
-      {/* </SimpleBar> */}
+      </ul>
     </div>
   );
 };
