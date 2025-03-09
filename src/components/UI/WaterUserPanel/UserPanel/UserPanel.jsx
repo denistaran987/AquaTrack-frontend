@@ -4,7 +4,7 @@ import css from './UserPanel.module.css';
 
 const UserPanel = () => {
   return (
-    <div className={css.wrapper}>
+    <div className={css.UserPanelWrapper}>
       <h2 className={css.title}>
         Hello<span className={css.titleSpan}>, Nadia!</span>
       </h2>

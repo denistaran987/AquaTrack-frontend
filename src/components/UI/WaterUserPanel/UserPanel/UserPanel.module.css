@@ -1,9 +1,9 @@
-.wrapper {
+.UserPanelWrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: flex-start;
-  padding-top: 40px;
+  padding: 40px 20px 0 20px;
 }
 
 .title {

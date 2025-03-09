@@ -11,7 +11,7 @@ const WaterItem = ({ amount, time }) => {
         <p className={css.amount}>{amount} ml</p>
         <p className={css.time}>{time} ml</p>
       </div>
-      <div>
+      <div className={css.svgWrapper}>
         <svg className={css.svg} width="14" height="14">
           <use href="/images/icons.svg#icon-edit-2"></use>
         </svg>

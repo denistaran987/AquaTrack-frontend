@@ -9,7 +9,10 @@
 
   padding: 18px 14px;
 
-  outline: 1px solid tomato;
+  background-color: aqua;
+  border-radius: 15px;
+
+  min-width: 149px;
 }
 
 .infoWrapper {
@@ -22,4 +25,16 @@
   font-weight: 700;
   font-size: 14px;
   line-height: 100%;
+}
+
+.time {
+  font-size: 12px;
+  line-height: 100%;
+  color: var(--color-secondary);
+}
+
+.svgWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
