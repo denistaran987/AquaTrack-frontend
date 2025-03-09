@@ -1,52 +1,47 @@
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import css from './Modal.module.css';
 import sprite from '/images/icons.svg';
-import { useEffect } from 'react';
 
-// для прикладу, викликається ось так <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
-//         <AddWaterModal onSubmit={handleAddWater} onCancel={closeModal} />
-//       </Modal>
+const Modal = ({ children, toggleModal, position }) => {
+  const modalRoot = document.querySelector('#modal-root');
 
-export default function Modal({ children, isOpen, onRequestClose }) {
-  // це стиль для кнопки закривання, буде завжди в кутку елементу children(має бути як мінімум, побачимо)
-  const closeButtonPosition =
-    window.innerWidth > 768 ? { right: '40px', top: '40px' } : { right: '20px', top: '20px' };
-  const handleModalClick = e => {
-    e.stopPropagation();
-  };
   useEffect(() => {
-    const bodyElement = document.body;
     const handleKeyDown = e => {
-      if (e.key === 'Escape') {
-        onRequestClose();
+      if (e.code !== 'Escape') {
+        return;
       }
+      toggleModal();
     };
 
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-      bodyElement.classList.add('lock');
-    }
+    window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      bodyElement.classList.remove('lock');
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, onRequestClose]);
+  }, [toggleModal]);
 
-  return (
-    <div
-      className={isOpen ? clsx(css.backdrop, css.active) : css.backdrop}
-      onClick={onRequestClose}
-    >
-      <div className={clsx(css.modal, { [css.active]: isOpen })} onClick={handleModalClick}>
-        <button className={css.btn} onClick={onRequestClose} style={closeButtonPosition}>
+  const handleClickBackdrop = e => {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+    toggleModal();
+  };
+
+  return createPortal(
+    <div className={css.backdrop} onClick={handleClickBackdrop}>
+      <div className={clsx(css.modal, { [css.topPosition]: position === 'top' })}>
+        <button className={css.btn} onClick={toggleModal}>
           <svg className={css.icon}>
             <use href={`${sprite}#icon-x`}></use>
           </svg>
         </button>
-
         {children}
       </div>
-    </div>
+    </div>,
+    modalRoot
   );
-}
+};
+
+export default Modal;
