@@ -7,9 +7,6 @@ const initialState = {
 export const slice = createSlice({
   name: 'monthData',
   initialState,
-  extraReducers: builder => {
-    builder.addCase();
-  },
 });
 
 export default slice.reducer;
