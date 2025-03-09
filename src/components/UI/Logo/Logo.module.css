@@ -1,14 +1,19 @@
 .logo {
+  position: absolute;
+  top: 24px;
+  left: 16px;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 1;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   text-align: center;
 }
 
-@media (max-width: 767.98px) {
+@media (min-width: 767.98px) {
   .logo {
-    font-size: 18px;
+    top: 32px;
+    left: 32px;
+    font-size: 24px;
   }
 }

@@ -9,7 +9,7 @@
   --font-family-secondary: 'Gilroy', sans-serif;
 
   --container-width: 343px;
-  --container-width-tab: 736px;
+  --container-width-tab: 704px;
   --container-width-desktop: 1376px;
 
   --container-padding-x: 16px;
@@ -27,4 +27,10 @@
 
   --mobile-above: 375px;
   --mobile: 374px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-padding-x: 32px;
+  }
 }
