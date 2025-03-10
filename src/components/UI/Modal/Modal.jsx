@@ -1,52 +1,60 @@
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import sprite from '/images/icons.svg';
 import clsx from 'clsx';
 import css from './Modal.module.css';
-import sprite from '/images/icons.svg';
-import { useEffect } from 'react';
 
-// для прикладу, викликається ось так <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
-//         <AddWaterModal onSubmit={handleAddWater} onCancel={closeModal} />
-//       </Modal>
+const Modal = ({ children, toggleModal, isOpen, position }) => {
+  const modalRoot = document.querySelector('#modal-root');
+  const [isAnimating, setIsAnimating] = useState(false);
 
-export default function Modal({ children, isOpen, onRequestClose }) {
-  // це стиль для кнопки закривання, буде завжди в кутку елементу children(має бути як мінімум, побачимо)
-  const closeButtonPosition =
-    window.innerWidth > 768 ? { right: '40px', top: '40px' } : { right: '20px', top: '20px' };
-  const handleModalClick = e => {
-    e.stopPropagation();
-  };
   useEffect(() => {
-    const bodyElement = document.body;
     const handleKeyDown = e => {
-      if (e.key === 'Escape') {
-        onRequestClose();
+      if (e.code === 'Escape') {
+        setIsAnimating(false);
+        setTimeout(toggleModal, 300);
       }
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-      bodyElement.classList.add('lock');
+      setIsAnimating(true);
+      window.addEventListener('keydown', handleKeyDown);
     }
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      bodyElement.classList.remove('lock');
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, onRequestClose]);
+  }, [isOpen, toggleModal]);
 
-  return (
+  const handleClickBackdrop = e => {
+    if (e.target === e.currentTarget) {
+      setIsAnimating(false);
+      setTimeout(toggleModal, 300);
+    }
+  };
+
+  return createPortal(
     <div
-      className={isOpen ? clsx(css.backdrop, css.active) : css.backdrop}
-      onClick={onRequestClose}
+      className={clsx(css.backdrop, { [css.active]: isOpen, [css.hidden]: !isAnimating })}
+      onClick={handleClickBackdrop}
     >
-      <div className={clsx(css.modal, { [css.active]: isOpen })} onClick={handleModalClick}>
-        <button className={css.btn} onClick={onRequestClose} style={closeButtonPosition}>
+      <div className={clsx(css.modalContent, { [css.topPosition]: position === 'top' })}>
+        <button
+          className={css.btn}
+          onClick={() => {
+            setIsAnimating(false);
+            setTimeout(toggleModal, 300);
+          }}
+        >
           <svg className={css.icon}>
             <use href={`${sprite}#icon-x`}></use>
           </svg>
         </button>
-
         {children}
       </div>
-    </div>
+    </div>,
+    modalRoot
   );
-}
+};
+
+export default Modal;
