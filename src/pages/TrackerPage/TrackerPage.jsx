@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import ProgressBar from '../../components/ProgressBar/ProgressBar.jsx';
+import ProgressBar from '../../components/UI/ProgressBar/ProgressBar.jsx';
 
 const TrackerPage = () => {
   const [progress, setProgress] = useState(0);
