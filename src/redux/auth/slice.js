@@ -1,5 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { registerUser, signInUser } from "./operations.js";
+
+export const logoutUser = createAsyncThunk("auth/logoutUser", async () => null);
 
 const initialState = {
   name: null,
@@ -17,20 +19,6 @@ const initialState = {
 export const slice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    setUser: (state, action) => {
-      state.name = action.payload.name;
-      state.email = action.payload.email;
-      state.token = action.payload.token;
-      state.isAuthenticated = true;
-    },
-    logout: (state) => {
-      state.name = null;
-      state.email = null;
-      state.token = null;
-      state.isAuthenticated = false;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
@@ -44,18 +32,21 @@ export const slice = createSlice({
       })
       .addCase(signInUser.fulfilled, (state, action) => {
         const user = action.payload.data.user || {}; 
-        const userName = user.name?.trim() || "User"; 
-
         state.token = action.payload.data.accessToken;
-        state.name = userName;
+        state.name = user.name?.trim() || "User";
         state.email = user.email || "";
         state.isAuthenticated = true;
       })
       .addCase(signInUser.rejected, (state, action) => {
         state.error = action.payload;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.name = null;
+        state.email = null;
+        state.token = null;
+        state.isAuthenticated = false;
       });
   },
 });
 
-export const { setUser, logout } = slice.actions;
 export default slice.reducer;

@@ -23,50 +23,52 @@ const SignInPage = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const handleSubmit = (values, { resetForm }) => {
+const handleSubmit = (values, { resetForm }) => {
     console.log("Form submitted with values:", values);
   
     dispatch(signInUser(values))
-    .unwrap()
-    .then((res) => {
-      console.log("Server response:", res);
+      .unwrap()
+      .then((res) => {
+        console.log("Server response:", res);
   
-      const user = res.data?.user || {};
-      const userName = user.name?.trim() || "User"; 
+        const user = res.data?.user || {};
+        const userName = user.name?.trim() || "User";
   
-      toast.success(`Welcome back, ${userName}!`, {
-        style: { backgroundColor: "#4CAF50", fontWeight: "bold" },
-        iconTheme: { primary: "white", secondary: "black" },
+        toast.success(`Welcome back, ${userName}!`, {
+          style: { backgroundColor: "#4CAF50", fontWeight: "bold" },
+          iconTheme: { primary: "white", secondary: "black" },
+        });
+  
+        resetForm();
+  
+        setTimeout(() => {
+          navigate("/tracker");
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error("Error in sign-in:", error);
+  
+        if (error.response) {
+            const { status, message, data } = error.response.data;
+            console.log("Response error data:", data); 
+          
+            if (status === 400) {
+              toast.error(message || "Bad request. Invalid input data.");
+            } else if (status === 401) {
+              toast.error(message || "Unauthorized. Session not found.");
+            } else if (status === 404) {
+              toast.error(message || "Resource not found.");
+            } else if (status === 409) {
+              toast.error(message || "A contact with this email already exists.");
+            } else if (status === 500) {
+              toast.error(message || "Something went wrong. Please try again later.");
+            } else {
+              toast.error(`Error: ${message || "An unknown error occurred."}`);
+            }
+          } else {
+            toast.error("Network error. Please check your connection.");
+          }
       });
-  
-      resetForm();
-  
-      setTimeout(() => {
-        navigate("/tracker");
-      }, 2000);
-    })
-    .catch((error) => {
-      console.error("Error in sign-in:", error);
-  
-      if (error.response) {
-        const { status, message } = error.response.data;
-        console.log("Response error data:", error.response.data);
-  
-        if (status === 400) {
-          toast.error("Invalid email or password.");
-        } else if (status === 401) {
-          toast.error("Unauthorized. Please try again.");
-        } else if (status === 404) {
-          toast.error("User not found.");
-        } else if (status === 500) {
-          toast.error("Something went wrong. Please try again later.");
-        } else {
-          toast.error(`Error: ${message}`);
-        }
-      } else {
-        toast.error("Network error. Please check your connection.");
-      }
-    });
   };
 
   return (
@@ -78,44 +80,48 @@ const SignInPage = () => {
             initialValues={{ email: "", password: "" }}
             validationSchema={SignInSchema}
             onSubmit={handleSubmit}
-          >
-            {({ errors, touched, setFieldTouched }) => (
-              <Form className={styles.signinForm}>
+            validateOnBlur={false}
+            validateOnChange={false}
+            >
+            {({ errors, touched, handleSubmit, setFieldTouched }) => (
+                <Form className={styles.signinForm} noValidate onSubmit={handleSubmit}>
                 <label className={styles.label}>Email</label>
                 <Field
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  className={`${styles.input} ${touched.email ? (errors.email ? styles.errorInput : styles.focusedInput) : styles.inactiveInput}`}
-                  onFocus={() => setFieldTouched("email", true)}
-                  onBlur={() => setFieldTouched("email", true)}
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    className={`${styles.input} ${
+                    touched.email && errors.email ? styles.errorInput : ""
+                    }`}
+                    onBlur={() => setFieldTouched("email", true)}
                 />
                 <ErrorMessage name="email" component="div" className={styles.errorMessage} />
 
                 <label className={styles.label}>Password</label>
                 <div className={styles.passwordWrapper}>
-                  <Field
+                    <Field
                     name="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
-                    className={`${styles.input} ${touched.password ? (errors.password ? styles.errorInput : styles.focusedInput) : styles.inactiveInput}`}
-                    onFocus={() => setFieldTouched("password", true)}
+                    className={`${styles.input} ${
+                        touched.password && errors.password ? styles.errorInput : ""
+                    }`}
                     onBlur={() => setFieldTouched("password", true)}
-                  />
-                  <button
+                    />
+                    <button
                     type="button"
                     onClick={togglePasswordVisibility}
                     className={styles.togglePassword}
-                  >
+                    >
                     <svg className={styles.icon} width="24" height="24">
-                      <use xlinkHref={`/images/icons.svg#${showPassword ? "icon-eye" : "icon-eye-off"}`} />
+                        <use xlinkHref={`/images/icons.svg#${showPassword ? "icon-eye" : "icon-eye-off"}`} />
                     </svg>
-                  </button>
+                    </button>
                 </div>
                 <ErrorMessage name="password" component="div" className={styles.errorMessage} />
 
                 <button type="submit" className={styles.signinBtn}>Sign In</button>
-              </Form>
+                </Form>
             )}
           </Formik>
           <p className={styles.signupLink}>
