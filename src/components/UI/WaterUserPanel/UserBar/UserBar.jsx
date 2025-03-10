@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import css from './UserBar.module.css';
+import UserBarPopover from '../UserBarPopover/UserBarPopover.jsx';
 
 const UserBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <button className={css.button}>
-      <p className={css.name}>Nadia</p>
-      <img className={css.image} src="/public/images/avatar_1.jpg" alt="User image" />
-      <svg
-        width="16"
-        height="16"
-        style={{ fill: 'none', stroke: 'white', transform: 'rotate(90deg)' }}
-      >
-        <use href="/images/icons.svg#icon-right"></use>
-      </svg>
-    </button>
+    <div className={css.wrapper}>
+      <button onClick={() => setIsOpen(!isOpen)} className={css.button}>
+        <p className={css.name}>Nadia</p>
+        <img className={css.image} src="/public/images/avatar_1.jpg" alt="User image" />
+        <svg className={css.svg}>
+          <use href="/images/icons.svg#icon-right"></use>
+        </svg>
+      </button>
+      {isOpen && <UserBarPopover />}
+    </div>
   );
 };
 

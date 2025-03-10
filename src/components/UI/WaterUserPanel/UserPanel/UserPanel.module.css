@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 20px;
   align-items: flex-start;
-  padding: 40px 20px 0 20px;
 }
 
 .title {
@@ -21,5 +20,9 @@
     flex-direction: row;
     gap: 0px;
     justify-content: space-between;
+  }
+  .title {
+    font-size: 36px;
+    line-height: 106%;
   }
 }

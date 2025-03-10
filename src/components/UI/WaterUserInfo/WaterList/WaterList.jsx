@@ -34,8 +34,8 @@ const WaterList = () => {
     <div className={css.WaterListWrapper}>
       <ul className={css.waterList}>
         {arr.map(({ time, amount }) => (
-          <li>
-            <WaterItem key={crypto.randomUUID()} amount={amount} time={time} />
+          <li key={crypto.randomUUID()}>
+            <WaterItem amount={amount} time={time} />
           </li>
         ))}
       </ul>

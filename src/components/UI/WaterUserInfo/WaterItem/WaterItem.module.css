@@ -1,24 +1,31 @@
+.cup {
+  width: 28px;
+  height: 30px;
+}
+
 .svg {
   stroke: var(--color-main);
   fill: none;
+  width: 14px;
+  height: 14px;
 }
 
 .cardWrapper {
   display: flex;
   gap: 10px;
+  align-items: center;
 
   padding: 18px 14px;
 
-  background-color: aqua;
+  background-color: var(--color-light);
   border-radius: 15px;
-
   min-width: 149px;
 }
 
 .infoWrapper {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .amount {
@@ -30,11 +37,42 @@
 .time {
   font-size: 12px;
   line-height: 100%;
-  color: var(--color-secondary);
+  color: rgba(47, 47, 47, 0.6);
 }
 
 .svgWrapper {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .cardWrapper {
+    gap: 20px;
+    padding: 20px;
+    min-width: 192px;
+  }
+
+  .cup {
+    width: 32px;
+    height: 36px;
+  }
+
+  .amount {
+    font-size: 15px;
+    line-height: 149%;
+  }
+
+  .time {
+    line-height: 187%;
+  }
+
+  .svgWrapper {
+    gap: 14px;
+  }
+
+  .svg {
+    width: 16px;
+    height: 16px;
+  }
 }

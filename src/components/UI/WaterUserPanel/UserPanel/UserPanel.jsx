@@ -1,6 +1,7 @@
 import React from 'react';
 import UserBar from '../UserBar/UserBar.jsx';
 import css from './UserPanel.module.css';
+import UserBarPopover from '../UserBarPopover/UserBarPopover.jsx';
 
 const UserPanel = () => {
   return (

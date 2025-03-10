@@ -1,23 +1,31 @@
 .WaterListWrapper {
   overflow-x: auto;
-  margin-top: 24px;
   padding-bottom: 24px;
 }
 
 .waterList {
   display: flex;
-  gap: 8px;
+  gap: 4px;
 }
 
 ::-webkit-scrollbar {
-  height: 8px; /* Висота горизонтального скролу */
+  height: 8px;
   border-radius: 9px;
   background-color: white;
 }
 
-/* Сам ползунок (рухома частина) */
 ::-webkit-scrollbar-thumb {
-  background: var(--color-main); /* Колір скролбару */
+  background: var(--color-main);
   border-radius: 9px;
   width: 150px;
+}
+
+@media (min-width: 768px) {
+  .waterList {
+    gap: 32px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    width: 235px;
+  }
 }
