@@ -5,6 +5,7 @@ import PrivateRoute from './Utils/PrivateRoute/PrivateRoute';
 import RestrictedRoute from './Utils/RestrictedRoute/RestrictedRoute';
 import { lazy, Suspense } from 'react';
 
+
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('../pages/SignInPage/SignInPage'));
@@ -22,6 +23,7 @@ function App() {
               element={
                 <RestrictedRoute redirectTo="/">
                   <HomePage />
+                  
                   </RestrictedRoute>
               }
             />
