@@ -1,10 +1,15 @@
 import css from "./CalendarButton.module.css";
 
-const CalendarButton = ({day}) => {
+const CalendarButton = ({day, amount}) => {
+
+  const dailyNorm = 1500;
+  const persents = Math.round(amount/dailyNorm*100);
+  console.log('persents :>> ', persents);
+
   return (
     <div className={css.itemBox}>
       <button>{day}</button>
-      <span>{"50%"}</span>
+      <span>{`${persents}%`}</span>
     </div>
   );
 };
