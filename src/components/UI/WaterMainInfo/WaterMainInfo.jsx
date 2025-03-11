@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './WaterMainInfo.module.css';
 import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma';
+import AddWaterBtn from '../AddWaterBtn/AddWaterBtn';
 
 const WaterMainInfo = () => {
   const handleAddWaterClick = () => {
@@ -9,17 +10,10 @@ const WaterMainInfo = () => {
 
   return (
     <section className={s.container}>
-      <header className={s.header}>
-        <h2 className={s.title}>AQUATRACK</h2>
-      </header>
-      <div className={s.bottleWrapper}>
-        <div className={s.bottle}></div>
-        <WaterDailyNorma />
-      </div>
-
-      <button className={s.addWaterBtn} onClick={handleAddWaterClick}>
-        + Add water
-      </button>
+      <h2 className={s.title}>AQUATRACK</h2>
+      <div className={s.bottle}></div>
+      <WaterDailyNorma />
+      <AddWaterBtn onClick={handleAddWaterClick} />
     </section>
   );
 };

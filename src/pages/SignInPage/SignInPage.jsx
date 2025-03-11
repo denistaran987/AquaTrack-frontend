@@ -1,7 +1,9 @@
+import React from 'react';
+
 const SignInPage = () => {
   return (
     <>
-      <h2>SignIn Page</h2>
+      <div>SignInPage</div>
     </>
   );
 };

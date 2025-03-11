@@ -6,30 +6,16 @@
   justify-content: center;
   background: #9be1a0;
   border-radius: 20px;
+  width: 100%;
   max-width: 350px;
-
   margin: 0 auto;
 }
 
-.header {
-  width: 100%;
-}
-
 .title {
-  font-size: 18px;
+  font-size: clamp(18px, 4vw, 24px);
   font-weight: 700;
-
   text-align: left;
   margin: 24px 0 0 16px;
-}
-
-.bottleWrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
 }
 
 .bottle {
@@ -40,8 +26,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  margin-top: 6px;
-  margin-bottom: 30px;
+  margin: 6px auto 30px auto;
   z-index: 1;
 }
 
@@ -49,22 +34,6 @@
   .bottle {
     background-image: url('/images/bottle-mob@2x.png');
   }
-}
-
-.addWaterBtn {
-  width: 140px;
-  height: 46px;
-  position: absolute;
-  bottom: 32px;
-  right: 16px;
-  background: black;
-  color: white;
-  border: none;
-  padding: 14px 20px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 14px;
-  z-index: 2;
 }
 
 @media (min-width: 768px) {
@@ -85,19 +54,17 @@
     margin-bottom: 32px;
   }
 
-  .addWaterBtn {
-    width: 178px;
-    height: 60px;
-    bottom: 64px;
-    right: 32px;
-    padding: 18px 30px;
-    font-size: 16px;
-  }
-
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .bottle {
       background-image: url('/images/bottle-tab@2x.png');
     }
+  }
+}
+
+@media (min-width: 1024px) {
+  .bottle {
+    max-width: 420px;
+    height: 540px;
   }
 }
 

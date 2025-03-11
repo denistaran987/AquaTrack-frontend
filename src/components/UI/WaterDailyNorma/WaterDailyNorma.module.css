@@ -2,7 +2,7 @@
   position: absolute;
   height: 54px;
   width: 102px;
-  top: 72px;
+  top: 122px;
   left: 16px;
   background: white;
   padding: 12px;
@@ -32,8 +32,8 @@
   .waterDailyNorma {
     height: 78px;
     width: 129px;
-    top: 101px;
-    left: 32px;
+    top: 157px;
+    left: clamp(32px, 4vw, 64px);
     padding: 14px 18px;
   }
 
