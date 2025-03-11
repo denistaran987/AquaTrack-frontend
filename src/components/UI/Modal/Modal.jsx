@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import sprite from '/images/icons.svg';
 import clsx from 'clsx';
 import css from './Modal.module.css';
 
@@ -46,8 +45,8 @@ const Modal = ({ children, toggleModal, isOpen, position }) => {
             setTimeout(toggleModal, 300);
           }}
         >
-          <svg className={css.icon}>
-            <use href={`${sprite}#icon-x`}></use>
+          <svg width="28" height="28" className={css.icon}>
+            <use href="/images/icons.svg#icon-x"></use>
           </svg>
         </button>
         {children}

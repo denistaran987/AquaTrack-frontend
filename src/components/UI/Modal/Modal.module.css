@@ -73,11 +73,7 @@ h2 {
 }
 
 .btn:hover {
-  transform: scale(1.1);
-}
-
-.btn:active {
-  transform: scale(0.9);
+  transform: rotate(90deg);
 }
 
 @media screen and (min-width: 768px) {

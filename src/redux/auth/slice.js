@@ -1,19 +1,41 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { registerUser, signInUser } from './operations.js';
 
 const initialState = {
-  name: null,
-  email: null,
-  gender: '',
-  dailyNorm: '',
-  weight: '',
-  time: null,
-  avatarUrl: '',
+  email: '',
   token: null,
+  error: null,
+  isLoading: false,
+  isLoggedIn: false,
+  isRefreshing: false,
 };
 
 export const slice = createSlice({
   name: 'auth',
   initialState,
+  extraReducers: builder => {
+    builder
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.token = action.payload.data.accessToken;
+        state.email = action.payload.email;
+        state.isLoggedIn = true;
+      })
+      .addCase(signInUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.token = action.payload.data.accessToken;
+        state.email = action.payload.email;
+        state.isLoggedIn = true;
+      })
+      .addMatcher(isAnyOf(registerUser.pending, signInUser.pending), state => {
+        state.isLoading = true;
+        state.isLoggedIn = false;
+      })
+      .addMatcher(isAnyOf(registerUser.rejected, signInUser.rejected), (state, action) => {
+        state.error = action.payload;
+        state.isLoading = false;
+        state.isLoggedIn = false;
+      });
+  },
 });
 
 export default slice.reducer;
