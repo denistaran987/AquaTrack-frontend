@@ -2,15 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchUserInfo } from './operations';
 
 const initialState = {
-  user: {
-    name: 'User',
-    email: '',
-    gender: '',
-    dailyNorm: 1.5,
-    weight: 0,
-    dailySportTime: 0,
-  },
-  avatarURL: '',
+  name: 'User',
+  email: '',
+  gender: '',
+  dailyNorm: 1500,
+  weight: 0,
+  dailySportTime: 0,
+  avatarUrl: '',
   isLoading: false,
   error: null,
 };
@@ -28,13 +26,7 @@ export const slice = createSlice({
       .addCase(fetchUserInfo.fulfilled, (state, action) => {
         state.error = null;
         state.isLoading = false;
-        state.gender = action.payload.gender;
-        state.email = action.payload.email;
-        state.name = action.payload.name;
-        state.dailyNorm = action.payload.dailyNorm;
-        state.weight = action.payload.dailyNorm;
-        state.avatarURL = action.payload.avatarURL;
-        state.dailySportTime = action.payload.dailySportTime;
+        Object.assign(state, action.payload);
       })
       .addCase(fetchUserInfo.rejected, (state, action) => {
         state.isLoading = false;

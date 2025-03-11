@@ -20,6 +20,7 @@ export const slice = createSlice({
       })
       .addCase(logout.fulfilled, state => {
         Object.assign(state, initialState);
+        state.isLoggedIn = false;
       })
       .addCase(logout.rejected, state => {
         state.token = null;
