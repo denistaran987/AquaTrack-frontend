@@ -15,7 +15,7 @@
   gap: 10px;
   align-items: center;
 
-  padding: 18px 14px;
+  padding: 19px 14px;
 
   background-color: var(--color-light);
   border-radius: 15px;
@@ -25,7 +25,7 @@
 .infoWrapper {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .amount {
@@ -51,11 +51,16 @@
     gap: 20px;
     padding: 20px;
     min-width: 192px;
+    max-height: 86px;
   }
 
   .cup {
     width: 32px;
     height: 36px;
+  }
+
+  .infoWrapper {
+    gap: 4px;
   }
 
   .amount {

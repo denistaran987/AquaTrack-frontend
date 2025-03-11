@@ -1,6 +1,8 @@
 .WaterListWrapper {
   overflow-x: auto;
-  padding-bottom: 24px;
+  padding-bottom: 32px;
+  max-height: 106px;
+  overflow-y: hidden;
 }
 
 .waterList {
@@ -21,6 +23,11 @@
 }
 
 @media (min-width: 768px) {
+  .WaterListWrapper {
+    padding-bottom: 32px;
+    max-height: 118px;
+  }
+
   .waterList {
     gap: 32px;
   }

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 const UserBarPopover = ({ isOpen }) => {
   return (
-    <ul className={clsx(css.wrapper, { [css.open]: isOpen })}>
+    <ul className={clsx(css.wrapper, isOpen && css.anim)}>
       <li>
         <button type="button" className={css.item}>
           <svg width="16" height="16">

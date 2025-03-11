@@ -9,6 +9,18 @@
   position: absolute;
   top: 108%;
   left: 0;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.anim {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
 }
 
 .item {
