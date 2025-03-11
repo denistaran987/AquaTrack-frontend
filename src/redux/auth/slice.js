@@ -1,50 +1,39 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { registerUser, signInUser } from "./operations.js";
-
-export const logoutUser = createAsyncThunk("auth/logoutUser", async () => null);
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { registerUser, signInUser } from './operations.js';
 
 const initialState = {
-  name: null,
-  email: null,
-  gender: "",
-  dailyNorm: "",
-  weight: "",
-  time: null,
-  avatarUrl: "",
+  email: '',
   token: null,
   error: null,
-  isAuthenticated: false,
+  isLoading: false,
+  isLoggedIn: false,
+  isRefreshing: false,
 };
 
 export const slice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
-        const user = action.payload.data.user || {}; 
         state.token = action.payload.data.accessToken;
-        state.name = user.name || "User";
-        state.isAuthenticated = true;
-      })
-      .addCase(registerUser.rejected, (state, action) => {
-        state.error = action.payload;
+        state.email = action.payload.email;
+        state.isLoggedIn = true;
       })
       .addCase(signInUser.fulfilled, (state, action) => {
-        const user = action.payload.data.user || {}; 
+        state.isLoading = false;
         state.token = action.payload.data.accessToken;
-        state.name = user.name?.trim() || "User";
-        state.email = user.email || "";
-        state.isAuthenticated = true;
+        state.email = action.payload.email;
+        state.isLoggedIn = true;
       })
-      .addCase(signInUser.rejected, (state, action) => {
+      .addMatcher(isAnyOf(registerUser.pending, signInUser.pending), state => {
+        state.isLoading = true;
+        state.isLoggedIn = false;
+      })
+      .addMatcher(isAnyOf(registerUser.rejected, signInUser.rejected), (state, action) => {
         state.error = action.payload;
-      })
-      .addCase(logoutUser.fulfilled, (state) => {
-        state.name = null;
-        state.email = null;
-        state.token = null;
-        state.isAuthenticated = false;
+        state.isLoading = false;
+        state.isLoggedIn = false;
       });
   },
 });
