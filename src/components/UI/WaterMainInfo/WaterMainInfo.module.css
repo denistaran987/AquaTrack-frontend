@@ -1,18 +1,17 @@
-.container {
+.section {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  background: #9be1a0;
+  padding: 50px 40px 30px 41px;
+  background-color: var(--color-accent);
   border-radius: 20px;
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto;
+  max-width: 343px;
 }
 
 .title {
-  font-size: clamp(18px, 4vw, 24px);
+  font-size: 18px;
   font-weight: 700;
   text-align: left;
   margin: 24px 0 0 16px;
@@ -26,7 +25,6 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  margin: 6px auto 30px auto;
   z-index: 1;
 }
 
@@ -37,8 +35,10 @@
 }
 
 @media (min-width: 768px) {
-  .container {
-    max-width: 704px;
+  .section {
+    width: 704px;
+    max-width: 100%;
+    padding: 69px 165px 32px 165px;
   }
 
   .title {
@@ -50,8 +50,6 @@
     background-image: url('/images/bottle-tab.png');
     max-width: 374px;
     height: 477px;
-    margin-top: 13px;
-    margin-bottom: 32px;
   }
 
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -61,20 +59,16 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .bottle {
-    max-width: 420px;
-    height: 540px;
-  }
-}
-
 @media (min-width: 1440px) {
+  .section {
+    width: 672px;
+    padding: 92px 100px 40px 100px;
+  }
+
   .bottle {
     background-image: url('/images/bottle.png');
     max-width: 472px;
     height: 604px;
-    margin-top: 36px;
-    margin-bottom: 40px;
   }
 
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
