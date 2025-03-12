@@ -1,44 +1,9 @@
-.editWaterModal {
-  background-color: #ffffff;
-  padding: 40px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  min-width: 340px;
-  width: 100%;
-}
-
-.editWaterModal p {
+.p {
   color: #2f2f2f;
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
   letter-spacing: -1%;
-}
-
-.editWaterModal h2 {
-  font-size: 20px;
-  color: #2c3e50;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: -1%;
-  margin-bottom: 24px;
-}
-
-.editWaterModal h3 {
-  font-size: 16px;
-  color: #2c3e50;
-  font-weight: 700;
-  line-height: 20px;
-  letter-spacing: -1%;
-  margin-bottom: 20px;
-  margin-top: 24px;
-}
-
-.editWaterModal label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 1rem;
-  color: #34495e;
 }
 
 .inputContainer {
@@ -129,11 +94,4 @@ input[type='number']::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield !important;
   appearance: textfield !important;
-}
-
-@media screen and (min-width: 768px) {
-  .editWaterModal {
-    min-width: 518px;
-    width: 100%;
-  }
 }

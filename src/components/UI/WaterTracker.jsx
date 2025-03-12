@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import Modal from './Modal/Modal.jsx';
-import AddWaterModal from './AddWaterModal/AddWaterModal.jsx';
-import EditWaterModal from './EditWaterModal/EditWaterModal.jsx';
+import WaterModal from './WaterModal/WaterModal.jsx';
 
 const WaterTracker = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const initialEditData = {
+    time: '10:00',
+    usedAmount: 250,
+  };
 
   return (
     <div>
@@ -15,13 +19,17 @@ const WaterTracker = () => {
 
       {isAddModalOpen && (
         <Modal isOpen={isAddModalOpen} toggleModal={() => setIsAddModalOpen(false)}>
-          <AddWaterModal onClose={() => setIsAddModalOpen(false)} />
+          <WaterModal type="add" onClose={() => setIsAddModalOpen(false)} />
         </Modal>
       )}
 
       {isEditModalOpen && (
         <Modal isOpen={isEditModalOpen} toggleModal={() => setIsEditModalOpen(false)}>
-          <EditWaterModal onClose={() => setIsEditModalOpen(false)} />
+          <WaterModal
+            type="edit"
+            initialData={initialEditData}
+            onClose={() => setIsEditModalOpen(false)}
+          />
         </Modal>
       )}
     </div>
