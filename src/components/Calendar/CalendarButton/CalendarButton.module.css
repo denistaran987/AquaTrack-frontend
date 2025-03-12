@@ -1,3 +1,36 @@
+.calendarList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+  gap: 20px 8px;
+}
+.calendarItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border-radius: 30px;
+}
+
+.buttonDay {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--color-secondary);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: var(--color-light);
+}
+
 .itemBox {
   display: flex;
   flex-direction: column;
@@ -5,4 +38,26 @@
   justify-content: space-between;
   width: 28px;
   height: 44px;
+}
+
+.buttonDay:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  color: #999;
+  background-color: #ccc;
+}
+
+.infoText {
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 10px;
+  color: var(--color-secondary);
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 1440px) {
 }

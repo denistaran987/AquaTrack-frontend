@@ -1,22 +1,30 @@
 import { useEffect, useState } from 'react';
 import CalendarButton from '../CalendarButton/CalendarButton';
+import css from "./CalendarBody.module.css"
+import { useSelector } from 'react-redux';
+import { selectWaterNorm } from '../../../redux/user/selectors';
+import { selectToken } from '../../../redux/auth/selectors';
 
 const CalendarBody = ({ monthNumber, year }) => {
   const [foundWaterDayData1, setfoundWaterDayData] = useState([]);
 
   const date = new Date(year, monthNumber, 1, 0, 0, 0, 0);
+  const dailyNorm = useSelector(selectWaterNorm);
 
-  // const token = "yKODB9bmLY8dHek1CCpSHJwjNdNBPozySmVZ7XhA";
+  const token = useSelector(selectToken);
 
-  // const fetchMonthData = () => { fetch(`http://localhost:3000/water/month?date=${date}`,{headers: {
-  //   "Content-Type": "application/json",
-  //   authorization: `Bearer ${token}`
-  // },}).then(res=>res.json().then(res=>setfoundWaterDayData(res))).catch(()=>{throw "Uncorrect response"})
-  // };
 
-  // useEffect(()=>{
-  //   if(monthNumber&&year){fetchMonthData()}
-  // },[monthNumber, year])
+  const fetchMonthData = () => { fetch(`https://aquatrack-backend-1b8z.onrender.com/water/day?date=2024-03-03T00:00:00.000Z`,{headers: {
+    "Content-Type": "application/json",
+    authorization: `Bearer ${token}`
+  },}).then(res=>res.json().then(res=>setfoundWaterDayData(res))).catch(()=>{throw "Uncorrect response"})
+  };
+  console.log('object :>> ', foundWaterDayData1);
+  console.log('token :>> ', token);
+
+  useEffect(()=>{
+    if(monthNumber&&year){fetchMonthData()}
+  },[monthNumber, year])
 
   const getAllDaysMonth = (foundWaterDayData, monthNumber, year) => {
     const amountDays = new Date(year, monthNumber, 0).getDate();
@@ -47,7 +55,7 @@ const CalendarBody = ({ monthNumber, year }) => {
   console.log('days :>> ', days);
 
   return (
-    <div>
+    <div className={css.calendarWrapper}>
       {days.map(day => (
         <CalendarButton key={day.day} day={day.day} amount={day.amount} />
       ))}

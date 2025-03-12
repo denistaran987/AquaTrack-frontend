@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CalendarBody from "../CalendarBody/CalendarBody";
 import CalendarHeader from "../CalendarHeader/CalendarHeader";
+import css from "./CalendarContainer.module.css"
 
 const CalendarContainer = () => {
 
@@ -23,10 +24,16 @@ const CalendarContainer = () => {
     else setMonthNumber(prev => prev+1)
   }
 
+  const monthPrevios = () => {
+    if (monthNumber === 0) {
+      setMonthNumber(11);
+      setYear(prev => prev - 1);
+    } else setMonthNumber(prev => prev - 1);
+  }
 
   return (
-    <div>
-     <CalendarHeader monthForvards={monthForvards} monthsName={months[monthNumber]} year={year} />
+    <div className={css.monthInfo}>
+     <CalendarHeader monthPrevios={monthPrevios} monthForvards={monthForvards} monthsName={months[monthNumber]} year={year} />
      <CalendarBody monthNumber={monthNumber} year={year} />
     </div>
   );

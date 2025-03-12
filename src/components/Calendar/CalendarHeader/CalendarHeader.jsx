@@ -1,13 +1,30 @@
-import { useState } from "react";
+import css from './CalendarHeader.module.css';
 
-const CalendarHeader = ({monthsName, year, monthForvards}) => {
+const CalendarHeader = ({monthsName, year, monthForvards, monthPrevios}) => {
 
   return (
-    <div >
-      <h2>Month</h2>
-      <button>{"<"}</button>
-      <h3> {monthsName}, {year}</h3>
-      <button onClick={monthForvards}>{">"}</button>
+    <div className={css.monthBox}>
+      <h2 className={css.monthTitle}>Month</h2>
+      <div className={css.oneMonthContainer}>
+      <div className={css.oneMonthWrapper}>
+      <button className={css.buttonPrevious} type="button" onClick={monthPrevios}>
+        <svg className={css.iconPrevious}>
+          <use href="/images/icons.svg#icon-left"></use> 
+        </svg>
+        </button>
+      <span className={css.monthDescription}> {monthsName}, {year}</span>
+      <button className={css.buttonNext} type="button" onClick={monthForvards}>
+      <svg className={css.iconNext}>
+          <use href="/images/icons.svg#icon-right"></use> 
+        </svg>
+      </button>
+      </div>
+      <button className={css.buttonNext} type="button" onClick={monthForvards}>
+      <svg className={css.buttonChart}>
+          <use href="/images/icons.svg#icon-chart"></use> 
+        </svg>
+      </button>
+      </div>
     </div>
   );
 };

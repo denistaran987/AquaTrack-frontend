@@ -7,10 +7,12 @@ const CalendarButton = ({day, amount}) => {
   console.log('persents :>> ', persents);
 
   return (
-    <div className={css.itemBox}>
-      <button>{day}</button>
-      <span>{`${persents}%`}</span>
-    </div>
+    <ul className={css.calendarList}>
+      <div className={css.itemBox}>
+      <button className={css.buttonDay}>{day}</button>
+      <span className={css.infoText}>{`${persents}%`}</span>
+      </div>
+    </ul>
   );
 };
 

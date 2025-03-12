@@ -1,0 +1,48 @@
+.calendarWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  gap: 20px 17px;
+}
+
+
+@media screen and (min-width: 319px) {
+  .calendarList {
+    justify-content: flex-start;
+    width: 100%;
+    /* gap: 20px; */
+  }
+  
+}
+
+@media screen and (min-width: 375px) {
+  .calendarList {
+    justify-content: flex-start;
+    width: 100%;
+    /* gap: 20px 18px; */
+  }
+
+
+}
+
+@media screen and (min-width: 768px) {
+  .calendarList {
+    gap: 15px 48px;
+  }
+
+
+}
+@media screen and (min-width: 1440px) {
+  .calendarList {
+    gap: 15px 43px;
+  }
+}
+
+@media screen and (max-width: 374px) {
+  .calendarList {
+    gap: 20px 8px;
+    max-width: 244px;
+  }
+
+}
