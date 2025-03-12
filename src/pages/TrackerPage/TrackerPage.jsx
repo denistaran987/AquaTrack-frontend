@@ -1,11 +1,13 @@
-import CalendarContainer from "../../components/Calendar/CalendarContainer/CalendarContainer";
+import React from 'react';
+
+import s from './TrackerPage.module.css';
+import WaterMainInfo from '../../components/UI/WaterMainInfo/WaterMainInfo';
 
 const TrackerPage = () => {
   return (
-    <>
-      <h2>TrackerPage</h2>
-      <CalendarContainer/>
-    </>
+    <div className={s.container}>
+      <WaterMainInfo />
+    </div>
   );
 };
 

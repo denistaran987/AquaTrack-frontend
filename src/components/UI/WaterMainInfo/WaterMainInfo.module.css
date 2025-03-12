@@ -1,0 +1,85 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background: #9be1a0;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: clamp(18px, 4vw, 24px);
+  font-weight: 700;
+  text-align: left;
+  margin: 24px 0 0 16px;
+}
+
+.bottle {
+  background-image: url('/images/bottle-mob.png');
+  width: 100%;
+  max-width: 262px;
+  height: 335px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 6px auto 30px auto;
+  z-index: 1;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .bottle {
+    background-image: url('/images/bottle-mob@2x.png');
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 704px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin: 32px 0 0 33px;
+  }
+
+  .bottle {
+    background-image: url('/images/bottle-tab.png');
+    max-width: 374px;
+    height: 477px;
+    margin-top: 13px;
+    margin-bottom: 32px;
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .bottle {
+      background-image: url('/images/bottle-tab@2x.png');
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .bottle {
+    max-width: 420px;
+    height: 540px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .bottle {
+    background-image: url('/images/bottle.png');
+    max-width: 472px;
+    height: 604px;
+    margin-top: 36px;
+    margin-bottom: 40px;
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .bottle {
+      background-image: url('/images/bottle@2x.png');
+    }
+  }
+}
