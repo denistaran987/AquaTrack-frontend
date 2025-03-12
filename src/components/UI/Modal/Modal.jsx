@@ -1,40 +1,52 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import css from './Modal.module.css';
-import sprite from '/images/icons.svg';
 
-const Modal = ({ children, toggleModal, position }) => {
+const Modal = ({ children, toggleModal, isOpen, position }) => {
   const modalRoot = document.querySelector('#modal-root');
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = e => {
-      if (e.code !== 'Escape') {
-        return;
+      if (e.code === 'Escape') {
+        setIsAnimating(false);
+        setTimeout(toggleModal, 300);
       }
-      toggleModal();
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    if (isOpen) {
+      setIsAnimating(true);
+      window.addEventListener('keydown', handleKeyDown);
+    }
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [toggleModal]);
+  }, [isOpen, toggleModal]);
 
   const handleClickBackdrop = e => {
-    if (e.target !== e.currentTarget) {
-      return;
+    if (e.target === e.currentTarget) {
+      setIsAnimating(false);
+      setTimeout(toggleModal, 300);
     }
-    toggleModal();
   };
 
   return createPortal(
-    <div className={css.backdrop} onClick={handleClickBackdrop}>
-      <div className={clsx(css.modal, { [css.topPosition]: position === 'top' })}>
-        <button className={css.btn} onClick={toggleModal}>
-          <svg className={css.icon}>
-            <use href={`${sprite}#icon-x`}></use>
+    <div
+      className={clsx(css.backdrop, { [css.active]: isOpen, [css.hidden]: !isAnimating })}
+      onClick={handleClickBackdrop}
+    >
+      <div className={clsx(css.modalContent, { [css.topPosition]: position === 'top' })}>
+        <button
+          className={css.btn}
+          onClick={() => {
+            setIsAnimating(false);
+            setTimeout(toggleModal, 300);
+          }}
+        >
+          <svg width="28" height="28" className={css.icon}>
+            <use href="/images/icons.svg#icon-x"></use>
           </svg>
         </button>
         {children}
