@@ -36,3 +36,9 @@
     width: 235px;
   }
 }
+
+@media (min-width: 1440px) {
+  .waterList {
+    gap: 16px;
+  }
+}

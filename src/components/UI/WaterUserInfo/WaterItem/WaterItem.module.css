@@ -60,7 +60,7 @@
   }
 
   .infoWrapper {
-    gap: 4px;
+    display: block;
   }
 
   .amount {
