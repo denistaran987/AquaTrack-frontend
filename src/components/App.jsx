@@ -32,7 +32,7 @@ function App() {
             <Route
               path="tracker"
               element={
-                <PrivateRoute redirectTo="/tracker">
+                <PrivateRoute redirectTo="/">
                   <TrackerPage />
                 </PrivateRoute>
               }

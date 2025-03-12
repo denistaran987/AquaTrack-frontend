@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import registerReducer from './auth/slice';
-import waterListReducer from './waterList/slice';
-import todayWaterListReducer from './todayWaterList/slice';
-import monthDataReducer from './monthData/slice';
+import authReducer from './auth/slice';
+import userReducer from './user/slice';
+import waterReducer from './water/slice';
 import modalReducer from './modal/slice';
 
 
@@ -10,10 +9,9 @@ import modalReducer from './modal/slice';
 
 export const store = configureStore({
   reducer: {
-    auth: registerReducer,
-    waterList: waterListReducer,
-    todayWaterList: todayWaterListReducer,
-    monthData: monthDataReducer,
+    auth: authReducer,
+    user: userReducer,
+    water: waterReducer,
     modal: modalReducer,
                  
   },

@@ -1,14 +1,8 @@
 :root {
-  color-scheme: light dark;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  min-height: 100vh;
 }
 
 body {
@@ -17,6 +11,7 @@ body {
   line-height: 1.5;
   color: var(--color-main);
   background-color: var(--color-light);
+  min-height: 100vh;
 }
 
 a,
