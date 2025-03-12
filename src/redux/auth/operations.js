@@ -3,6 +3,10 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://aquatrack-backend-1b8z.onrender.com';
 
+export const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
 export const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
@@ -12,7 +16,7 @@ export const registerUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post('/auth/signup', userData);
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (!error.response) {
         return rejectWithValue('Network error. Please check your connection.');

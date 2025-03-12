@@ -15,6 +15,16 @@ export const slice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.email = action.payload.email;
+        state.token = action.payload.accessToken;
+        state.isLoggedIn = true;
+      })
+      .addCase(signInUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.token = action.payload.data.accessToken;
+        state.isLoggedIn = true;
+      })
       .addCase(logout.pending, state => {
         state.token = null;
       })
@@ -24,17 +34,6 @@ export const slice = createSlice({
       })
       .addCase(logout.rejected, state => {
         state.token = null;
-      })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.token = action.payload.data.accessToken;
-        state.email = action.payload.email;
-        state.isLoggedIn = true;
-      })
-      .addCase(signInUser.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.token = action.payload.data.accessToken;
-        state.email = action.payload.email;
-        state.isLoggedIn = true;
       })
       .addMatcher(isAnyOf(registerUser.pending, signInUser.pending), state => {
         state.isLoading = true;

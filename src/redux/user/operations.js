@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+import { setAuthHeader } from '../auth/operations';
 
 export const fetchUserInfo = createAsyncThunk('user/fetchUserInfo', async (token, thunkAPI) => {
   if (!token) {
