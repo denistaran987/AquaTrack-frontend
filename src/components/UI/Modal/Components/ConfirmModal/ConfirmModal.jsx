@@ -2,8 +2,9 @@ import { useDispatch } from 'react-redux';
 import css from './ConfirmModal.module.css';
 import { deleteWaterEntry } from '../../../../../redux/water/operations.js';
 import toast from 'react-hot-toast';
+import { toggleModal } from '../../../../../redux/modal/slice.js';
 
-export default function ConfirmModal({ toggleModal, entryId, title, text, buttonText }) {
+export default function ConfirmModal({ entryId, title, text, buttonText }) {
   const dispatch = useDispatch();
 
   const successStyle = { backgroundColor: '#00ced1', fontWeight: 'bold' };
@@ -35,7 +36,7 @@ export default function ConfirmModal({ toggleModal, entryId, title, text, button
         <button className={css.confirmBtn} onClick={handleDelete}>
           {buttonText}
         </button>
-        <button className={css.cancelBtn} onClick={toggleModal}>
+        <button className={css.cancelBtn} onClick={() => dispatch(toggleModal())}>
           Cancel
         </button>
       </div>
