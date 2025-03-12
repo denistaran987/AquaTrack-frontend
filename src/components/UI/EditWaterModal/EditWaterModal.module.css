@@ -1,6 +1,5 @@
-/* Основные стили для модального окна */
 .editWaterModal {
-  background-color: #ffffff; /* Белый фон модального окна */
+  background-color: #ffffff;
   padding: 40px 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -16,7 +15,6 @@
   letter-spacing: -1%;
 }
 
-/* Заголовок модального окна */
 .editWaterModal h2 {
   font-size: 20px;
   color: #2c3e50;
@@ -26,7 +24,6 @@
   margin-bottom: 24px;
 }
 
-/* Подзаголовок модального окна */
 .editWaterModal h3 {
   font-size: 16px;
   color: #2c3e50;
@@ -37,7 +34,6 @@
   margin-top: 24px;
 }
 
-/* Стили для лейблов */
 .editWaterModal label {
   display: block;
   margin-bottom: 10px;
@@ -45,17 +41,15 @@
   color: #34495e;
 }
 
-/* Контейнер для верхнего фиксированного значения и кнопок */
 .inputContainer {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Стили для фиксированного значения "50 ml" */
 .fixedValue {
-  background-color: #323f47; /* Темный фон */
-  color: white; /* Белый текст */
+  background-color: #323f47;
+  color: white;
   border-radius: 30px;
   padding: 10px 20px;
   font-size: 1rem;
@@ -64,10 +58,9 @@
   margin-bottom: 8px;
 }
 
-/* Стили для нижних инпутов (белый фон) */
 .inputlight1 {
-  background-color: white; /* Белый фон */
-  color: black; /* Черный текст */
+  background-color: white;
+  color: black;
   border: 1px solid #ccc;
   border-radius: 15px;
   padding: 10px;
@@ -76,8 +69,8 @@
 }
 
 .inputlight2 {
-  background-color: white; /* Белый фон */
-  color: black; /* Черный текст */
+  background-color: white;
+  color: black;
   border: 1px solid #ccc;
   border-radius: 15px;
   padding: 10px;
@@ -86,29 +79,26 @@
   margin-bottom: 14px;
 }
 
-/* Стили для кнопок с иконками */
 .button {
-  background-color: transparent; /* Прозрачный фон */
-  border: none; /* Убираем границу */
-  padding: 0; /* Убираем отступы */
+  background-color: transparent;
+  border: none;
+  padding: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Стили для иконок */
 .icon {
   width: 40px;
   height: 40px;
-  stroke: currentColor; /* Цвет иконок будет наследоваться от родителя */
-  fill: white; /* Белый цвет иконок */
-  color: #323f47; /* Цвет иконок по умолчанию */
+  stroke: currentColor;
+  fill: white;
+  color: #323f47;
 }
 
-/* Стили для кнопки Save */
 .saveButton {
-  background-color: #9be1a0; /* Зеленый цвет */
+  background-color: #9be1a0;
   color: #323f47;
   border: none;
   padding: 14px 40px;
@@ -121,27 +111,24 @@
   text-align: center;
 }
 
-/* Стили для кнопки Save при наведении */
 .saveButton:hover {
-  background-color: #87d28d; /* Темнее зеленый при наведении */
+  background-color: #87d28d;
 }
 
-/* Стили для сообщений об ошибках */
 .error {
   color: red;
   font-size: 0.875rem;
 }
 
-/* Глобальные стили для всех полей ввода типа number */
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none !important; /* Убираем стрелочки в WebKit-браузерах */
-  margin: 0 !important; /* Убираем отступы */
+  -webkit-appearance: none !important;
+  margin: 0 !important;
 }
 
 input[type='number'] {
-  -moz-appearance: textfield !important; /* Убираем стрелочки в Firefox */
-  appearance: textfield !important; /* Убираем стрелочки в других браузерах */
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
 }
 
 @media screen and (min-width: 768px) {

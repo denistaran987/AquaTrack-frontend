@@ -35,14 +35,14 @@ const AddWaterModal = ({ onClose }) => {
       >
         {({ setFieldValue, values }) => (
           <Form>
-            {/* Верхняя часть: фиксированное значение "50 ml" и кнопки */}
+            
             <label>
               <p className={styles.p}>Amount of water:</p>
               <div className={styles.inputContainer}>
                 <button
                   type="button"
                   onClick={() => {
-                    const newValue = Math.max(50, values.usedAmount - 50); // Уменьшаем на 50 мл, но не меньше 50
+                    const newValue = Math.max(50, values.usedAmount - 50); 
                     setFieldValue('usedAmount', newValue);
                   }}
                   className={styles.button}
@@ -51,11 +51,11 @@ const AddWaterModal = ({ onClose }) => {
                     <use href="/images/icons.svg#icon-minus-circle" />
                   </svg>
                 </button>
-                <span className={styles.fixedValue}>50 ml</span> {/* Фиксированное значение */}
+                <span className={styles.fixedValue}>50 ml</span> 
                 <button
                   type="button"
                   onClick={() => {
-                    const newValue = Math.min(1500, values.usedAmount + 50); // Увеличиваем на 50 мл, но не больше 1500
+                    const newValue = Math.min(1500, values.usedAmount + 50); 
                     setFieldValue('usedAmount', newValue);
                   }}
                   className={styles.button}
@@ -67,14 +67,14 @@ const AddWaterModal = ({ onClose }) => {
               </div>
             </label>
 
-            {/* Поле для времени */}
+           
             <label>
               <p className={styles.p}>Recording time:</p>
               <Field type="time" name="time" className={styles.inputlight1} />
               <ErrorMessage name="time" component="div" className={styles.error} />
             </label>
 
-            {/* Нижний инпут для ввода значения воды */}
+          
             <label>
               <h3>Enter the value of the water used:</h3>
               <Field
@@ -83,13 +83,13 @@ const AddWaterModal = ({ onClose }) => {
                 className={styles.inputlight2}
                 onChange={(e) => {
                   const value = e.target.value;
-                  setFieldValue('usedAmount', value); // Обновляем значение
+                  setFieldValue('usedAmount', value);
                 }}
               />
               <ErrorMessage name="usedAmount" component="div" className={styles.error} />
             </label>
 
-            {/* Кнопка Save */}
+           
             <button type="submit" className={styles.saveButton}>Save</button>
           </Form>
         )}
