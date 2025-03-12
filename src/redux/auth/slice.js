@@ -13,6 +13,12 @@ const initialState = {
 export const slice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    setCredentials: (state, action) => {
+      state.token = action.payload;
+    },
+  },
+
   extraReducers: builder => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
@@ -46,5 +52,7 @@ export const slice = createSlice({
       });
   },
 });
+
+export const { setCredentials } = slice.actions;
 
 export default slice.reducer;
