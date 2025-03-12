@@ -1,13 +1,16 @@
 import React from 'react';
-import s from './ProgressBar.module.css';
+import s from './WaterProgressBar.module.css';
 
-const ProgressBar = ({ progress }) => {
+const WaterProgressBar = ({ progress }) => {
   return (
     <div className={s.progressBar}>
       <h2 className={s.today}>Today</h2>
       <span
         className={s.activePercent}
-        style={{ left: `calc(${progress}px * 1.74)` }}
+        style={{
+          left: `calc(${progress}px * 1.72)`,
+          color: progress === 100 && '#9be1a0',
+        }}
       >{`${progress}%`}</span>
       <div className={s.progressBarContainer}>
         <div className={s.progressBarFiller} style={{ width: `${progress}%` }}></div>
@@ -22,4 +25,4 @@ const ProgressBar = ({ progress }) => {
   );
 };
 
-export default ProgressBar;
+export default WaterProgressBar;
