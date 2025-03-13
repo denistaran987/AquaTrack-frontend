@@ -1,14 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { setCredentials } from './slice';
 
-const API_URL = 'https://aquatrack-backend-1b8z.onrender.com/auth';
+axios.defaults.baseURL = 'https://aquatrack-backend-1b8z.onrender.com';
+axios.defaults.withCredentials = true;
+
+export const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+export const clearAuthHeader = () => {
+  axios.defaults.headers.common.Authorization = '';
+};
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${API_URL}/signup`, userData);
-      return response.data;
+      const response = await axios.post('/auth/signup', userData);
+      return response.data.data;
     } catch (error) {
       if (!error.response) {
         return rejectWithValue('Network error. Please check your connection.');
@@ -26,7 +36,7 @@ export const signInUser = createAsyncThunk(
   'auth/signInUser',
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${API_URL}/signin`, userData);
+      const response = await axios.post('/auth/signin', userData, { withCredentials: true });
       return response.data;
     } catch (error) {
       if (!error.response) {
@@ -40,3 +50,39 @@ export const signInUser = createAsyncThunk(
     }
   }
 );
+
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    const response = await axios.post('/auth/logout');
+    clearAuthHeader();
+    localStorage.removeItem('persist:auth');
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const setupAxiosInterceptors = store => {
+  axios.interceptors.response.use(
+    response => response,
+    async error => {
+      const originalRequest = error.config;
+      if (error.response?.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
+        try {
+          const res = await axios.post('/auth/refresh');
+          const token = res.data.data.accessToken;
+
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          originalRequest.headers['Authorization'] = `Bearer ${token}`;
+          store.dispatch(setCredentials(token));
+          return axios(originalRequest);
+        } catch (refreshError) {
+          await store.dispatch(logout());
+          return Promise.reject(refreshError);
+        }
+      }
+      return Promise.reject(error);
+    }
+  );
+};
