@@ -3,11 +3,11 @@ import css from './DeleteWaterModal.module.css';
 import { deleteWaterEntry } from '../../../../../redux/water/operations.js';
 import toast from 'react-hot-toast';
 import { toggleModal } from '../../../../../redux/modal/slice.js';
-import { selectUserId } from '../../../../../redux/user/selectors.js';
+import { selectWaterId } from '../../../../../redux/water/selectors.js';
 
 const DeleteWaterModal = () => {
   const dispatch = useDispatch();
-  const userId = useSelector(selectUserId);
+  const waterId = useSelector(selectWaterId);
 
   const successStyle = { backgroundColor: '#9be1a0', fontWeight: 'medium' };
   const errorStyle = { backgroundColor: '#FFCCCC', fontWeight: 'medium' };
@@ -16,7 +16,7 @@ const DeleteWaterModal = () => {
 
   const handleDelete = async () => {
     try {
-      await dispatch(deleteWaterEntry(userId)).unwrap();
+      await dispatch(deleteWaterEntry(waterId)).unwrap();
 
       toast.success('Entry deleted successfully!', {
         style: successStyle,
