@@ -1,16 +1,16 @@
 .waterDailyNorma {
   position: absolute;
-  height: 54px;
-  width: 102px;
   top: 122px;
   left: 16px;
-  background: white;
-  padding: 12px;
-  border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  height: 54px;
+  width: 102px;
+  padding: 12px;
+  background-color: var(--color-light);
+  border-radius: 15px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
   z-index: 2;
 }
@@ -24,7 +24,7 @@
 
 .normaText {
   font-size: 10px;
-  color: #2f2f2f99;
+  color: var(--color-secondary);
   align-self: center;
 }
 
@@ -33,7 +33,7 @@
     height: 78px;
     width: 129px;
     top: 157px;
-    left: clamp(32px, 4vw, 64px);
+    left: 32px;
     padding: 14px 18px;
   }
 

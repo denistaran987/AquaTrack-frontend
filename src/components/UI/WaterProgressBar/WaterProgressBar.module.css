@@ -1,0 +1,86 @@
+.progressBar {
+  position: absolute;
+  left: 50%;
+  bottom: 120px;
+  width: 198px;
+  height: 83px;
+  padding: 12px;
+  background-color: var(--color-light);
+  border-radius: 15px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  transform: translate(-50%);
+  z-index: 200;
+}
+
+.today {
+  font-size: 14px;
+  line-height: 1;
+  color: var(--color-secondary);
+}
+
+.activePercent {
+  position: absolute;
+  top: 28px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  transition: left 1s ease-in-out;
+}
+
+.progressBarContainer {
+  position: relative;
+  background-color: var(--color-gray);
+  border-radius: 9px;
+  height: 6px;
+  width: 100%;
+  margin: 16px 0 8px;
+}
+
+.progressBarFiller {
+  background-color: var(--color-accent);
+  height: 6px;
+  border-radius: 9px;
+  transition: width 1s ease-in-out;
+}
+
+.circle {
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-light);
+  border: solid 1px;
+  border-color: var(--color-accent);
+  border-radius: 50%;
+  position: absolute;
+  top: -3px;
+  transition: left 1s ease-in-out;
+}
+
+.progressBarLabels {
+  display: flex;
+  font-size: 10px;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .progressBar {
+    bottom: 150px;
+    width: 295px;
+    height: 106px;
+    padding: 20px;
+  }
+
+  .activePercent {
+    top: 32px;
+    font-size: 12px;
+  }
+
+  .progressBarLabels {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .progressBar {
+    bottom: 150px;
+  }
+}

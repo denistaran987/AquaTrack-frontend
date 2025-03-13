@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Logo from '../Logo/Logo';
 import s from './WaterMainInfo.module.css';
 import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma';
 import AddWaterBtn from '../AddWaterBtn/AddWaterBtn';
+import WaterProgressBar from '../WaterProgressBar/WaterProgressBar';
 
 const WaterMainInfo = () => {
-  const handleAddWaterClick = () => {
-    console.log('Open WaterModal');
-  };
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    setProgress(12);
+  }, []);
 
   return (
-    <section className={s.container}>
-      <h2 className={s.title}>AQUATRACK</h2>
+    <section className={s.section}>
+      <Logo />
       <div className={s.bottle}></div>
       <WaterDailyNorma />
-      <AddWaterBtn onClick={handleAddWaterClick} />
+      <AddWaterBtn />
+      <WaterProgressBar progress={progress} />
     </section>
   );
 };

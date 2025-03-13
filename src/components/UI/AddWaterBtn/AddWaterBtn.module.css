@@ -4,19 +4,19 @@
   position: absolute;
   bottom: 32px;
   right: 16px;
-  background: black;
-  color: white;
+  background: var(--color-main);
+  color: var(--color-light);
   border: none;
   padding: 14px 20px;
   border-radius: 30px;
   cursor: pointer;
   font-size: 14px;
   z-index: 2;
-  transition: background 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
 }
 
 .addWaterBtn:hover {
-  color: #9be1a0;
+  color: var(--color-accent);
 }
 
 @media (min-width: 768px) {
