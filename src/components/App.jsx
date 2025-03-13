@@ -5,7 +5,6 @@ import PrivateRoute from './Utils/PrivateRoute/PrivateRoute';
 import RestrictedRoute from './Utils/RestrictedRoute/RestrictedRoute';
 import { lazy, Suspense } from 'react';
 import Loader from './Utils/Loader/Loader';
-import WaterTracker from './UI/WaterTracker.jsx';
 
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
