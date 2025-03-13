@@ -32,14 +32,15 @@ const SettingModal = () => {
           <div className={css.avatarBlock}>
             <h2 className={css.title}>Setting</h2>
             <div className={css.avatarWrapper}>
-              <img src="../../../public/img/photo.jpeg" alt="avatar" />
+              <img src="#" alt="avatar" />
             </div>
-            <button type="button" className={css.uploadBtn}>
-              <svg className={css.icon}>
+            <label className={css.uploadLabel}>
+              <svg className={css.uploadIcon}>
                 <use href="/images/icons.svg#icon-upload"></use>
               </svg>
               Upload a photo
-            </button>
+              <Field type="file" className={css.uploadBtn} value="" />
+            </label>
           </div>
           <div className={css.infoBlock}>
             <div className={css.leftBlock}>
