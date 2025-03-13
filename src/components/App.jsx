@@ -25,7 +25,6 @@ function App() {
               element={
                 <RestrictedRoute redirectTo="/">
                   <HomePage />
-                  <WaterTracker />
                   </RestrictedRoute>
               }
             />
