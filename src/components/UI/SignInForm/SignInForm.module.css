@@ -1,298 +1,295 @@
 .section {
-    position: relative;
-    padding: 24px 16px 170px 16px;
-    width: 343px;
-    height: 780px;
-    background-color: var(--color-gray);
-    border-radius: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  padding: 24px 16px 170px 16px;
+  width: 343px;
+  height: 780px;
+  background-color: var(--color-gray);
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .signinSection {
-    width: 311px;
-    margin-top: 172px;
+  width: 311px;
+  margin-top: 172px;
 }
 
 .logo {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 20px;
 }
 
 h2.title {
-    font-size: 32px; 
-    font-weight: 700;
-    text-align: start;
-    color: var(--color-main);
-    margin-bottom: 32px;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: start;
+  color: var(--color-main);
+  margin-bottom: 32px;
 }
 
 .label {
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 18px;
-    margin-bottom: 8px;
-    display: block;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 8px;
+  display: block;
 }
 
 input {
-    width: 100%;
-    height: 56px;
-    padding: 16px;
-    border: 1px solid rgba(47, 47, 47, 0.2);
-    border-radius: 15px;
-    font-size: 14px;
-    line-height: 18px;
-    background-color: var(--color-light);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 16px;
-    padding-right: 48px;
-    color: inherit;
+  width: 100%;
+  height: 56px;
+  padding: 16px;
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
+  font-size: 14px;
+  line-height: 18px;
+  background-color: var(--color-light);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 16px;
+  padding-right: 48px;
+  color: inherit;
 }
 
 input.inactive {
-    border-color: rgba(47, 47, 47, 0.2); 
-    background-color: var(--color-light);
+  border-color: rgba(47, 47, 47, 0.2);
+  background-color: var(--color-light);
 }
 
 input:focus {
-    outline: none;
-    border-color: var(--color-accent);
-    box-shadow: 0 0 5px rgba(85, 204, 141, 0.6);
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 5px rgba(85, 204, 141, 0.6);
 }
 
 input.activated {
-    border-color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 input.errorInput {
-    border-color: red; 
-    background-color: rgba(255, 0, 0, 0.1); 
+  border-color: red;
+  background-color: rgba(255, 0, 0, 0.1);
 }
 
 .errorMessage {
-    color: red;
-    font-size: 14px;
-    margin-bottom: 10px;
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 button.signinBtn {
-    width: 100%;
-    height: 60px;
-    background-color: var(--color-accent);
-    border: none;
-    border-radius: 30px;
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 700;
-    color: var(--color-main);
-    cursor: pointer;
-    margin-top: 16px;
+  width: 100%;
+  height: 60px;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 700;
+  color: var(--color-main);
+  cursor: pointer;
+  margin-top: 16px;
 }
 
 button.signinBtn:hover {
-    background-color: #85cc8d;
+  background-color: #85cc8d;
 }
 
 .signupLink {
-    text-align: center;
-    margin-top: 16px;
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 400;
-    color: var(--color-main);
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a.signupLink {
-    text-align: center;
-    margin-top: 16px;
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 400;
-    color: var(--color-main);
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-main);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .signupLinkText {
-    margin-left: 6px;
+  margin-left: 6px;
 }
 
 a.signupLinkText {
-    color: var(--color-main);
-    text-decoration: underline;
-    font-weight: bold;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
+  color: var(--color-main);
+  text-decoration: underline;
+  font-weight: bold;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
 .signupLinkText:hover {
-    color: var(--color-accent);
-    text-decoration: underline; 
-  }
+  color: var(--color-accent);
+  text-decoration: underline;
+}
 
 .passwordWrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .togglePassword {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-70%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    opacity: 0.5;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-70%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  opacity: 0.5;
 }
 
-
 .icon {
-    width: 20px;
-    height: 20px;
-    fill: none;
-    stroke: var(--color-main);
-    stroke-width: 1.8px;
-    transition: stroke 0.3s ease;
-                                                                                           
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--color-main);
+  stroke-width: 1.8px;
+  transition: stroke 0.3s ease;
 }
 
 .icon:hover {
-    fill: var(--color-accent);
+  fill: var(--color-accent);
 }
 
 @media (min-width: 320px) and (max-width: 375px) {
-    .section {
-        padding: 24px 16px 150px 16px; 
-        width: 100%;
-        height: auto;
-    }
+  .section {
+    padding: 24px 16px 150px 16px;
+    width: 100%;
+    height: auto;
+  }
 
-    .signinSection {
-        width: 100%;
-        margin-top: 160px;
-    }
+  .signinSection {
+    width: 100%;
+    margin-top: 160px;
+  }
 
-    .logo {
-        font-size: 16px; 
-        line-height: 18px;
-    }
+  .logo {
+    font-size: 16px;
+    line-height: 18px;
+  }
 
-    h2.title {
-        font-size: 28px;
-        margin-bottom: 24px;
-    }
+  h2.title {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
 
-    .label {
-        font-size: 12px;
-        line-height: 16px;
-        margin-bottom: 6px;
-    }
+  .label {
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 6px;
+  }
 
-    input {
-        font-size: 14px;
-        line-height: 20px;
-        height: 48px;
-        padding: 14px;
-    }
+  input {
+    font-size: 14px;
+    line-height: 20px;
+    height: 48px;
+    padding: 14px;
+  }
 
-    .signinBtn {
-        height: 50px;
-        font-size: 14px;
-        line-height: 18px;
-    }
+  .signinBtn {
+    height: 50px;
+    font-size: 14px;
+    line-height: 18px;
+  }
 
-    .signupLink {
-        font-size: 12px;
-        line-height: 16px;
-        margin-top: 12px;
-    }
+  .signupLink {
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 12px;
+  }
 
-    .passwordWrapper {
-        width: 100%;
-    }
+  .passwordWrapper {
+    width: 100%;
+  }
 
-    .togglePassword {
-        right: 12px;
-        top: 50%;
-        transform: translateY(-70%);
-    }
+  .togglePassword {
+    right: 12px;
+    top: 50%;
+    transform: translateY(-70%);
+  }
 
-    .icon {
-        width: 16px;
-        height: 16px;
-    }
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
 
-    .signupLinkText {
-        font-size: 12px;
-    }
+  .signupLinkText {
+    font-size: 12px;
+  }
 
-    .errorMessage {
-        font-size: 12px;
-    }
+  .errorMessage {
+    font-size: 12px;
+  }
 }
 
 @media (min-width: 768px) {
-   
-    .section {
-        padding: 32px 134px 227px 134px;
-        width: 704px;
-        height: 960px;
-    }
-  
-    .logo {
-        font-size: 24px;
-        line-height: 24px;
-    } 
+  .section {
+    padding: 32px 134px 227px 134px;
+    width: 704px;
+    height: 960px;
+  }
 
-    .signinSection {
-        width: 436px;
-        margin-top: 225px;
-    }
+  .logo {
+    font-size: 24px;
+    line-height: 24px;
+  }
 
-    h2.title {
-        font-size: 36px;
-    }
+  .signinSection {
+    width: 436px;
+    margin-top: 225px;
+  }
 
-    .label {
-        font-size: 16px;
-        line-height: 24px;
-    }
+  h2.title {
+    font-size: 36px;
+  }
 
-    input {
-        font-size: 16px;
-        line-height: 24px;
-    }
+  .label {
+    font-size: 16px;
+    line-height: 24px;
+  }
 
-    a.signupLink {
-        font-size: 16px;
-        line-height: 24px;
-    }
+  input {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  a.signupLink {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 @media (min-width: 1440px) {
-    .section {
-        padding: 32px 118px 100px 118px;
-        width: 672px;
-        height: 736px;
-    }
-    
-    .signinSection {
-        margin-top: 113px;
-    }
-}   
+  .section {
+    padding: 32px 118px 100px 118px;
+    width: 672px;
+    height: 736px;
+  }
+
+  .signinSection {
+    margin-top: 113px;
+  }
+}
