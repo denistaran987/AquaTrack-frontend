@@ -3,6 +3,7 @@ import axios from 'axios';
 import { setCredentials } from './slice';
 
 axios.defaults.baseURL = 'https://aquatrack-backend-1b8z.onrender.com';
+axios.defaults.withCredentials = true;
 
 export const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -35,7 +36,7 @@ export const signInUser = createAsyncThunk(
   'auth/signInUser',
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/auth/signin', userData);
+      const response = await axios.post('/auth/signin', userData, { withCredentials: true });
       return response.data;
     } catch (error) {
       if (!error.response) {

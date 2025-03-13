@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchUserInfo } from './operations';
 
 const initialState = {
+  _id: '',
   name: 'User',
   email: '',
   gender: '',
