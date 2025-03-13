@@ -11,6 +11,7 @@ import DeleteWaterModal from '../../components/UI/Modal/Components/DeleteWaterMo
 import LogOutModal from '../../components/UI/Modal/Components/LogOutModal/LogOutModal';
 import { fetchUserInfo } from '../../redux/user/operations';
 import { selectToken } from '../../redux/auth/selectors';
+import SettingModal from '../../components/UI/Modal/Components/SettingsModal/SettingsModal';
 
 const TrackerPage = () => {
   const [position, setPosition] = useState(null);
@@ -40,7 +41,7 @@ const TrackerPage = () => {
         <Modal isOpen={isOpen} toggleModal={() => dispatch(toggleModal())} position={position}>
           {isOpen === 'deleteWater' && <DeleteWaterModal />}
           {isOpen === 'logout' && <LogOutModal />}
-          {isOpen === 'settings' && <SettingsModal />}
+          {isOpen === 'settings' && <SettingModal />}
         </Modal>
       )}
     </div>
