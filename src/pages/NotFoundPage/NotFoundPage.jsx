@@ -9,7 +9,7 @@ const NotFoundPage = () => {
         <FaArrowLeftLong />
         HomePage
       </Link>
-      <h2 className={s.title}>Oops... Page is not found</h2>
+      <img className={s.image} src="/images/NotFound.png" alt="404 Not Found" />
     </div>
   );
 };
