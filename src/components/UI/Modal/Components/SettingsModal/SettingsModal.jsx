@@ -64,22 +64,14 @@ const SettingModal = () => {
                     Your name
                   </label>
                   <Field type="text" name="name" id={nameId} />
-                  <ErrorMessage
-                    name="name"
-                    component="div"
-                    // className={}
-                  />
+                  <ErrorMessage name="name" component="div" />
                 </div>
                 <div className={css.block}>
                   <label htmlFor={emailId} className={css.title}>
                     Email
                   </label>
                   <Field type="email" name="mail" id={emailId} />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    // className={}
-                  />
+                  <ErrorMessage name="email" component="div" />
                 </div>
               </div>
               <div className={css.normaBlock}>
