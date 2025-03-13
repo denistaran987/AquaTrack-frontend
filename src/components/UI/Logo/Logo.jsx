@@ -3,7 +3,9 @@ import s from './Logo.module.css';
 const Logo = () => {
   return (
     <>
-      <h1 className={s.logo}>AquaTrack</h1>
+      <a href="/" className={s.logo}>
+        AquaTrack
+      </a>
     </>
   );
 };
