@@ -115,11 +115,7 @@ const SettingModal = () => {
                 <div className={css.block}>
                   <label htmlFor={nameId}>Your weight in kilograms:</label>
                   <Field type="text" name="weight" id={weightId} />
-                  <ErrorMessage
-                    name="weight"
-                    component="div"
-                    // className={}
-                  />
+                  <ErrorMessage name="weight" component="div" />
                 </div>
                 <div className={css.block}>
                   <label htmlFor={emailId}>The time of active participation in sports:</label>
