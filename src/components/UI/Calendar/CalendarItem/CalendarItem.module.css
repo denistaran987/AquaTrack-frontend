@@ -31,6 +31,20 @@
   background-color: var(--color-light);
 }
 
+.normed{
+  background-color: rgba(50, 63, 71, 0.2);
+  ;
+}
+
+.currentDay{
+  background-color: var(--color-main);
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent) ;
+}
+
+
+
+
 .itemBox {
   display: flex;
   flex-direction: column;
