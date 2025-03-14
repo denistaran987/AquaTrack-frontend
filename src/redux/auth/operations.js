@@ -49,6 +49,30 @@ export const signInUser = createAsyncThunk(
   }
 );
 
+export const sendResetEmail = createAsyncThunk(
+  'auth/sendResetEmail',
+  async (email, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/auth/send-reset-email', { email });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to send reset email');
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  'auth/resetPassword',
+  async ({ token, password }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/auth/reset-pwd', { token, password });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to reset password');
+    }
+  }
+);
+
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     const response = await axios.post('auth/logout');

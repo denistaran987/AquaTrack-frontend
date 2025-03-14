@@ -148,8 +148,8 @@ a.signupLinkText {
     position: absolute;
     right: 16px;
     top: 50%;
-    transform: translateY(-70%);
-    background: none;
+    transform: translateY(-120%);
+    background: none! important;
     border: none;
     cursor: pointer;
     display: flex;
@@ -160,7 +160,6 @@ a.signupLinkText {
     padding: 0;
     opacity: 0.5;
 }
-
 
 .icon {
     width: 20px;
@@ -175,6 +174,27 @@ a.signupLinkText {
 .icon:hover {
     fill: var(--color-accent);
 }
+
+.forgotPassword {
+    font-size: 14px;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.forgotPasswordLink {
+    cursor: pointer;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    color: var(--color-main);
+    text-decoration: underline;
+    font-weight: bold;
+
+}
+
+.forgotPasswordLink:hover {
+    color: var(--color-accent);
+    text-decoration: underline; 
+}
+  
 
 @media (min-width: 320px) and (max-width: 375px) {
     .section {
@@ -224,18 +244,33 @@ a.signupLinkText {
     }
 
     .passwordWrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
         width: 100%;
+        height: 100%;
     }
 
     .togglePassword {
-        right: 12px;
+        position: absolute;
+        right: 16px;
         top: 50%;
-        transform: translateY(-70%);
+        transform: translateY(-120%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px; 
+        height: 32px;
+        padding: 0;
+        opacity: 0.5;
     }
 
     .icon {
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
     }
 
     .signupLinkText {
@@ -244,6 +279,18 @@ a.signupLinkText {
 
     .errorMessage {
         font-size: 12px;
+    }
+
+    .forgotPassword {
+        font-size: 12px;
+        line-height: 16px;
+        margin-bottom: 6px;
+    }
+
+    .forgotPasswordBtn {
+        height: 50px;
+        font-size: 14px;
+        line-height: 18px;
     }
 }
 
@@ -280,6 +327,11 @@ a.signupLinkText {
     }
 
     a.signupLink {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .forgotPassword {
         font-size: 16px;
         line-height: 24px;
     }

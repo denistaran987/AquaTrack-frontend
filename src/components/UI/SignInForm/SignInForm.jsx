@@ -9,6 +9,7 @@ import { signInUser } from '../../../redux/auth/operations';
 import toast from 'react-hot-toast';
 import { selectIsLoading } from '../../../redux/auth/selectors';
 import Loader from '../../Utils/Loader/Loader';
+import ForgotPasswordModal from '../Modal/Components/ForgotPasswordModal/ForgotPasswordModal';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -17,6 +18,7 @@ const SignInSchema = Yup.object().shape({
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isForgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
@@ -31,17 +33,11 @@ const SignInPage = () => {
       .then(() => {
         toast.success(`Welcome, User!`, {
           style: { backgroundColor: '#9be1a0', fontWeight: 'medium' },
-          iconTheme: {
-            primary: 'white',
-            secondary: 'black',
-          },
+          iconTheme: { primary: 'white', secondary: 'black' },
         });
 
         resetForm();
-
-        setTimeout(() => {
-          navigate('/tracker');
-        }, 2000);
+        setTimeout(() => navigate('/tracker'), 2000);
       })
       .catch(error => {
         console.error('Error in sign-in:', error);
@@ -54,21 +50,8 @@ const SignInPage = () => {
           500: 'Something went wrong. Please try again later.',
         };
 
-        if (typeof error === 'string') {
-          toast.error(error);
-          return;
-        }
-
-        const status = error?.status;
-        const message = errorMessages[status] || 'An unknown error occurred.';
-
-        toast.error(message, {
-          style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' },
-          iconTheme: {
-            primary: 'white',
-            secondary: 'red',
-          },
-        });
+        const message = errorMessages[error?.status] || 'An unknown error occurred.';
+        toast.error(message, { style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' } });
       });
   };
 
@@ -92,9 +75,7 @@ const SignInPage = () => {
                 name="email"
                 type="email"
                 placeholder="Enter your email"
-                className={`${styles.input} ${
-                  touched.email && errors.email ? styles.errorInput : ''
-                }`}
+                className={`${styles.input} ${touched.email && errors.email ? styles.errorInput : ''}`}
                 onBlur={() => setFieldTouched('email', true)}
               />
               <ErrorMessage name="email" component="div" className={styles.errorMessage} />
@@ -105,9 +86,7 @@ const SignInPage = () => {
                   name="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Enter your password"
-                  className={`${styles.input} ${
-                    touched.password && errors.password ? styles.errorInput : ''
-                  }`}
+                  className={`${styles.input} ${touched.password && errors.password ? styles.errorInput : ''}`}
                   onBlur={() => setFieldTouched('password', true)}
                 />
                 <button
@@ -116,13 +95,26 @@ const SignInPage = () => {
                   className={styles.togglePassword}
                 >
                   <svg className={styles.icon} width="24" height="24">
-                    <use
-                      xlinkHref={`/images/icons.svg#${showPassword ? 'icon-eye' : 'icon-eye-off'}`}
-                    />
+                    <use xlinkHref={`/images/icons.svg#${showPassword ? 'icon-eye' : 'icon-eye-off'}`} />
                   </svg>
                 </button>
               </div>
               <ErrorMessage name="password" component="div" className={styles.errorMessage} />
+
+              <p className={styles.forgotPassword}>
+                Forgot your password?{' '}
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setForgotPasswordOpen(true);
+                  }}
+                  className={styles.forgotPasswordLink}
+                >
+                  Click here
+                </a>{' '}
+                to reset your password.
+              </p>
 
               <button type="submit" className={styles.signinBtn}>
                 Sign In
@@ -130,6 +122,7 @@ const SignInPage = () => {
             </Form>
           )}
         </Formik>
+
         <p className={styles.signupLink}>
           Don't have an account?{' '}
           <Link to="/signup" className={styles.signupLinkText}>
@@ -137,7 +130,8 @@ const SignInPage = () => {
           </Link>
         </p>
       </section>
-      {/* <ToastContainer /> */}
+
+      {isForgotPasswordOpen && <ForgotPasswordModal onClose={() => setForgotPasswordOpen(false)} />}
     </section>
   );
 };
