@@ -6,6 +6,7 @@ import RestrictedRoute from './Utils/RestrictedRoute/RestrictedRoute';
 import { lazy, Suspense } from 'react';
 import Loader from './Utils/Loader/Loader';
 
+
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('../pages/SignInPage/SignInPage'));
