@@ -12,9 +12,10 @@
   pointer-events: none;
   transform: scale(0.9);
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  overflow-x: auto;
+  overflow-x: hidden;
   z-index: 1000;
 }
+
 .backdrop.active {
   opacity: 1;
   transform: scale(1);
