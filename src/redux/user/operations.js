@@ -12,6 +12,34 @@ export const fetchUserInfo = createAsyncThunk('user/fetchUserInfo', async (token
     const response = await axios.get('/users/current');
     return response.data.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
   }
 });
+
+export const updateUserInfo = createAsyncThunk(
+  'user/updateUserInfo',
+  async (formData, thunkAPI) => {
+    try {
+      const response = await axios.patch('/users', formData);
+      return response.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const updateUserAvatar = createAsyncThunk(
+  'user/updateUserAvatar',
+  async (formData, thunkAPI) => {
+    try {
+      const response = await axios.patch('/users/avatar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
