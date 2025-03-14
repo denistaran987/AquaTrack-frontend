@@ -1,0 +1,109 @@
+.p {
+  color: #2f2f2f;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -1%;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fixedValue {
+  background-color: #323f47;
+  color: white;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.inputlight1 {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.inputlight2 {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+  width: 100%;
+  margin-top: -24px;
+  margin-bottom: 14px;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  stroke: currentColor;
+  fill: white;
+  color: #323f47;
+}
+
+.icon:hover {
+  color: var(--color-accent);
+}
+
+.saveButton {
+  background-color: #9be1a0;
+  color: #323f47;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -1%;
+  text-align: center;
+}
+
+.saveButton:hover {
+  background-color: #87d28d;
+}
+
+.error {
+  color: red;
+  font-size: 0.875rem;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+
+input[type='time']::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type='time'] {
+  -moz-appearance: textfield;
+}
