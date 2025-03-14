@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import css from './CalendarHeader.module.css';
 
-const CalendarHeader = ({ monthsName, year, monthForvards, monthPrevios }) => {
+const CalendarHeader = ({ monthsName, year, monthForvards, monthPrevios, setIsChart }) => {
   return (
     <div className={css.monthBox}>
 
@@ -23,7 +24,7 @@ const CalendarHeader = ({ monthsName, year, monthForvards, monthPrevios }) => {
             </svg>
           </button>
         </div>
-        <button className={css.buttonNext} type="button" onClick={monthForvards}>
+        <button type="button" onClick={()=>setIsChart(prev=>!prev)}>
           <svg className={css.iconChart}>
             <use xlinkHref={`/images/icons.svg#icon-pie-chart`} />
           </svg>
@@ -33,4 +34,5 @@ const CalendarHeader = ({ monthsName, year, monthForvards, monthPrevios }) => {
   );
 };
 
-export default CalendarHeader;
+export default memo(CalendarHeader);
+
