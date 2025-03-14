@@ -1,25 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useDispatch } from 'react-redux'; 
+import { toggleModal } from '../../../../../redux/modal/slice.js'; 
 import * as Yup from 'yup';
 import styles from './WaterForm.module.css';
 
 const validationSchema = Yup.object({
-  time: Yup.string().required('Incorrect time'),
-  usedAmount: Yup.number()
+  time: Yup.string()
+    .matches(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Time must be in HH:mm format (00:00 - 23:59)')
+    .required('Incorrect time'),
+  Amount: Yup.number()
     .min(50, 'Min Value - 50 ml')
     .max(1500, 'Max value - 1500 ml')
     .required('This field is required'),
 });
 
-const WaterForm = ({ initialData, onClose }) => {
+const WaterForm = ({ type, initialData }) => {
+  const dispatch = useDispatch(); 
+  const [currentTime, setCurrentTime] = useState('');
+
+  useEffect(() => {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    setCurrentTime(`${hours}:${minutes}`);
+  }, []);
+
   const defaultValues = {
-    time: initialData?.time || '07:00',
-    usedAmount: initialData?.usedAmount || 50,
+    time: type === 'add' ? currentTime : initialData?.time || '07:00',
+    Amount: initialData?.Amount || 50,
   };
 
   const handleSubmit = (values) => {
     console.log('Data form:', values);
-    onClose(); 
+    dispatch(toggleModal()); 
   };
 
   return (
@@ -27,6 +41,7 @@ const WaterForm = ({ initialData, onClose }) => {
       initialValues={defaultValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
+      enableReinitialize
     >
       {({ setFieldValue, values }) => (
         <Form>
@@ -36,8 +51,8 @@ const WaterForm = ({ initialData, onClose }) => {
               <button
                 type="button"
                 onClick={() => {
-                  const newValue = Math.max(50, values.usedAmount - 50);
-                  setFieldValue('usedAmount', newValue);
+                  const newValue = Math.max(50, Number(values.Amount) - 50);
+                  setFieldValue('Amount', newValue);
                 }}
                 className={styles.button}
               >
@@ -45,12 +60,12 @@ const WaterForm = ({ initialData, onClose }) => {
                   <use href="/images/icons.svg#icon-minus-circle" />
                 </svg>
               </button>
-              <span className={styles.fixedValue}>{values.usedAmount} ml</span>
+              <span className={styles.fixedValue}>{values.Amount} ml</span>
               <button
                 type="button"
                 onClick={() => {
-                  const newValue = Math.min(1500, values.usedAmount + 50);
-                  setFieldValue('usedAmount', newValue);
+                  const newValue = Math.min(1500, Number(values.Amount) + 50);
+                  setFieldValue('Amount', newValue);
                 }}
                 className={styles.button}
               >
@@ -60,25 +75,23 @@ const WaterForm = ({ initialData, onClose }) => {
               </button>
             </div>
           </label>
-
           <label>
             <p className={styles.p}>Recording time:</p>
             <Field type="time" name="time" className={styles.inputlight1} />
             <ErrorMessage name="time" component="div" className={styles.error} />
           </label>
-
           <label>
             <h3>Enter the value of the water used:</h3>
             <Field
               type="number"
-              name="usedAmount"
+              name="Amount"
               className={styles.inputlight2}
               onChange={(e) => {
                 const value = e.target.value;
-                setFieldValue('usedAmount', value);
+                setFieldValue('Amount', Number(value));
               }}
             />
-            <ErrorMessage name="usedAmount" component="div" className={styles.error} />
+            <ErrorMessage name="Amount" component="div" className={styles.error} />
           </label>
 
           <button type="submit" className={styles.saveButton}>

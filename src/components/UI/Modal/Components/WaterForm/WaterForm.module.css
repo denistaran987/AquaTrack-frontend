@@ -62,6 +62,10 @@
   color: #323f47;
 }
 
+.icon:hover {
+  color: var(--color-accent);
+}
+
 .saveButton {
   background-color: #9be1a0;
   color: #323f47;
@@ -94,4 +98,12 @@ input[type='number']::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield !important;
   appearance: textfield !important;
+}
+
+input[type='time']::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type='time'] {
+  -moz-appearance: textfield;
 }

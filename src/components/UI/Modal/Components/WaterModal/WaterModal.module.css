@@ -25,6 +25,13 @@
   margin-top: 24px;
 }
 
+@media screen and (max-width: 375px) {
+  .waterModal {
+    min-width: 280px;
+    width: 100%;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .waterModal {
     min-width: 518px;
