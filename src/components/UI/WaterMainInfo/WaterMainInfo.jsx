@@ -9,7 +9,7 @@ const WaterMainInfo = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    setProgress(12);
+    setProgress(65);
   }, []);
 
   return (
