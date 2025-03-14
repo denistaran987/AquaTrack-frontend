@@ -5,13 +5,13 @@ import WaterMainInfo from '../../components/UI/WaterMainInfo/WaterMainInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { selectIsOpenModal } from '../../redux/modal/selector';
-import { toggleModal } from '../../redux/modal/slice';
 import Modal from '../../components/UI/Modal/Modal';
+import SettingsModal from '../../components/UI/Modal/Components/SettingsModal/SettingsModal';
 import DeleteWaterModal from '../../components/UI/Modal/Components/DeleteWaterModal/DeleteWaterModal';
 import LogOutModal from '../../components/UI/Modal/Components/LogOutModal/LogOutModal';
+import { toggleModal } from '../../redux/modal/slice';
 import { fetchUserInfo } from '../../redux/user/operations';
 import { selectToken } from '../../redux/auth/selectors';
-import SettingModal from '../../components/UI/Modal/Components/SettingsModal/SettingsModal';
 
 const TrackerPage = () => {
   const [position, setPosition] = useState(null);
@@ -41,7 +41,7 @@ const TrackerPage = () => {
         <Modal isOpen={isOpen} toggleModal={() => dispatch(toggleModal())} position={position}>
           {isOpen === 'deleteWater' && <DeleteWaterModal />}
           {isOpen === 'logout' && <LogOutModal />}
-          {isOpen === 'settings' && <SettingModal />}
+          {isOpen === 'settings' && <SettingsModal />}
         </Modal>
       )}
     </div>

@@ -3,32 +3,40 @@ import * as Yup from 'yup';
 import css from './SettingsModal.module.css';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 
-const SettingModal = () => {
+const SettingsModal = () => {
   const nameId = useId();
   const emailId = useId();
   const weightId = useId();
   const timeId = useId();
+  const waterIntakeId = useId();
 
-  const SignUpSchema = Yup.object().shape({
-    name: Yup.string().min(6, 'Too short!').required('Required'),
-    email: Yup.string().email('Invalid email').required('Required'),
+  const SettingSchema = Yup.object().shape({
+    name: Yup.string().max(30),
+    email: Yup.string().email('Invalid email'),
     weight: Yup.number()
       .typeError('Must be a number')
       .min(30, 'Weight must be at least 30 kg')
       .max(500, 'Weight must be realistic'),
+    time: Yup.number()
+      .typeError('Must be a number')
+      .min(0, 'Cannot be negative')
+      .max(24, 'Cannot exceed 24 hours'),
   });
 
-  const handleSubmit = () => console.log('submit');
+  const handleSubmit = values => {
+    console.log('submit:', values);
+  };
+
   return (
     <Formik
-      initialValues={{ name: '', email: '', weight: '' }}
-      validationSchema={SignUpSchema}
+      initialValues={{ name: '', email: '', weight: '', time: '' }}
+      validationSchema={SettingSchema}
       onSubmit={handleSubmit}
       validateOnBlur={false}
       validateOnChange={false}
     >
-      {() => (
-        <Form className={css.modalBoby} onSubmit={handleSubmit}>
+      {({ errors, touched, setFieldTouched }) => (
+        <Form className={css.modalBody}>
           <div className={css.avatarBlock}>
             <h2 className={css.title}>Setting</h2>
             <div className={css.avatarWrapper}>
@@ -53,7 +61,7 @@ const SettingModal = () => {
                     Woman
                   </label>
                   <label>
-                    <Field type="radio" name="gender" value="man" />
+                    <Field type="radio" name="gender" value="man" checked />
                     <span className={css.customRadio}></span>
                     Man
                   </label>
@@ -64,15 +72,27 @@ const SettingModal = () => {
                   <label htmlFor={nameId} className={css.title}>
                     Your name
                   </label>
-                  <Field type="text" name="name" id={nameId} />
-                  <ErrorMessage name="name" component="div" />
+                  <Field
+                    type="text"
+                    name="name"
+                    id={nameId}
+                    className={`${touched.name && errors.name ? css.errorInput : ''}`}
+                    onBlur={() => setFieldTouched('name', true)}
+                  />
+                  <ErrorMessage className={css.errorMessage} name="name" component="div" />
                 </div>
                 <div className={css.block}>
                   <label htmlFor={emailId} className={css.title}>
                     Email
                   </label>
-                  <Field type="email" name="mail" id={emailId} />
-                  <ErrorMessage name="email" component="div" />
+                  <Field
+                    type="email"
+                    name="email"
+                    id={emailId}
+                    className={`${touched.email && errors.email ? css.errorInput : ''}`}
+                    onBlur={() => setFieldTouched('email', true)}
+                  />
+                  <ErrorMessage className={css.errorMessage} name="email" component="div" />
                 </div>
               </div>
               <div className={css.normaBlock}>
@@ -106,13 +126,26 @@ const SettingModal = () => {
             <div className={css.rightBlock}>
               <div className={css.inputBlock}>
                 <div className={css.block}>
-                  <label htmlFor={nameId}>Your weight in kilograms:</label>
-                  <Field type="text" name="weight" id={weightId} />
-                  <ErrorMessage name="weight" component="div" />
+                  <label htmlFor={weightId}>Your weight in kilograms:</label>
+                  <Field
+                    type="text"
+                    name="weight"
+                    id={weightId}
+                    className={`${touched.weight && errors.weight ? css.errorInput : ''}`}
+                    onBlur={() => setFieldTouched('weight', true)}
+                  />
+                  <ErrorMessage className={css.errorMessage} name="weight" component="div" />
                 </div>
                 <div className={css.block}>
-                  <label htmlFor={emailId}>The time of active participation in sports:</label>
-                  <Field type="text" name="time" id={timeId} />
+                  <label htmlFor={timeId}>The time of active participation in sports:</label>
+                  <Field
+                    type="text"
+                    name="time"
+                    id={timeId}
+                    className={`${touched.time && errors.time ? css.errorInput : ''}`}
+                    onBlur={() => setFieldTouched('time', true)}
+                  />
+                  <ErrorMessage className={css.errorMessage} name="time" component="div" />
                 </div>
               </div>
               <div className={css.inputBlock}>
@@ -121,15 +154,15 @@ const SettingModal = () => {
                   <p className={css.result}>1.8 L</p>
                 </div>
                 <div className={css.block}>
-                  <label htmlFor={emailId} className={css.title}>
+                  <label htmlFor={waterIntakeId} className={css.title}>
                     Write down how much water you will drink:
                   </label>
-                  <Field type="text" name="time" id={timeId} />
+                  <Field type="text" name="time" id={waterIntakeId} />
                 </div>
               </div>
             </div>
           </div>
-          <button type="button" className={css.saveBtn}>
+          <button type="submit" className={css.saveBtn}>
             Save
           </button>
         </Form>
@@ -138,4 +171,4 @@ const SettingModal = () => {
   );
 };
 
-export default SettingModal;
+export default SettingsModal;
