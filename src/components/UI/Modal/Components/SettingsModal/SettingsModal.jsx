@@ -14,13 +14,9 @@ const SettingsModal = () => {
     name: Yup.string().max(30),
     email: Yup.string().email('Invalid email'),
     weight: Yup.number()
-      .typeError('Must be a number')
       .min(30, 'Weight must be at least 30 kg')
       .max(500, 'Weight must be realistic'),
-    time: Yup.number()
-      .typeError('Must be a number')
-      .min(0, 'Cannot be negative')
-      .max(24, 'Cannot exceed 24 hours'),
+    time: Yup.number().min(0, 'Cannot be negative').max(24, 'Cannot exceed 24 hours'),
   });
 
   const handleSubmit = values => {
@@ -42,13 +38,15 @@ const SettingsModal = () => {
             <div className={css.avatarWrapper}>
               <img src="#" alt="avatar" />
             </div>
-            <label className={css.uploadLabel}>
-              <svg className={css.uploadIcon}>
-                <use href="/images/icons.svg#icon-upload"></use>
-              </svg>
-              Upload a photo
-              <Field type="file" className={css.uploadBtn} value="" />
-            </label>
+            <div className={css.uploadWrapper}>
+              <label className={css.uploadLabel}>
+                <svg className={css.uploadIcon}>
+                  <use href="/images/icons.svg#icon-upload"></use>
+                </svg>
+                Upload a photo
+                <Field type="file" className={css.uploadBtn} value="" />
+              </label>
+            </div>
           </div>
           <div className={css.infoBlock}>
             <div className={css.leftBlock}>
@@ -86,7 +84,7 @@ const SettingsModal = () => {
                     Email
                   </label>
                   <Field
-                    type="email"
+                    type="text"
                     name="email"
                     id={emailId}
                     className={`${touched.email && errors.email ? css.errorInput : ''}`}
@@ -128,7 +126,7 @@ const SettingsModal = () => {
                 <div className={css.block}>
                   <label htmlFor={weightId}>Your weight in kilograms:</label>
                   <Field
-                    type="text"
+                    type="number"
                     name="weight"
                     id={weightId}
                     className={`${touched.weight && errors.weight ? css.errorInput : ''}`}
@@ -139,7 +137,7 @@ const SettingsModal = () => {
                 <div className={css.block}>
                   <label htmlFor={timeId}>The time of active participation in sports:</label>
                   <Field
-                    type="text"
+                    type="number"
                     name="time"
                     id={timeId}
                     className={`${touched.time && errors.time ? css.errorInput : ''}`}
@@ -157,7 +155,7 @@ const SettingsModal = () => {
                   <label htmlFor={waterIntakeId} className={css.title}>
                     Write down how much water you will drink:
                   </label>
-                  <Field type="text" name="time" id={waterIntakeId} />
+                  <Field type="number" name="water" id={waterIntakeId} />
                 </div>
               </div>
             </div>
