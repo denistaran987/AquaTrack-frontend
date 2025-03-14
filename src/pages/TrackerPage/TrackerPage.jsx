@@ -12,6 +12,7 @@ import LogOutModal from '../../components/UI/Modal/Components/LogOutModal/LogOut
 import { toggleModal } from '../../redux/modal/slice';
 import { fetchUserInfo } from '../../redux/user/operations';
 import { selectToken } from '../../redux/auth/selectors';
+import CalendarContainer from '../../components/UI/Calendar/CalendarContainer/CalendarContainer';
 
 const TrackerPage = () => {
   const [position, setPosition] = useState(null);
@@ -27,6 +28,7 @@ const TrackerPage = () => {
     <div className="section">
       <div className={clsx('container', s['homepage-wrapper'])}>
         <WaterMainInfo />
+        <CalendarContainer/>
       </div>
       <button type="button" onClick={() => dispatch(toggleModal('deleteWater'), setPosition(null))}>
         Open DeleteWaterModal
