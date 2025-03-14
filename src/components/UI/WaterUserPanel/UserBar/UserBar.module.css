@@ -35,6 +35,11 @@
   fill: none;
   stroke: white;
   transform: rotate(90deg);
+  transition: transform 0.3s ease;
+}
+
+.svgOpen {
+  transform: rotate(-90deg);
 }
 
 @media (min-width: 768px) {

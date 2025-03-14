@@ -7,7 +7,7 @@ const UserBarPopover = ({ isOpen }) => {
       <li>
         <button type="button" className={css.item}>
           <svg width="16" height="16">
-            <use href="/public/images/icons.svg#icon-settings"></use>
+            <use href="/images/icons.svg#icon-settings"></use>
           </svg>
           <p>Setting</p>
         </button>
@@ -15,7 +15,7 @@ const UserBarPopover = ({ isOpen }) => {
       <li>
         <button type="button" className={clsx(css.item, css['item-logout'])}>
           <svg width="16" height="16">
-            <use href="/public/images/icons.svg#icon-log-out"></use>
+            <use href="/images/icons.svg#icon-log-out"></use>
           </svg>
           <p>Log out</p>
         </button>

@@ -8,8 +8,13 @@
   fill: none;
   width: 14px;
   height: 14px;
+  transition: stroke 0.3s ease;
 }
 
+.svg:hover {
+  stroke: var(--color-accent);
+  cursor: pointer;
+}
 .cardWrapper {
   display: flex;
   gap: 10px;

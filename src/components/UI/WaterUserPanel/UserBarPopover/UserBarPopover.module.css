@@ -45,11 +45,16 @@
   color: rgba(50, 63, 71, 0.4);
   stroke: rgba(50, 63, 71, 0.4);
   fill: none;
+  transition-duration: 0.3s;
 }
 
 .item-logout:hover {
-  color: var(--color-main);
   stroke: var(--color-main);
+  color: var(--color-main);
+}
+
+svg use {
+  transition-duration: 0s;
 }
 
 @media (min-width: 768px) {

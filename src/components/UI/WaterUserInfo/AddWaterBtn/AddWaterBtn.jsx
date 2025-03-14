@@ -6,7 +6,7 @@ const AddWaterBtn = () => {
     <button className={css.button}>
       <div className={css.svgWrapper}>
         <svg width="20" height="20" className={css.svg}>
-          <use href="/public/images/icons.svg#icon-plus"></use>
+          <use href="/images/icons.svg#icon-plus"></use>
         </svg>
       </div>
       <p className={css.text}>Add water</p>
