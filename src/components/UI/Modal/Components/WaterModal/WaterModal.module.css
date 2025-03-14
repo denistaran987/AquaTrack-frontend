@@ -1,0 +1,40 @@
+.waterModal {
+  background-color: #ffffff;
+  padding: 40px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 340px;
+  width: 100%;
+}
+
+.waterModal h2 {
+  font-size: 20px;
+  color: #2c3e50;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -1%;
+}
+
+.waterModal h3 {
+  font-size: 16px;
+  color: #2c3e50;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -1%;
+  margin-bottom: 20px;
+  margin-top: 24px;
+}
+
+@media screen and (max-width: 375px) {
+  .waterModal {
+    min-width: 280px;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .waterModal {
+    min-width: 518px;
+    width: 100%;
+  }
+}

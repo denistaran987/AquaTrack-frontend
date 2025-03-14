@@ -6,6 +6,7 @@ import RestrictedRoute from './Utils/RestrictedRoute/RestrictedRoute';
 import { lazy, Suspense } from 'react';
 import Loader from './Utils/Loader/Loader';
 
+
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('../pages/SignInPage/SignInPage'));
@@ -18,18 +19,11 @@ function App() {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
-            <Route
-              index
-              element={
-                <RestrictedRoute redirectTo="/">
-                  <HomePage />
-                </RestrictedRoute>
-              }
-            />
+            <Route index element={<HomePage />} />
             <Route
               path="tracker"
               element={
-                <PrivateRoute redirectTo="/">
+                <PrivateRoute redirectTo="/signin">
                   <TrackerPage />
                 </PrivateRoute>
               }
@@ -37,7 +31,7 @@ function App() {
             <Route
               path="signup"
               element={
-                <RestrictedRoute redirectTo="/signup">
+                <RestrictedRoute redirectTo="/tracker">
                   <SignUpPage />
                 </RestrictedRoute>
               }
@@ -45,7 +39,7 @@ function App() {
             <Route
               path="signin"
               element={
-                <RestrictedRoute redirectTo="/signin">
+                <RestrictedRoute redirectTo="/tracker">
                   <SignInPage />
                 </RestrictedRoute>
               }
