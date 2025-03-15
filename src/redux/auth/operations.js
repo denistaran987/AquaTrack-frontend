@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { setCredentials } from './slice';
+import { selectIsLoggedIn } from './selectors';
 
 axios.defaults.baseURL = 'https://aquatrack-backend-1b8z.onrender.com';
 axios.defaults.withCredentials = true;
@@ -63,6 +64,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 });
 
 export const setupAxiosInterceptors = store => {
+  if (selectIsLoggedIn) return;
   axios.interceptors.response.use(
     response => response,
     async error => {
