@@ -1,11 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import css from './Modal.module.css';
+import { useSelector } from 'react-redux';
+import { selectModalPosition } from '../../../redux/modal/selector';
 
-const Modal = ({ children, toggleModal, isOpen, position }) => {
+const Modal = ({ children, toggleModal, isOpen }) => {
   const modalRoot = document.querySelector('#modal-root');
   const [isAnimating, setIsAnimating] = useState(false);
+  const position = useSelector(selectModalPosition);
+
+  useLayoutEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => (document.body.style.overflow = '');
+  }, [isOpen]);
 
   useEffect(() => {
     const handleKeyDown = e => {

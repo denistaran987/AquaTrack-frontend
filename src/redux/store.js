@@ -24,22 +24,22 @@ const authPersistConfig = {
 
 export const resetStore = createAction('RESET_STORE');
 
-const rootReduser = combineReducers({
+const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   user: userReducer,
   modal: modalReducer,
   water: waterReducer,
 });
 
-const rootReduserWithReset = (state, action) => {
+const rootReducerWithReset = (state, action) => {
   if (action.type === resetStore.type) {
     return (state = undefined);
   }
-  return rootReduser(state, action);
+  return rootReducer(state, action);
 };
 
 export const store = configureStore({
-  reducer: rootReduserWithReset,
+  reducer: rootReducerWithReset,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
