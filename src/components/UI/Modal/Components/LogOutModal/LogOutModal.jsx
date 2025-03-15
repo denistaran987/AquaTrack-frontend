@@ -12,9 +12,10 @@ const LogOutModal = () => {
   const successIconTheme = { primary: 'white', secondary: 'black' };
   const errorIconTheme = { primary: 'white', secondary: 'red' };
 
-  const handleDelete = async () => {
+  const handleLogout = async () => {
     try {
       await dispatch(logout()).unwrap();
+      dispatch(toggleModal());
 
       toast.success('Logout successful!', {
         style: successStyle,
@@ -33,7 +34,7 @@ const LogOutModal = () => {
       <h2 className={css.modalTitle}>Log out</h2>
       <p className={css.modalText}>Do you really want to leave?</p>
       <div className={css.modalActions}>
-        <button className={css.confirmBtn} onClick={handleDelete}>
+        <button className={css.confirmBtn} onClick={handleLogout}>
           Log out
         </button>
         <button className={css.cancelBtn} onClick={() => dispatch(toggleModal())}>
