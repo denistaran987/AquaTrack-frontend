@@ -2,8 +2,10 @@ import React from 'react';
 import WaterItem from '../WaterItem/WaterItem.jsx';
 import css from './WaterList.module.css';
 import WaterPlaceholder from '../WaterListPlaceholder/WaterListPlaceholder.jsx';
+// import { useSelector } from 'react-redux';
 
 const WaterList = () => {
+  // const waterNotesArray = useSelector();
   const arr = [
     {
       amount: 250,
@@ -39,7 +41,7 @@ const WaterList = () => {
         ) : (
           arr.map(({ time, amount }) => (
             <li key={crypto.randomUUID()}>
-              <WaterItem amount={amount} time={time} />
+              <WaterItem id={''} amount={amount} time={time} />
             </li>
           ))
         )}
