@@ -1,0 +1,64 @@
+.wrapper {
+  display: flex;
+  position: relative;
+}
+
+.button {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  background-color: var(--color-main);
+
+  border-radius: 30px;
+  padding: 6px 12px;
+  border: none;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--color-light);
+}
+
+.image {
+  border-radius: 100%;
+  border: 1px solid #000;
+  width: 38px;
+  height: 38px;
+}
+
+.svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: white;
+  transform: rotate(90deg);
+  transition: transform 0.3s ease;
+}
+
+.svgOpen {
+  transform: rotate(-90deg);
+}
+
+@media (min-width: 768px) {
+  .button {
+    gap: 10px;
+  }
+
+  .name {
+    font-size: 16px;
+    line-height: 150%;
+  }
+
+  .image {
+    width: 44px;
+    height: 44px;
+  }
+
+  .svg {
+    width: 20px;
+    height: 20px;
+  }
+}

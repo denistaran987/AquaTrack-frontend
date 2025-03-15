@@ -1,0 +1,11 @@
+.DailyInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.waterInfoWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

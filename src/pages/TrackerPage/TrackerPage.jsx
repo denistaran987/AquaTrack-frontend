@@ -11,7 +11,11 @@ import LogOutModal from '../../components/UI/Modal/Components/LogOutModal/LogOut
 import { setPosition, toggleModal } from '../../redux/modal/slice';
 import { fetchUserInfo } from '../../redux/user/operations';
 import { selectToken } from '../../redux/auth/selectors';
+<<<<<<< HEAD
 import CalendarContainer from '../../components/UI/Calendar/CalendarContainer/CalendarContainer';
+=======
+import WaterDetailedInfo from '../../components/UI/WaterDetailedInfo/WaterDetailedInfo.jsx';
+>>>>>>> 5edadbc (Feature/header and water list (#25))
 import WaterModal from '../../components/UI/Modal/Components/WaterModal/WaterModal';
 
 const TrackerPage = () => {
@@ -28,6 +32,7 @@ const TrackerPage = () => {
       <div className={clsx('container', s['homepage-wrapper'])}>
         <WaterMainInfo />
         <CalendarContainer/>
+        <WaterDetailedInfo />
       </div>
       <button
         type="button"
