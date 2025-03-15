@@ -145,20 +145,20 @@ a.signupLinkText {
 }
 
 .togglePassword {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-70%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  opacity: 0.5;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-120%);
+    background: none! important;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    opacity: 0.5;
 }
 
 .icon {
@@ -174,112 +174,166 @@ a.signupLinkText {
   fill: var(--color-accent);
 }
 
+.forgotPassword {
+    font-size: 14px;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.forgotPasswordLink {
+    cursor: pointer;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    color: var(--color-main);
+    text-decoration: underline;
+    font-weight: bold;
+
+}
+
+.forgotPasswordLink:hover {
+    color: var(--color-accent);
+    text-decoration: underline; 
+}
+  
+
 @media (min-width: 320px) and (max-width: 375px) {
-  .section {
-    padding: 24px 16px 150px 16px;
-    width: 100%;
-    height: auto;
-  }
+    .section {
+        padding: 24px 16px 150px 16px; 
+        width: 100%;
+        height: auto;
+    }
 
-  .signinSection {
-    width: 100%;
-    margin-top: 160px;
-  }
+    .signinSection {
+        width: 100%;
+        margin-top: 160px;
+    }
 
-  .logo {
-    font-size: 16px;
-    line-height: 18px;
-  }
+    .logo {
+        font-size: 16px; 
+        line-height: 18px;
+    }
 
-  h2.title {
-    font-size: 28px;
-    margin-bottom: 24px;
-  }
+    h2.title {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
 
-  .label {
-    font-size: 12px;
-    line-height: 16px;
-    margin-bottom: 6px;
-  }
+    .label {
+        font-size: 12px;
+        line-height: 16px;
+        margin-bottom: 6px;
+    }
 
-  input {
-    font-size: 14px;
-    line-height: 20px;
-    height: 48px;
-    padding: 14px;
-  }
+    input {
+        font-size: 14px;
+        line-height: 20px;
+        height: 48px;
+        padding: 14px;
+    }
 
-  .signinBtn {
-    height: 50px;
-    font-size: 14px;
-    line-height: 18px;
-  }
+    .signinBtn {
+        height: 50px;
+        font-size: 14px;
+        line-height: 18px;
+    }
 
-  .signupLink {
-    font-size: 12px;
-    line-height: 16px;
-    margin-top: 12px;
-  }
+    .signupLink {
+        font-size: 12px;
+        line-height: 16px;
+        margin-top: 12px;
+    }
 
-  .passwordWrapper {
-    width: 100%;
-  }
+    .passwordWrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
 
-  .togglePassword {
-    right: 12px;
-    top: 50%;
-    transform: translateY(-70%);
-  }
+    .togglePassword {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-120%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px; 
+        height: 32px;
+        padding: 0;
+        opacity: 0.5;
+    }
 
-  .icon {
-    width: 16px;
-    height: 16px;
-  }
+    .icon {
+        width: 20px;
+        height: 20px;
+    }
 
-  .signupLinkText {
-    font-size: 12px;
-  }
+    .signupLinkText {
+        font-size: 12px;
+    }
 
-  .errorMessage {
-    font-size: 12px;
-  }
+    .errorMessage {
+        font-size: 12px;
+    }
+
+    .forgotPassword {
+        font-size: 12px;
+        line-height: 16px;
+        margin-bottom: 6px;
+    }
+
+    .forgotPasswordBtn {
+        height: 50px;
+        font-size: 14px;
+        line-height: 18px;
+    }
 }
 
 @media (min-width: 768px) {
-  .section {
-    padding: 32px 134px 227px 134px;
-    width: 704px;
-    height: 960px;
-  }
+   
+    .section {
+        padding: 32px 134px 227px 134px;
+        width: 704px;
+        height: 960px;
+    }
+  
+    .logo {
+        font-size: 24px;
+        line-height: 24px;
+    } 
 
-  .logo {
-    font-size: 24px;
-    line-height: 24px;
-  }
+    .signinSection {
+        width: 436px;
+        margin-top: 225px;
+    }
 
-  .signinSection {
-    width: 436px;
-    margin-top: 225px;
-  }
+    h2.title {
+        font-size: 36px;
+    }
 
-  h2.title {
-    font-size: 36px;
-  }
+    .label {
+        font-size: 16px;
+        line-height: 24px;
+    }
 
-  .label {
-    font-size: 16px;
-    line-height: 24px;
-  }
+    input {
+        font-size: 16px;
+        line-height: 24px;
+    }
 
-  input {
-    font-size: 16px;
-    line-height: 24px;
-  }
+    a.signupLink {
+        font-size: 14px;
+        line-height: 24px;
+    }
 
-  a.signupLink {
-    font-size: 16px;
-    line-height: 24px;
-  }
+    .forgotPassword {
+        font-size: 14px;
+        line-height: 24px;
+    }
 }
 
 @media (min-width: 1440px) {
