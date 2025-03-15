@@ -1,0 +1,29 @@
+.UserPanelWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.title {
+  font-family: var(--font-family-secondary);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 100%;
+}
+
+.titleSpan {
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .UserPanelWrapper {
+    flex-direction: row;
+    gap: 0px;
+    justify-content: space-between;
+  }
+  .title {
+    font-size: 36px;
+    line-height: 106%;
+  }
+}

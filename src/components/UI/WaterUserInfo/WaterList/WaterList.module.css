@@ -1,0 +1,44 @@
+.WaterListWrapper {
+  overflow-x: auto;
+  padding-bottom: 32px;
+  max-height: 106px;
+  overflow-y: hidden;
+}
+
+.waterList {
+  display: flex;
+  gap: 4px;
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  border-radius: 9px;
+  background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-main);
+  border-radius: 9px;
+  width: 150px;
+}
+
+@media (min-width: 768px) {
+  .WaterListWrapper {
+    padding-bottom: 32px;
+    max-height: 118px;
+  }
+
+  .waterList {
+    gap: 32px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    width: 235px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .waterList {
+    gap: 16px;
+  }
+}

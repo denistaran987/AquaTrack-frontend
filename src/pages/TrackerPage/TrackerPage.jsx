@@ -11,6 +11,7 @@ import LogOutModal from '../../components/UI/Modal/Components/LogOutModal/LogOut
 import { setPosition, toggleModal } from '../../redux/modal/slice';
 import { fetchUserInfo } from '../../redux/user/operations';
 import { selectToken } from '../../redux/auth/selectors';
+import WaterDetailedInfo from '../../components/UI/WaterDetailedInfo/WaterDetailedInfo.jsx';
 import WaterModal from '../../components/UI/Modal/Components/WaterModal/WaterModal';
 
 const TrackerPage = () => {
@@ -26,6 +27,7 @@ const TrackerPage = () => {
     <div className="section">
       <div className={clsx('container', s['homepage-wrapper'])}>
         <WaterMainInfo />
+        <WaterDetailedInfo />
       </div>
       <button
         type="button"

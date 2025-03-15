@@ -1,0 +1,39 @@
+.placeholderContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  padding: 12px;
+  margin: 0 auto;
+
+  background-color: var(--color-light);
+  border-radius: 15px;
+  text-align: center;
+  height: 106px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-main);
+}
+
+.text {
+  font-size: 12px;
+  color: var(--color-secondary);
+}
+
+@media (min-width: 768px) {
+  .placeholderContainer {
+    height: 118px;
+    width: 340px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+}
