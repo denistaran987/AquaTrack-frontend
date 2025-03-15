@@ -88,7 +88,16 @@ const WaterForm = ({ type, initialData }) => {
               className={styles.inputlight2}
               onChange={(e) => {
                 const value = e.target.value;
-                setFieldValue('Amount', Number(value));
+                if (value === '') {
+                  setFieldValue('Amount', ''); 
+                } else {
+                  setFieldValue('Amount', Number(value)); 
+                }
+              }}
+              onBlur={(e) => {
+                if (e.target.value === '') {
+                  setFieldValue('Amount', 50); 
+                }
               }}
             />
             <ErrorMessage name="Amount" component="div" className={styles.error} />
