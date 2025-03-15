@@ -49,7 +49,6 @@ export const slice = createSlice({
         state.dailyNorm = action.payload.dailyNorm ?? state.dailyNorm;
         state.weight = action.payload.weight ?? state.weight;
         state.dailySportTime = action.payload.dailySportTime ?? state.dailySportTime;
-        state.avatarUrl = action.payload.avatarUrl || state.avatarUrl;
       })
       .addCase(updateUserInfo.rejected, handleRejected)
       .addCase(updateUserAvatar.pending, handlePending)

@@ -17,6 +17,7 @@ const DeleteWaterModal = () => {
   const handleDelete = async () => {
     try {
       await dispatch(deleteWaterEntry(waterId)).unwrap();
+      dispatch(toggleModal());
 
       toast.success('Entry deleted successfully!', {
         style: successStyle,
