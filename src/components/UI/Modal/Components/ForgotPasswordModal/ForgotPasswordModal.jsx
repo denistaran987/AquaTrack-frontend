@@ -40,10 +40,17 @@ const ForgotPasswordModal = ({ onClose }) => {
           validationSchema={ForgotPasswordSchema}
           onSubmit={handleSubmit}
         >
-          {() => (
+          {({ errors, submitCount, setFieldTouched }) => (
             <Form>
-              <Field name="email" type="email" placeholder="Enter your email" className={styles.inputField}/>
+              <Field
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                className={`${styles.inputField} ${submitCount > 0 && errors.email ? styles.errorInput : ''}`} 
+                onBlur={() => setFieldTouched('email', true)}
+              />
               <ErrorMessage name="email" component="div" className={styles.error} />
+
               <button type="submit" disabled={isSubmitting}>Send Reset Link</button>
               <button type="button" onClick={onClose}>Close</button>
             </Form>

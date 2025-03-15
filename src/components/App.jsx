@@ -52,8 +52,8 @@ function App() {
                 </RestrictedRoute>
               }
             />
-            <Route path="/auth/reset-pwd" element={<ResetPasswordPage />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route path="/reset-pwd" element={<ResetPasswordPage />} />
           </Route>
         </Routes>
       </Suspense>
