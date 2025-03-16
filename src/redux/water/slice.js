@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getWaterByDay, getWaterByMonth } from './operations';
+import { addWaterEntry, editWaterEntry, getWaterByDay, getWaterByMonth } from './operations';
 
 const initialState = {
   todayWaterNotesArray: [],
@@ -39,6 +39,33 @@ export const slice = createSlice({
       })
       .addCase(getWaterByMonth.rejected, (state, {payload}) => {
         state.error = payload;
+      })
+    .addCase(addWaterEntry.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
+        state.todayWaterNotesArray.push(payload); 
+        state.isLoading = false;
+      })
+      .addCase(addWaterEntry.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.isLoading = false;
+      })
+    .addCase(editWaterEntry.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editWaterEntry.fulfilled, (state, { payload }) => {
+        const index = state.todayWaterNotesArray.findIndex(
+          (entry) => entry.id === payload.id
+        );
+        if (index !== -1) {
+          state.todayWaterNotesArray[index] = payload; 
+        }
+        state.isLoading = false;
+      })
+      .addCase(editWaterEntry.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.isLoading = false;
       })
   },
 });

@@ -44,3 +44,39 @@ export const getWaterByMonth = createAsyncThunk(
     }
   }
 );
+
+export const addWaterEntry = createAsyncThunk(
+  'water/addEntry',
+  async (entryData, { rejectWithValue, getState }) => {
+    const { token } = getState().auth;
+    if (!token) {
+      return rejectWithValue('Unable to get current user');
+    }
+
+    try {
+      setAuthHeader(token);
+      const response = await axios.post('/water', entryData); 
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const editWaterEntry = createAsyncThunk(
+  'water/editEntry',
+  async ({ id, entryData }, { rejectWithValue, getState }) => {
+    const { token } = getState().auth;
+    if (!token) {
+      return rejectWithValue('Unable to get current user');
+    }
+
+    try {
+      setAuthHeader(token);
+      const response = await axios.put(`/water/${id}`, entryData); 
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
