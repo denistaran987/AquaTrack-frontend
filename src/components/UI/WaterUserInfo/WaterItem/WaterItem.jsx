@@ -4,8 +4,16 @@ import { useDispatch } from 'react-redux';
 import { setPosition, toggleModal } from '../../../../redux/modal/slice.js';
 import { setId } from '../../../../redux/water/slice.js';
 
-const WaterItem = ({ id, amount, time }) => {
+const WaterItem = ({ id, amount, date }) => {
   const dispatch = useDispatch();
+  const time = new Date(date);
+  const formattedTime = time.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+    timeZone: 'UTC',
+  });
+
   return (
     <div className={css.cardWrapper}>
       <svg className={css.cup}>
@@ -13,7 +21,7 @@ const WaterItem = ({ id, amount, time }) => {
       </svg>
       <div className={css.infoWrapper}>
         <p className={css.amount}>{amount} ml</p>
-        <p className={css.time}>{time} AM</p>
+        <p className={css.time}>{formattedTime}</p>
       </div>
       <div className={css.svgWrapper}>
         <button

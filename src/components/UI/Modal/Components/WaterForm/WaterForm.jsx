@@ -5,6 +5,7 @@ import { toggleModal } from '../../../../../redux/modal/slice.js';
 import * as Yup from 'yup';
 import styles from './WaterForm.module.css';
 import { addWaterEntry, editWaterEntry } from '../../../../../redux/water/operations.js';
+import toast from 'react-hot-toast';
 
 const validationSchema = Yup.object({
   date: Yup.string()
@@ -33,7 +34,10 @@ const WaterForm = ({ type, initialData }) => {
   };
 
   const handleSubmit = values => {
-    const formattedDate = new Date().toISOString().slice(0, 10) + `T${values.date}:00.000Z`;
+    const now = new Date();
+    const offset = now.getTimezoneOffset() * 60 * 1000;
+    const utcDate = new Date(now.getTime() - offset);
+    const formattedDate = utcDate.toISOString();
 
     const payload = {
       ...values,
@@ -41,11 +45,38 @@ const WaterForm = ({ type, initialData }) => {
     };
 
     if (type === 'add') {
-      dispatch(addWaterEntry(payload));
-    } else if (type === 'edit') {
-      dispatch(editWaterEntry({ id: initialData.id, entryData: payload }));
+      dispatch(addWaterEntry(payload))
+        .unwrap()
+        .then(() => {
+          toast.success(`Successfully added water record!`, {
+            style: { backgroundColor: '#9be1a0', fontWeight: 'medium' },
+            iconTheme: { primary: 'white', secondary: 'black' },
+          });
+          dispatch(toggleModal());
+        })
+        .catch(() => {
+          toast.error('Sorry something went wrong', {
+            style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' },
+          });
+        });
     }
-    dispatch(toggleModal());
+
+    if (type === 'edit') {
+      dispatch(editWaterEntry({ id: initialData.id, entryData: payload }))
+        .unwrap()
+        .then(() => {
+          toast.success(`Your entry has been successfully updated!`, {
+            style: { backgroundColor: '#9be1a0', fontWeight: 'medium' },
+            iconTheme: { primary: 'white', secondary: 'black' },
+          });
+          dispatch(toggleModal());
+        })
+        .catch(() => {
+          toast.error('Oops! Something went wrong while updating.', {
+            style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' },
+          });
+        });
+    }
   };
 
   return (

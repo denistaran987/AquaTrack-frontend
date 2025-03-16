@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {deleteWaterEntry, addWaterEntry, editWaterEntry, getWaterByDay, getWaterByMonth } from './operations';
-
+import {
+  deleteWaterEntry,
+  addWaterEntry,
+  editWaterEntry,
+  getWaterByDay,
+  getWaterByMonth,
+} from './operations';
 
 const initialState = {
   todayWaterNotesArray: [],
@@ -27,11 +32,11 @@ export const slice = createSlice({
       .addCase(getWaterByDay.pending, state => {
         state.isLoading = true;
       })
-      .addCase(getWaterByDay.fulfilled, (state, {payload}) => {
-       state.consumedWaterData = payload.consumedWaterData;
-       state.currentDate = payload.date;
-       state.todayProgress = payload.totalDayWater;
-       state.isLoading = false;
+      .addCase(getWaterByDay.fulfilled, (state, { payload }) => {
+        state.consumedWaterData = payload.consumedWaterData;
+        state.currentDate = payload.date;
+        state.todayProgress = payload.totalDayWater;
+        state.isLoading = false;
       })
       .addCase(getWaterByDay.rejected, (state, { payload }) => {
         state.error = payload;
@@ -46,26 +51,24 @@ export const slice = createSlice({
       .addCase(getWaterByMonth.rejected, (state, { payload }) => {
         state.error = payload;
       })
-    .addCase(addWaterEntry.pending, (state) => {
+      .addCase(addWaterEntry.pending, state => {
         state.isLoading = true;
       })
       .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
-        state.consumedWaterDataArray.push(payload); 
+        state.consumedWaterData.push(payload);
         state.isLoading = false;
       })
       .addCase(addWaterEntry.rejected, (state, { payload }) => {
         state.error = payload;
         state.isLoading = false;
       })
-    .addCase(editWaterEntry.pending, (state) => {
+      .addCase(editWaterEntry.pending, state => {
         state.isLoading = true;
       })
       .addCase(editWaterEntry.fulfilled, (state, { payload }) => {
-        const index = state.consumedWaterDataArray.findIndex(
-          (entry) => entry.id === payload.id
-        );
+        const index = state.consumedWaterData.findIndex(entry => entry.id === payload.id);
         if (index !== -1) {
-          state.consumedWaterDataArray[index] = payload; 
+          state.consumedWaterData[index] = payload;
         }
         state.isLoading = false;
       })

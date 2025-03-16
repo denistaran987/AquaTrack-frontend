@@ -31,10 +31,11 @@ const SettingsModal = () => {
   const waterIntakeId = useId();
 
   const SettingSchema = Yup.object().shape({
-    name: Yup.string().max(30),
+    name: Yup.string().max(10),
     email: Yup.string().email('Invalid email'),
     weight: Yup.number().max(500, 'Weight must be realistic'),
-    dailySportTime: Yup.number().min(0, 'Cannot be negative').max(24, 'Cannot exceed 24 hours'),
+    dailySportTime: Yup.number().min(0, 'Can not be negative').max(24, 'Can not exceed 24 hours'),
+    dailyNorm: Yup.number().min(0, 'Can not be negative').max(5000, 'Can not be more than 5000'),
   });
 
   const handleSubmit = async values => {
@@ -243,6 +244,7 @@ const SettingsModal = () => {
                     Write down how much water you will drink:
                   </label>
                   <Field type="number" name="dailyNorm" id={waterIntakeId} />
+                  <ErrorMessage className={css.errorMessage} name="dailyNorm" component="div" />
                 </div>
               </div>
             </div>
