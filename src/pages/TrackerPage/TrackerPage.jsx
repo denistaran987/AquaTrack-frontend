@@ -60,7 +60,7 @@ const TrackerPage = () => {
           {isOpen === 'deleteWater' && <DeleteWaterModal />}
           {isOpen === 'logout' && <LogOutModal />}
           {isOpen === 'settings' && <SettingsModal />}
-          {isOpen === 'add' && <WaterModal />}
+          {isOpen === 'add' && <WaterModal type={'add'} />}
           {isOpen === 'edit' && <WaterModal type={'edit'} />}
         </Modal>
       )}

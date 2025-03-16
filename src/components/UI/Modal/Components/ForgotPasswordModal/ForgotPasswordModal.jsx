@@ -46,13 +46,19 @@ const ForgotPasswordModal = ({ onClose }) => {
                 name="email"
                 type="email"
                 placeholder="Enter your email"
-                className={`${styles.inputField} ${submitCount > 0 && errors.email ? styles.errorInput : ''}`} 
+                className={`${styles.inputField} ${
+                  submitCount > 0 && errors.email ? styles.errorInput : ''
+                }`}
                 onBlur={() => setFieldTouched('email', true)}
               />
               <ErrorMessage name="email" component="div" className={styles.error} />
 
-              <button type="submit" disabled={isSubmitting}>Send Reset Link</button>
-              <button type="button" onClick={onClose}>Close</button>
+              <button className={styles['button-send']} type="submit" disabled={isSubmitting}>
+                Send Reset Link
+              </button>
+              <button className={styles['button-close']} type="button" onClick={onClose}>
+                Close
+              </button>
             </Form>
           )}
         </Formik>
