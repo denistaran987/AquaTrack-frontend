@@ -22,7 +22,7 @@ export const slice = createSlice({
       })
       .addCase(getWaterByDay.fulfilled, (state, {payload}) => {
        state.consumedWaterData = payload.consumedWaterData;
-       state.currentDate = payload.currentDate;
+       state.currentDate = payload.date;
        state.todayProgress = payload.totalDayWater;
        state.isLoading = false;
       })
