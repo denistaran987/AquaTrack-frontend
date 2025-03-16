@@ -2,13 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import css from './CalendarItem.module.css';
 import { selectWaterNorm } from '../../../../redux/user/selectors';
 import { getWaterByDay } from '../../../../redux/water/operations';
-import { selectWaterCurrentDate } from '../../../../redux/water/selectors';
-import { memo, useEffect, useMemo } from 'react';
+import { memo, useMemo } from 'react';
 
 const CalendarItem = ({ day, totalDayWater, isCurrentDate, token, date, isFuture }) => {
   const dispatch = useDispatch();
   const dailyNorm = useSelector(selectWaterNorm);
-  const currentDate = useSelector(selectWaterCurrentDate);
 
   const percents = useMemo(
     () => (totalDayWater ? Math.round((totalDayWater / dailyNorm) * 100) : 0),
@@ -21,19 +19,11 @@ const CalendarItem = ({ day, totalDayWater, isCurrentDate, token, date, isFuture
     ? `${css.buttonDay} ${css.normed}`
     : css.buttonDay;
 
-    const disabled = isFuture?`${dayStyle} ${css.disabled}`: dayStyle;
+  const disabled = isFuture ? `${dayStyle} ${css.disabled}` : dayStyle;
 
   const getDayData = () => {
     dispatch(getWaterByDay({ date, token }));
   };
-
-  useEffect(() => {
-    if (!currentDate&&token) {
-      dispatch(
-        getWaterByDay({ date: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(), token })
-      );
-    }
-  }, [dispatch, token, currentDate]);
 
   return (
     <div className={css.itemBox}>

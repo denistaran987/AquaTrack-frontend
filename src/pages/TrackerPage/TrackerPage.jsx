@@ -11,18 +11,28 @@ import LogOutModal from '../../components/UI/Modal/Components/LogOutModal/LogOut
 import { toggleModal } from '../../redux/modal/slice';
 import { fetchUserInfo } from '../../redux/user/operations';
 import { selectToken } from '../../redux/auth/selectors';
-import CalendarContainer from '../../components/UI/Calendar/CalendarContainer/CalendarContainer';
 import WaterDetailedInfo from '../../components/UI/WaterDetailedInfo/WaterDetailedInfo.jsx';
 import WaterModal from '../../components/UI/Modal/Components/WaterModal/WaterModal';
+import { selectWaterCurrentDate } from '../../redux/water/selectors.js';
+import { getWaterByDay } from '../../redux/water/operations.js';
 
 const TrackerPage = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector(selectIsOpenModal);
   const token = useSelector(selectToken);
+  const currentDate = useSelector(selectWaterCurrentDate);
 
   useEffect(() => {
     dispatch(fetchUserInfo(token));
   }, [dispatch, token]);
+
+  useEffect(() => {
+    if (!currentDate && token) {
+      dispatch(
+        getWaterByDay({ date: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(), token })
+      );
+    }
+  }, [dispatch, token, currentDate]);
 
   return (
     <div className="section">
