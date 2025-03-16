@@ -77,10 +77,6 @@
   color: var(--color-main);
 }
 
-/* .buttonNext:disabled {
-  cursor: not-allowed;
-} */
-
 @media (min-width: 768px) {
   .monthTitle {
     font-weight: 700;
@@ -111,21 +107,5 @@
 @media (min-width: 1440px) {
 }
 
-/* .container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  width: 100%;
-  padding: 0;
-} */
 
-/* @media only screen and (min-width: 768px) {
-  .buttonPrevious,
-  .buttonNext {
-    width: 24px;
-    height: 24px;
-  }
-}
-} */
+
