@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import s from './WaterProgressBar.module.css';
 import { useSelector } from 'react-redux';
 import { selectTodayProgress } from '../../../redux/water/selectors';
+import { selectWaterNorm } from '../../../redux/user/selectors';
 
 const WaterProgressBar = () => {
   const progress = useSelector(selectTodayProgress);
+  const dailyNorm = useSelector(selectWaterNorm);
   const getProgressBarWidthCoefficient = () => {
     if (window.innerWidth >= 768) {
       return 2.55;
@@ -12,6 +14,8 @@ const WaterProgressBar = () => {
       return 1.74;
     }
   };
+
+  const todayProgress = progress ? Math.min(Math.round((progress / dailyNorm) * 100), 100) : 0;
 
   const [progressBarWidthCoefficient, setProgressBarWidthCoefficient] = useState(
     getProgressBarWidthCoefficient()
@@ -35,13 +39,13 @@ const WaterProgressBar = () => {
       <span
         className={s.activePercent}
         style={{
-          left: `calc(${progress}px * ${progressBarWidthCoefficient})`,
-          color: progress === 100 && '#9be1a0',
+          left: `calc(${todayProgress}px * ${progressBarWidthCoefficient})`,
+          color: todayProgress >= 100 && '#9be1a0',
         }}
-      >{`${progress}%`}</span>
+      >{`${todayProgress}%`}</span>
       <div className={s.progressBarContainer}>
-        <div className={s.progressBarFiller} style={{ width: `${progress}%` }}></div>
-        <div className={s.circle} style={{ left: `calc(${progress}% - 10px)` }}></div>
+        <div className={s.progressBarFiller} style={{ width: `${todayProgress}%` }}></div>
+        <div className={s.circle} style={{ left: `calc(${todayProgress}% - 10px)` }}></div>
       </div>
       <div className={s.progressBarLabels}>
         <span>0%</span>

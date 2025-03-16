@@ -6,13 +6,8 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { updateUserInfo, updateUserAvatar } from '../../../../../redux/user/operations';
 import {
   selectUserAvatarUrl,
-  selectUserDailyNorm,
-  selectUserDailySportTime,
-  selectUserEmail,
   selectUserGender,
   selectUserId,
-  selectUserName,
-  selectUserWeight,
 } from '../../../../../redux/user/selectors';
 import { toggleModal } from '../../../../../redux/modal/slice';
 import toast from 'react-hot-toast';
@@ -27,12 +22,7 @@ const SettingsModal = () => {
 
   const userId = useSelector(selectUserId);
   const userAvatar = useSelector(selectUserAvatarUrl);
-  const username = useSelector(selectUserName);
-  const userEmail = useSelector(selectUserEmail);
-  const userWeight = useSelector(selectUserWeight);
-  const userDailySportTime = useSelector(selectUserDailySportTime);
   const userGender = useSelector(selectUserGender);
-  const userDailyNorm = useSelector(selectUserDailyNorm);
 
   const nameId = useId();
   const emailId = useId();
@@ -50,7 +40,23 @@ const SettingsModal = () => {
   const handleSubmit = async values => {
     try {
       const { avatar: _avatar, ...valuesToSend } = values;
-      await dispatch(updateUserInfo(valuesToSend)).unwrap();
+
+      /* eslint-disable no-unused-vars */
+      const filteredValues = Object.fromEntries(
+        Object.entries(valuesToSend).filter(
+          ([_, value]) => value !== '' && value !== null && value !== undefined
+        )
+      );
+
+      if (Object.keys(filteredValues).length === 1) {
+        toast.error('No changes detected. Please fill in at least one field.', {
+          style: errorStyle,
+          iconTheme: errorIconTheme,
+        });
+        return;
+      }
+
+      await dispatch(updateUserInfo(filteredValues)).unwrap();
       toast.success('Successfully updated!', {
         style: successStyle,
         iconTheme: successIconTheme,
@@ -85,16 +91,17 @@ const SettingsModal = () => {
       }
     }
   };
+
   return (
     <Formik
       initialValues={{
-        name: username,
-        email: userEmail,
-        weight: userWeight,
-        dailySportTime: userDailySportTime,
+        name: '',
+        email: '',
+        weight: '',
+        dailySportTime: '',
         avatar: '',
         gender: userGender,
-        dailyNorm: userDailyNorm,
+        dailyNorm: '',
       }}
       validationSchema={SettingSchema}
       onSubmit={handleSubmit}
@@ -250,5 +257,3 @@ const SettingsModal = () => {
 };
 
 export default SettingsModal;
-
-// toast

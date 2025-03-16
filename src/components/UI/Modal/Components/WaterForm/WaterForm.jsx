@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { toggleModal } from '../../../../../redux/modal/slice.js';
 import * as Yup from 'yup';
 import styles from './WaterForm.module.css';
+import { addWaterEntry, editWaterEntry } from '../../../../../redux/water/operations.js';
 
 const validationSchema = Yup.object({
   date: Yup.string()
@@ -31,9 +32,13 @@ const WaterForm = ({ type, initialData }) => {
     amount: initialData?.amount || 50,
   };
 
-  const handleSubmit = values => {
-    console.log('Data form:', values);
-    dispatch(toggleModal());
+  const handleSubmit = (values) => {
+    if (type === 'add') {
+      dispatch(addWaterEntry(values)); 
+    } else if (type === 'edit') {
+      dispatch(editWaterEntry({ id: initialData.id, entryData: values })); 
+    }
+    dispatch(toggleModal()); 
   };
 
   return (

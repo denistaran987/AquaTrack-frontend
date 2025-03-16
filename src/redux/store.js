@@ -1,4 +1,4 @@
-import { configureStore, combineReducers, createAction } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -14,7 +14,6 @@ import authReducer from './auth/slice';
 import userReducer from './user/slice';
 import waterReducer from './water/slice';
 import modalReducer from './modal/slice';
-import { setupAxiosInterceptors } from './auth/operations';
 
 const authPersistConfig = {
   key: 'auth',
@@ -22,24 +21,16 @@ const authPersistConfig = {
   whiteList: ['token'],
 };
 
-export const resetStore = createAction('RESET_STORE');
-
-const rootReducer = combineReducers({
-  auth: persistReducer(authPersistConfig, authReducer),
-  user: userReducer,
-  modal: modalReducer,
-  water: waterReducer,
-});
-
-const rootReducerWithReset = (state, action) => {
-  if (action.type === resetStore.type) {
-    return (state = undefined);
-  }
-  return rootReducer(state, action);
-};
+const persistedReducer = persistReducer(authPersistConfig, authReducer);
 
 export const store = configureStore({
-  reducer: rootReducerWithReset,
+  reducer: {
+    auth: persistedReducer,
+    user: userReducer,
+    modal: modalReducer,
+    water: waterReducer,
+  },
+
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -47,7 +38,5 @@ export const store = configureStore({
       },
     }),
 });
-
-setupAxiosInterceptors(store);
 
 export const persistor = persistStore(store);
