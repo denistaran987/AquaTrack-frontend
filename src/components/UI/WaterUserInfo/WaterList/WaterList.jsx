@@ -2,44 +2,21 @@ import React from 'react';
 import WaterItem from '../WaterItem/WaterItem.jsx';
 import css from './WaterList.module.css';
 import WaterPlaceholder from '../WaterListPlaceholder/WaterListPlaceholder.jsx';
+import { useSelector } from 'react-redux';
+import { selectConsumedWaterData } from '../../../../redux/water/selectors.js';
 
 const WaterList = () => {
-  const arr = [
-    {
-      amount: 250,
-      time: '7:00',
-    },
-    {
-      amount: 250,
-      time: '7:00',
-    },
-    {
-      amount: '1L',
-      time: '7:00',
-    },
-    {
-      amount: 250,
-      time: '7:00',
-    },
-    {
-      amount: 250,
-      time: '7:00',
-    },
-    {
-      amount: 250,
-      time: '7:00',
-    },
-  ];
+  const waterNotesArray = useSelector(selectConsumedWaterData);
 
   return (
     <div className={css.WaterListWrapper}>
       <ul className={css.waterList}>
-        {arr.length === 0 ? (
+        {waterNotesArray.length === 0 ? (
           <WaterPlaceholder />
         ) : (
-          arr.map(({ time, amount }) => (
+          waterNotesArray.map(({ _id, time, amount }) => (
             <li key={crypto.randomUUID()}>
-              <WaterItem amount={amount} time={time} />
+              <WaterItem id={_id} amount={amount} time={time} />
             </li>
           ))
         )}

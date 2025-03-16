@@ -51,6 +51,13 @@
   gap: 8px;
 }
 
+.svgWrapper button {
+  border: none;
+  background-color: transparent;
+  padding: 0px;
+  height: 14px;
+}
+
 @media (min-width: 768px) {
   .cardWrapper {
     gap: 20px;
@@ -79,6 +86,9 @@
 
   .svgWrapper {
     gap: 14px;
+  }
+  .svgWrapper button {
+    height: 16px;
   }
 
   .svg {
