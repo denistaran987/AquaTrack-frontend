@@ -11,7 +11,7 @@ const Calendar = ({ monthNumber, year }) => {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const monthWaterData = useSelector(selectMonthWaterData);
-  const date = new Date(year, monthNumber + 1, 1, 0, 0, 0, 0).toISOString();
+  const date = new Date(year, monthNumber + 1, 0, 0, 0, 0, 0).toISOString();
 
   useEffect(() => {
     if (date) {
@@ -35,6 +35,7 @@ const Calendar = ({ monthNumber, year }) => {
           0
         ).toISOString();
         const isCurrentDate = dateNow === calendarDate;
+        const isFuture = dateNow < calendarDate;
 
         return (
           <CalendarItem
@@ -44,6 +45,7 @@ const Calendar = ({ monthNumber, year }) => {
             isCurrentDate={isCurrentDate}
             token={token}
             date={calendarDateBefore}
+            isFuture={isFuture}
           />
         );
       })}

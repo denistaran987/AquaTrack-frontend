@@ -44,16 +44,16 @@
 
 .buttonDay:hover,
 .buttonDay:focus,
-.buttonDay:active {
+.buttonDay:active{
   background-color: #d6d7d6;
   border: 2px solid var(--color-accent);
 }
 
-.disabledDay {
+.disabled {
   cursor: not-allowed;
   opacity: 0.5;
   color: #999;
-  background-color: #ccc;
+  background-color: #838584;
 }
 
 .infoText {

@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { setCredentials } from './slice';
 
 axios.defaults.baseURL = 'https://aquatrack-backend-1b8z.onrender.com';
 axios.defaults.withCredentials = true;
@@ -86,28 +85,19 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
-export const setupAxiosInterceptors = store => {
-  axios.interceptors.response.use(
-    response => response,
-    async error => {
-      const originalRequest = error.config;
-      if (originalRequest.url.includes('/auth/refresh')) {
-        return Promise.reject(error);
-      }
-      if (error.response?.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
-        try {
-          const res = await axios.post('/auth/refresh');
-          const token = res.data.data.accessToken;
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          originalRequest.headers['Authorization'] = `Bearer ${token}`;
-          store.dispatch(setCredentials(token));
-          return axios(originalRequest);
-        } catch (refreshError) {
-          return Promise.reject(refreshError);
-        }
-      }
-      return Promise.reject(error);
-    }
-  );
-};
+export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const persistedToken = state.auth.token;
+
+  if (!persistedToken) {
+    return thunkAPI.rejectWithValue('Unable to fetch user');
+  }
+
+  try {
+    setAuthHeader(persistedToken);
+    const res = await axios.post('/auth/refresh');
+    return res.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
