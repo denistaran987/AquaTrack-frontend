@@ -1,7 +1,6 @@
 import React from 'react';
 import UserBar from '../UserBar/UserBar.jsx';
 import css from './UserPanel.module.css';
-import UserBarPopover from '../UserBarPopover/UserBarPopover.jsx';
 import { selectUserName } from '../../../../redux/user/selectors.js';
 import { useSelector } from 'react-redux';
 

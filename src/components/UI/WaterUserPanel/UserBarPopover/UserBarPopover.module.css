@@ -62,6 +62,8 @@ svg use {
     padding: 14px 57px 14px 20px;
     top: 115%;
     width: 158px;
+    right: 0;
+    left: auto;
   }
 
   .item {
