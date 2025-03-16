@@ -11,6 +11,7 @@ import LogOutModal from '../../components/UI/Modal/Components/LogOutModal/LogOut
 import { toggleModal } from '../../redux/modal/slice';
 import { fetchUserInfo } from '../../redux/user/operations';
 import { selectToken } from '../../redux/auth/selectors';
+import CalendarContainer from '../../components/UI/Calendar/CalendarContainer/CalendarContainer';
 import WaterDetailedInfo from '../../components/UI/WaterDetailedInfo/WaterDetailedInfo.jsx';
 import WaterModal from '../../components/UI/Modal/Components/WaterModal/WaterModal';
 
@@ -34,7 +35,7 @@ const TrackerPage = () => {
           {isOpen === 'deleteWater' && <DeleteWaterModal />}
           {isOpen === 'logout' && <LogOutModal />}
           {isOpen === 'settings' && <SettingsModal />}
-          {isOpen === 'add' && <WaterModal />}
+          {isOpen === 'add' && <WaterModal type={'add'} />}
           {isOpen === 'edit' && <WaterModal type={'edit'} />}
         </Modal>
       )}

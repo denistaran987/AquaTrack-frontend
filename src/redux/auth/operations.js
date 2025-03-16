@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { setCredentials } from './slice';
-import { selectIsLoggedIn } from './selectors';
 
 axios.defaults.baseURL = 'https://aquatrack-backend-1b8z.onrender.com';
 axios.defaults.withCredentials = true;
@@ -52,6 +51,30 @@ export const signInUser = createAsyncThunk(
   }
 );
 
+export const sendResetEmail = createAsyncThunk(
+  'auth/sendResetEmail',
+  async (email, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/auth/send-reset-email', { email });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to send reset email');
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  'auth/resetPassword',
+  async ({ token, password }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/auth/reset-pwd', { token, password });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to reset password');
+    }
+  }
+);
+
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     const response = await axios.post('/auth/logout');
@@ -64,23 +87,23 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 });
 
 export const setupAxiosInterceptors = store => {
-  if (selectIsLoggedIn) return;
   axios.interceptors.response.use(
     response => response,
     async error => {
       const originalRequest = error.config;
+      if (originalRequest.url.includes('/auth/refresh')) {
+        return Promise.reject(error);
+      }
       if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         try {
           const res = await axios.post('/auth/refresh');
           const token = res.data.data.accessToken;
-
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           originalRequest.headers['Authorization'] = `Bearer ${token}`;
           store.dispatch(setCredentials(token));
           return axios(originalRequest);
         } catch (refreshError) {
-          await store.dispatch(logout());
           return Promise.reject(refreshError);
         }
       }

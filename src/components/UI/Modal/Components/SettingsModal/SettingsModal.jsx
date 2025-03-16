@@ -1,9 +1,29 @@
 import { useId } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import css from './SettingsModal.module.css';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { updateUserInfo, updateUserAvatar } from '../../../../../redux/user/operations';
+import {
+  selectUserAvatarUrl,
+  selectUserGender,
+  selectUserId,
+} from '../../../../../redux/user/selectors';
+import { toggleModal } from '../../../../../redux/modal/slice';
+import toast from 'react-hot-toast';
 
 const SettingsModal = () => {
+  const dispatch = useDispatch();
+
+  const successStyle = { backgroundColor: '#9be1a0', fontWeight: 'medium' };
+  const errorStyle = { backgroundColor: '#FFCCCC', fontWeight: 'medium' };
+  const successIconTheme = { primary: 'white', secondary: 'black' };
+  const errorIconTheme = { primary: 'white', secondary: 'red' };
+
+  const userId = useSelector(selectUserId);
+  const userAvatar = useSelector(selectUserAvatarUrl);
+  const userGender = useSelector(selectUserGender);
+
   const nameId = useId();
   const emailId = useId();
   const weightId = useId();
@@ -13,19 +33,76 @@ const SettingsModal = () => {
   const SettingSchema = Yup.object().shape({
     name: Yup.string().max(30),
     email: Yup.string().email('Invalid email'),
-    weight: Yup.number()
-      .min(30, 'Weight must be at least 30 kg')
-      .max(500, 'Weight must be realistic'),
-    time: Yup.number().min(0, 'Cannot be negative').max(24, 'Cannot exceed 24 hours'),
+    weight: Yup.number().max(500, 'Weight must be realistic'),
+    dailySportTime: Yup.number().min(0, 'Cannot be negative').max(24, 'Cannot exceed 24 hours'),
   });
 
-  const handleSubmit = values => {
-    console.log('submit:', values);
+  const handleSubmit = async values => {
+    try {
+      const { avatar: _avatar, ...valuesToSend } = values;
+
+      /* eslint-disable no-unused-vars */
+      const filteredValues = Object.fromEntries(
+        Object.entries(valuesToSend).filter(
+          ([_, value]) => value !== '' && value !== null && value !== undefined
+        )
+      );
+
+      if (Object.keys(filteredValues).length === 1) {
+        toast.error('No changes detected. Please fill in at least one field.', {
+          style: errorStyle,
+          iconTheme: errorIconTheme,
+        });
+        return;
+      }
+
+      await dispatch(updateUserInfo(filteredValues)).unwrap();
+      toast.success('Successfully updated!', {
+        style: successStyle,
+        iconTheme: successIconTheme,
+      });
+      dispatch(toggleModal());
+    } catch (error) {
+      toast.error(`${error}: Please check all the fields!`, {
+        style: errorStyle,
+        iconTheme: errorIconTheme,
+      });
+    }
+  };
+
+  const handleAvatarUpload = async event => {
+    const file = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('id', userId);
+      formData.append('avatarUrl', file);
+
+      try {
+        await dispatch(updateUserAvatar(formData)).unwrap();
+        toast.success('Successfully updated avatar!', {
+          style: successStyle,
+          iconTheme: successIconTheme,
+        });
+      } catch (error) {
+        toast.error(`${error}: Failed to update avatar`, {
+          style: errorStyle,
+          iconTheme: errorIconTheme,
+        });
+      }
+    }
   };
 
   return (
     <Formik
-      initialValues={{ name: '', email: '', weight: '', time: '' }}
+      initialValues={{
+        name: '',
+        email: '',
+        weight: '',
+        dailySportTime: '',
+        avatar: '',
+        gender: userGender,
+        dailyNorm: '',
+      }}
       validationSchema={SettingSchema}
       onSubmit={handleSubmit}
       validateOnBlur={false}
@@ -36,7 +113,7 @@ const SettingsModal = () => {
           <div className={css.avatarBlock}>
             <h2 className={css.title}>Setting</h2>
             <div className={css.avatarWrapper}>
-              <img src="#" alt="avatar" />
+              <img src={userAvatar} alt="avatar" />
             </div>
             <div className={css.uploadWrapper}>
               <label className={css.uploadLabel}>
@@ -44,7 +121,13 @@ const SettingsModal = () => {
                   <use href="/images/icons.svg#icon-upload"></use>
                 </svg>
                 Upload a photo
-                <Field type="file" className={css.uploadBtn} value="" />
+                <Field
+                  type="file"
+                  className={css.uploadBtn}
+                  onChange={handleAvatarUpload}
+                  accept="image/*"
+                  name="avatar"
+                />
               </label>
             </div>
           </div>
@@ -54,12 +137,12 @@ const SettingsModal = () => {
                 <p className={css.title}>Your gender identity</p>
                 <div className={css.radioBtns}>
                   <label>
-                    <Field type="radio" name="gender" value="woman" />
+                    <Field type="radio" name="gender" value="female" />
                     <span className={css.customRadio}></span>
                     Woman
                   </label>
                   <label>
-                    <Field type="radio" name="gender" value="man" checked />
+                    <Field type="radio" name="gender" value="male" />
                     <span className={css.customRadio}></span>
                     Man
                   </label>
@@ -138,12 +221,16 @@ const SettingsModal = () => {
                   <label htmlFor={timeId}>The time of active participation in sports:</label>
                   <Field
                     type="number"
-                    name="time"
+                    name="dailySportTime"
                     id={timeId}
                     className={`${touched.time && errors.time ? css.errorInput : ''}`}
-                    onBlur={() => setFieldTouched('time', true)}
+                    onBlur={() => setFieldTouched('dailySportTime', true)}
                   />
-                  <ErrorMessage className={css.errorMessage} name="time" component="div" />
+                  <ErrorMessage
+                    className={css.errorMessage}
+                    name="dailySportTime"
+                    component="div"
+                  />
                 </div>
               </div>
               <div className={css.inputBlock}>
@@ -155,7 +242,7 @@ const SettingsModal = () => {
                   <label htmlFor={waterIntakeId} className={css.title}>
                     Write down how much water you will drink:
                   </label>
-                  <Field type="number" name="water" id={waterIntakeId} />
+                  <Field type="number" name="dailyNorm" id={waterIntakeId} />
                 </div>
               </div>
             </div>

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import s from './WaterProgressBar.module.css';
+import { useSelector } from 'react-redux';
+import { selectTodayProgress } from '../../../redux/water/selectors';
 
-const WaterProgressBar = ({ progress }) => {
+const WaterProgressBar = () => {
+  const progress = useSelector(selectTodayProgress);
   const getProgressBarWidthCoefficient = () => {
     if (window.innerWidth >= 768) {
       return 2.55;
