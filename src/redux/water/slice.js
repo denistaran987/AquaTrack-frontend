@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { deleteWaterEntry, getWaterByDay, getWaterByMonth } from './operations';
+import {deleteWaterEntry, addWaterEntry, editWaterEntry, getWaterByDay, getWaterByMonth } from './operations';
+
 
 const initialState = {
   todayWaterNotesArray: [],
@@ -44,6 +45,33 @@ export const slice = createSlice({
       })
       .addCase(getWaterByMonth.rejected, (state, { payload }) => {
         state.error = payload;
+      })
+    .addCase(addWaterEntry.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
+        state.consumedWaterDataArray.push(payload); 
+        state.isLoading = false;
+      })
+      .addCase(addWaterEntry.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.isLoading = false;
+      })
+    .addCase(editWaterEntry.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editWaterEntry.fulfilled, (state, { payload }) => {
+        const index = state.consumedWaterDataArray.findIndex(
+          (entry) => entry.id === payload.id
+        );
+        if (index !== -1) {
+          state.consumedWaterDataArray[index] = payload; 
+        }
+        state.isLoading = false;
+      })
+      .addCase(editWaterEntry.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.isLoading = false;
       })
       .addCase(deleteWaterEntry.pending, state => {
         state.isLoading = true;
