@@ -2,6 +2,7 @@ import React from 'react';
 import css from './WaterItem.module.css';
 import { useDispatch } from 'react-redux';
 import { setPosition, toggleModal } from '../../../../redux/modal/slice.js';
+import { setId } from '../../../../redux/water/slice.js';
 
 const WaterItem = ({ id, amount, time }) => {
   const dispatch = useDispatch();
@@ -15,12 +16,20 @@ const WaterItem = ({ id, amount, time }) => {
         <p className={css.time}>{time} AM</p>
       </div>
       <div className={css.svgWrapper}>
-        <button onClick={() => dispatch(toggleModal('edit'), dispatch(setPosition('null')))}>
+        <button
+          onClick={() =>
+            dispatch(toggleModal('edit'), dispatch(setPosition('null')), dispatch(setId(id)))
+          }
+        >
           <svg className={css.svg}>
             <use href="/images/icons.svg#icon-edit-2"></use>
           </svg>
         </button>
-        <button onClick={() => dispatch(toggleModal('deleteWater'), dispatch(setPosition('null')))}>
+        <button
+          onClick={() =>
+            dispatch(toggleModal('deleteWater'), dispatch(setPosition('null')), dispatch(setId(id)))
+          }
+        >
           <svg className={css.svg}>
             <use href="/images/icons.svg#icon-trash"></use>
           </svg>
