@@ -28,17 +28,24 @@ const WaterForm = ({ type, initialData }) => {
   }, []);
 
   const defaultValues = {
-    date: type === 'add' ? currentTime : initialData?.date || '07:00',
+    date: type === 'add' ? currentTime : initialData?.date?.slice(11, 16) || '07:00',
     amount: initialData?.amount || 50,
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = values => {
+    const formattedDate = new Date().toISOString().slice(0, 10) + `T${values.date}:00.000Z`;
+
+    const payload = {
+      ...values,
+      date: formattedDate,
+    };
+
     if (type === 'add') {
-      dispatch(addWaterEntry(values)); 
+      dispatch(addWaterEntry(payload));
     } else if (type === 'edit') {
-      dispatch(editWaterEntry({ id: initialData.id, entryData: values })); 
+      dispatch(editWaterEntry({ id: initialData.id, entryData: payload }));
     }
-    dispatch(toggleModal()); 
+    dispatch(toggleModal());
   };
 
   return (
