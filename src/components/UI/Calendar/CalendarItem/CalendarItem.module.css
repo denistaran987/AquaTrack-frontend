@@ -42,7 +42,9 @@
   gap: 6px;
 }
 
-.buttonDay:hover {
+.buttonDay:hover,
+.buttonDay:focus,
+.buttonDay:active {
   background-color: #d6d7d6;
   border: 2px solid var(--color-accent);
 }
