@@ -26,16 +26,15 @@ export const slice = createSlice({
       .addCase(getWaterByDay.pending, state => {
         state.isLoading = true;
       })
-      .addCase(getWaterByDay.fulfilled, (state, { payload }) => {
-        state.consumedWaterData = payload.consumedWaterData;
-        state.currentDate = payload.date;
-        state.todayProgress = payload.totalDayWater;
-        state.isLoading = false;
+      .addCase(getWaterByDay.fulfilled, (state, {payload}) => {
+       state.consumedWaterData = payload.consumedWaterData;
+       state.currentDate = payload.date;
+       state.todayProgress = payload.totalDayWater;
+       state.isLoading = false;
       })
       .addCase(getWaterByDay.rejected, (state, { payload }) => {
         state.error = payload;
       })
-
       .addCase(getWaterByMonth.pending, state => {
         state.isLoading = true;
       })
