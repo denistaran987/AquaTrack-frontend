@@ -34,6 +34,14 @@
   color: var(--color-accent);
 }
 
+.buttonDay:hover .currentDay,
+.buttonDay:focus .currentDay,
+.buttonDay:active .currentDay {
+  background-color: var(--color-main);
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
 .itemBox {
   display: flex;
   flex-direction: column;
@@ -44,16 +52,15 @@
 
 .buttonDay:hover,
 .buttonDay:focus,
-.buttonDay:active{
+.buttonDay:active {
   background-color: #d6d7d6;
   border: 2px solid var(--color-accent);
 }
 
 .disabled {
-  cursor: not-allowed;
   opacity: 0.5;
-  color: #999;
   background-color: #838584;
+  pointer-events: none;
 }
 
 .infoText {
