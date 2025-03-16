@@ -1,0 +1,88 @@
+.calendarItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border-radius: 30px;
+}
+
+.buttonDay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  padding: 5px 10px;
+  text-align: center;
+  color: var(--color-main);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  background-color: var(--color-light);
+}
+
+.normed {
+  background-color: rgba(50, 63, 71, 0.2);
+}
+
+.currentDay {
+  background-color: var(--color-main);
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.itemBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.buttonDay:hover,
+.buttonDay:focus,
+.buttonDay:active {
+  background-color: #d6d7d6;
+  border: 2px solid var(--color-accent);
+}
+
+.disabledDay {
+  cursor: not-allowed;
+  opacity: 0.5;
+  color: #999;
+  background-color: #ccc;
+}
+
+.infoText {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1;
+  color: var(--color-secondary);
+}
+
+@media (min-width: 768px) {
+  .buttonDay {
+    width: 38px;
+    height: 38px;
+    padding: 7px 14px;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    text-align: center;
+  }
+
+  .itemBox {
+    gap: 4px;
+  }
+
+  .infoText {
+    font-size: 12px;
+    line-height: 1.86667;
+  }
+}
+
+@media (min-width: 1440px) {
+}
