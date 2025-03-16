@@ -15,7 +15,7 @@ const WaterProgressBar = () => {
     }
   };
 
-  const todayProgress = progress ? Math.round((progress / dailyNorm) * 100) : 0;
+  const todayProgress = progress ? Math.min(Math.round((progress / dailyNorm) * 100), 100) : 0;
 
   const [progressBarWidthCoefficient, setProgressBarWidthCoefficient] = useState(
     getProgressBarWidthCoefficient()
@@ -40,7 +40,7 @@ const WaterProgressBar = () => {
         className={s.activePercent}
         style={{
           left: `calc(${todayProgress}px * ${progressBarWidthCoefficient})`,
-          color: progress === 100 && '#9be1a0',
+          color: todayProgress >= 100 && '#9be1a0',
         }}
       >{`${todayProgress}%`}</span>
       <div className={s.progressBarContainer}>
