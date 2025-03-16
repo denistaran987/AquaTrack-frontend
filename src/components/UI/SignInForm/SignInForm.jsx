@@ -9,7 +9,8 @@ import { signInUser } from '../../../redux/auth/operations';
 import toast from 'react-hot-toast';
 import { selectIsLoading } from '../../../redux/auth/selectors';
 import Loader from '../../Utils/Loader/Loader';
-import ForgotPasswordModal from '../Modal/Components/ForgotPasswordModal/ForgotPasswordModal';
+
+import { setPosition, toggleModal } from '../../../redux/modal/slice';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -18,7 +19,6 @@ const SignInSchema = Yup.object().shape({
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isForgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
@@ -75,7 +75,9 @@ const SignInPage = () => {
                 name="email"
                 type="email"
                 placeholder="Enter your email"
-                className={`${styles.input} ${touched.email && errors.email ? styles.errorInput : ''}`}
+                className={`${styles.input} ${
+                  touched.email && errors.email ? styles.errorInput : ''
+                }`}
                 onBlur={() => setFieldTouched('email', true)}
               />
               <ErrorMessage name="email" component="div" className={styles.errorMessage} />
@@ -86,7 +88,9 @@ const SignInPage = () => {
                   name="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Enter your password"
-                  className={`${styles.input} ${touched.password && errors.password ? styles.errorInput : ''}`}
+                  className={`${styles.input} ${
+                    touched.password && errors.password ? styles.errorInput : ''
+                  }`}
                   onBlur={() => setFieldTouched('password', true)}
                 />
                 <button
@@ -95,7 +99,9 @@ const SignInPage = () => {
                   className={styles.togglePassword}
                 >
                   <svg className={styles.icon} width="24" height="24">
-                    <use xlinkHref={`/images/icons.svg#${showPassword ? 'icon-eye' : 'icon-eye-off'}`} />
+                    <use
+                      xlinkHref={`/images/icons.svg#${showPassword ? 'icon-eye' : 'icon-eye-off'}`}
+                    />
                   </svg>
                 </button>
               </div>
@@ -105,9 +111,9 @@ const SignInPage = () => {
                 Forgot your password?{' '}
                 <a
                   href="#"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
-                    setForgotPasswordOpen(true);
+                    dispatch(toggleModal('forgotPassword'), dispatch(setPosition('null')));
                   }}
                   className={styles.forgotPasswordLink}
                 >
@@ -130,8 +136,6 @@ const SignInPage = () => {
           </Link>
         </p>
       </section>
-
-      {isForgotPasswordOpen && <ForgotPasswordModal onClose={() => setForgotPasswordOpen(false)} />}
     </section>
   );
 };
