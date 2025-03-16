@@ -10,17 +10,16 @@ const CalendarItem = ({ day, totalDayWater, isCurrentDate, token, date }) => {
   const dailyNorm = useSelector(selectWaterNorm);
   const currentDate = useSelector(selectWaterCurrentDate);
 
-  const persents = useMemo(
+  const percents = useMemo(
     () => (totalDayWater ? Math.round((totalDayWater / dailyNorm) * 100) : 0),
     [totalDayWater, dailyNorm]
   );
 
-  const dayStyle =
-      isCurrentDate
-        ? `${css.buttonDay} ${css.currentDay}`
-        : persents > 0
-        ? `${css.buttonDay} ${css.normed}`
-        : css.buttonDay;
+  const dayStyle = isCurrentDate
+    ? `${css.buttonDay} ${css.currentDay}`
+    : percents > 0
+    ? `${css.buttonDay} ${css.normed}`
+    : css.buttonDay;
 
   const getDayData = () => {
     dispatch(getWaterByDay({ date, token }));
@@ -32,17 +31,15 @@ const CalendarItem = ({ day, totalDayWater, isCurrentDate, token, date }) => {
         getWaterByDay({ date: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(), token })
       );
     }
-  }, [currentDate]);
+  }, [dispatch, token, currentDate]);
 
   return (
-    <ul className={css.calendarList}>
-      <div className={css.itemBox}>
-        <button className={dayStyle} onClick={getDayData}>
-          {day}
-        </button>
-        <span className={css.infoText}>{`${persents}%`}</span>
-      </div>
-    </ul>
+    <div className={css.itemBox}>
+      <button className={dayStyle} onClick={getDayData}>
+        {day}
+      </button>
+      <span className={css.infoText}>{`${percents}%`}</span>
+    </div>
   );
 };
 

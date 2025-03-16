@@ -1,5 +1,5 @@
 const useGetAllDaysMonth =(monthWaterData, monthNumber, year) => {
-  const amountDays = new Date(year,monthNumber, 0).getDate();
+  const amountDays = new Date(year,monthNumber+1, 0).getDate();
   const allDaysOfMonth = Array.from({ length: amountDays }, (_, i) => i + 1);
 
   const allDaysWithPersents = allDaysOfMonth.map(day => {

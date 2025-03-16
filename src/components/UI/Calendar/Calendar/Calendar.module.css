@@ -1,0 +1,25 @@
+.calendarWrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(28px, 1fr));
+  gap: 20px 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .calendarWrapper {
+    grid-template-columns: repeat(auto-fit, minmax(38px, 1fr));
+    gap: 15px 48px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .calendarList {
+    gap: 15px 43px;
+  }
+}
+
+@media screen and (max-width: 374px) {
+  .calendarList {
+    gap: 20px 8px;
+    max-width: 244px;
+  }
+}

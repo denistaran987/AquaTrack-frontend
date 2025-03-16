@@ -28,7 +28,6 @@ const TrackerPage = () => {
     <div className="section">
       <div className={clsx('container', s['homepage-wrapper'])}>
         <WaterMainInfo />
-        <CalendarContainer/>
         <WaterDetailedInfo />
       </div>
       <button
