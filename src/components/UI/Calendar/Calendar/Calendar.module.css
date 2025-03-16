@@ -11,15 +11,9 @@
     gap: 15px 48px;
   }
 }
-@media screen and (min-width: 1440px) {
-  .calendarList {
-    gap: 15px 43px;
-  }
-}
 
-@media screen and (max-width: 374px) {
-  .calendarList {
-    gap: 20px 8px;
-    max-width: 244px;
+@media screen and (min-width: 1440px) {
+  .calendarWrapper {
+    gap: 15px 43px;
   }
 }
