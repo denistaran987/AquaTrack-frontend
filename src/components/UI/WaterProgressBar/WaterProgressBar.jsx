@@ -15,7 +15,7 @@ const WaterProgressBar = () => {
     }
   };
 
-  const todayProgress = progress ? Math.round((progress / dailyNorm) * 100) : 0;
+  const todayProgress = progress ? Math.min(Math.round((progress / dailyNorm) * 100), 100) : 0;
 
   const [progressBarWidthCoefficient, setProgressBarWidthCoefficient] = useState(
     getProgressBarWidthCoefficient()
