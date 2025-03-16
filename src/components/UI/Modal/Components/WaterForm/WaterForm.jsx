@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useDispatch } from 'react-redux'; 
-import { toggleModal } from '../../../../../redux/modal/slice.js'; 
+import { useDispatch } from 'react-redux';
+import { toggleModal } from '../../../../../redux/modal/slice.js';
 import * as Yup from 'yup';
 import styles from './WaterForm.module.css';
 
 const validationSchema = Yup.object({
-  time: Yup.string()
+  date: Yup.string()
     .matches(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Time must be in HH:mm format (00:00 - 23:59)')
     .required('Incorrect time'),
-  Amount: Yup.number()
+  amount: Yup.number()
     .min(50, 'Min Value - 50 ml')
     .max(1500, 'Max value - 1500 ml')
     .required('This field is required'),
 });
 
 const WaterForm = ({ type, initialData }) => {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
@@ -27,13 +27,13 @@ const WaterForm = ({ type, initialData }) => {
   }, []);
 
   const defaultValues = {
-    time: type === 'add' ? currentTime : initialData?.time || '07:00',
-    Amount: initialData?.Amount || 50,
+    date: type === 'add' ? currentTime : initialData?.date || '07:00',
+    amount: initialData?.amount || 50,
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = values => {
     console.log('Data form:', values);
-    dispatch(toggleModal()); 
+    dispatch(toggleModal());
   };
 
   return (
@@ -51,8 +51,8 @@ const WaterForm = ({ type, initialData }) => {
               <button
                 type="button"
                 onClick={() => {
-                  const newValue = Math.max(50, Number(values.Amount) - 50);
-                  setFieldValue('Amount', newValue);
+                  const newValue = Math.max(50, Number(values.amount) - 50);
+                  setFieldValue('amount', newValue);
                 }}
                 className={styles.button}
               >
@@ -60,12 +60,12 @@ const WaterForm = ({ type, initialData }) => {
                   <use href="/images/icons.svg#icon-minus-circle" />
                 </svg>
               </button>
-              <span className={styles.fixedValue}>{values.Amount} ml</span>
+              <span className={styles.fixedValue}>{values.amount} ml</span>
               <button
                 type="button"
                 onClick={() => {
-                  const newValue = Math.min(1500, Number(values.Amount) + 50);
-                  setFieldValue('Amount', newValue);
+                  const newValue = Math.min(1500, Number(values.amount) + 50);
+                  setFieldValue('amount', newValue);
                 }}
                 className={styles.button}
               >
@@ -77,30 +77,30 @@ const WaterForm = ({ type, initialData }) => {
           </label>
           <label>
             <p className={styles.p}>Recording time:</p>
-            <Field type="time" name="time" className={styles.inputlight1} />
-            <ErrorMessage name="time" component="div" className={styles.error} />
+            <Field type="text" name="date" className={styles.inputlight1} />
+            <ErrorMessage name="date" component="div" className={styles.error} />
           </label>
           <label>
             <h3>Enter the value of the water used:</h3>
             <Field
               type="number"
-              name="Amount"
+              name="amount"
               className={styles.inputlight2}
-              onChange={(e) => {
+              onChange={e => {
                 const value = e.target.value;
                 if (value === '') {
-                  setFieldValue('Amount', ''); 
+                  setFieldValue('amount', '');
                 } else {
-                  setFieldValue('Amount', Number(value)); 
+                  setFieldValue('amount', Number(value));
                 }
               }}
-              onBlur={(e) => {
+              onBlur={e => {
                 if (e.target.value === '') {
-                  setFieldValue('Amount', 50); 
+                  setFieldValue('amount', 50);
                 }
               }}
             />
-            <ErrorMessage name="Amount" component="div" className={styles.error} />
+            <ErrorMessage name="amount" component="div" className={styles.error} />
           </label>
 
           <button type="submit" className={styles.saveButton}>
