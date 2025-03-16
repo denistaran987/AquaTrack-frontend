@@ -65,7 +65,7 @@ export const addWaterEntry = createAsyncThunk(
 
 export const editWaterEntry = createAsyncThunk(
   'water/editEntry',
-  async ({ id, entryData }, { rejectWithValue, getState }) => {
+  async ({ entryId, entryData }, { rejectWithValue, getState }) => {
     const { token } = getState().auth;
     if (!token) {
       return rejectWithValue('Unable to get current user');
@@ -73,7 +73,7 @@ export const editWaterEntry = createAsyncThunk(
 
     try {
       setAuthHeader(token);
-      const response = await axios.put(`/water/${id}`, entryData); 
+      const response = await axios.put(`/water/${entryId}`, entryData); 
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);

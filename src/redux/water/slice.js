@@ -44,7 +44,7 @@ export const slice = createSlice({
         state.isLoading = true;
       })
       .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
-        state.todayWaterNotesArray.push(payload); 
+        state.consumedWaterDataArray.push(payload); 
         state.isLoading = false;
       })
       .addCase(addWaterEntry.rejected, (state, { payload }) => {
@@ -55,11 +55,11 @@ export const slice = createSlice({
         state.isLoading = true;
       })
       .addCase(editWaterEntry.fulfilled, (state, { payload }) => {
-        const index = state.todayWaterNotesArray.findIndex(
+        const index = state.consumedWaterDataArray.findIndex(
           (entry) => entry.id === payload.id
         );
         if (index !== -1) {
-          state.todayWaterNotesArray[index] = payload; 
+          state.consumedWaterDataArray[index] = payload; 
         }
         state.isLoading = false;
       })
