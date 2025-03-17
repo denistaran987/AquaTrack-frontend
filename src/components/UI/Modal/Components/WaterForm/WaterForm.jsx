@@ -6,7 +6,11 @@ import * as Yup from 'yup';
 import styles from './WaterForm.module.css';
 import { addWaterEntry, editWaterEntry } from '../../../../../redux/water/operations.js';
 import toast from 'react-hot-toast';
-import { selectWaterCurrentDate, selectWaterId } from '../../../../../redux/water/selectors.js';
+import {
+  selectWaterCurrentDate,
+  selectWaterId,
+  selectWaterItemInfo,
+} from '../../../../../redux/water/selectors.js';
 
 const validationSchema = Yup.object({
   date: Yup.string()
@@ -20,6 +24,7 @@ const validationSchema = Yup.object({
 
 const WaterForm = ({ type, initialData }) => {
   const WaterId = useSelector(selectWaterId);
+  const waterItem = useSelector(state => selectWaterItemInfo(state, WaterId));
   const currentDate = useSelector(selectWaterCurrentDate);
   const dispatch = useDispatch();
   const [currentTime, setCurrentTime] = useState('');
@@ -32,8 +37,11 @@ const WaterForm = ({ type, initialData }) => {
   }, []);
 
   const defaultValues = {
-    date: type === 'add' ? currentTime : initialData?.date?.slice(11, 16) || '07:00',
-    amount: initialData?.amount || 50,
+    date:
+      type === 'add'
+        ? currentTime
+        : initialData?.date?.slice(11, 16) || waterItem.date.slice(11, 16),
+    amount: type === 'add' ? 50 : initialData?.amount || waterItem.amount,
   };
 
   const handleSubmit = values => {
