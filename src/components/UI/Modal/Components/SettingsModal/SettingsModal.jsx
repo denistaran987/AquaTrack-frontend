@@ -6,11 +6,18 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { updateUserInfo, updateUserAvatar } from '../../../../../redux/user/operations';
 import {
   selectUserAvatarUrl,
+  selectUserDailyNorm,
+  selectUserDailySportTime,
+  selectUserEmail,
   selectUserGender,
   selectUserId,
+  selectUserIsLoading,
+  selectUserName,
+  selectUserWeight,
 } from '../../../../../redux/user/selectors';
 import { toggleModal } from '../../../../../redux/modal/slice';
 import toast from 'react-hot-toast';
+import { ClipLoader, ClockLoader } from 'react-spinners';
 
 const SettingsModal = () => {
   const dispatch = useDispatch();
@@ -22,7 +29,13 @@ const SettingsModal = () => {
 
   const userId = useSelector(selectUserId);
   const userAvatar = useSelector(selectUserAvatarUrl);
+  const username = useSelector(selectUserName);
+  const userEmail = useSelector(selectUserEmail);
+  const userWeight = useSelector(selectUserWeight);
+  const userDailySportTime = useSelector(selectUserDailySportTime);
   const userGender = useSelector(selectUserGender);
+  const userDailyNorm = useSelector(selectUserDailyNorm);
+  const isLoading = useSelector(selectUserIsLoading);
 
   console.log(userGender);
 
@@ -58,20 +71,25 @@ const SettingsModal = () => {
   const waterIntakeId = useId();
 
   const SettingSchema = Yup.object().shape({
-    name: Yup.string().max(10),
-    email: Yup.string().email('Invalid email'),
-    weight: Yup.number().max(500, 'Weight must be realistic'),
+    name: Yup.string().max(10).required(),
+    email: Yup.string().email('Invalid email').required(),
+    weight: Yup.number().min(0, 'Can not be negative').max(500, 'Weight must be realistic'),
     dailySportTime: Yup.number().min(0, 'Can not be negative').max(24, 'Can not exceed 24 hours'),
-    dailyNorm: Yup.number().min(0, 'Can not be negative').max(5000, 'Can not be more than 5000'),
+    dailyNorm: Yup.number().min(0, 'Can not be negative').max(5, 'Can not be more than 5'),
   });
 
   const handleSubmit = async values => {
     try {
-      const { avatar: _avatar, ...valuesToSend } = values;
+      const { avatar: _avatar, dailyNorm, ...valuesToSend } = values;
+
+      const updatedValues = {
+        ...valuesToSend,
+        dailyNorm: dailyNorm * 1000,
+      };
 
       /* eslint-disable no-unused-vars */
       const filteredValues = Object.fromEntries(
-        Object.entries(valuesToSend).filter(
+        Object.entries(updatedValues).filter(
           ([_, value]) => value !== '' && value !== null && value !== undefined
         )
       );
@@ -121,28 +139,64 @@ const SettingsModal = () => {
   };
 
   return (
-    <div className={css.wrapper}>
-      <Formik
-        initialValues={{
-          name: '',
-          email: '',
-          weight: '',
-          dailySportTime: '',
-          avatar: '',
-          gender: userGender,
-          dailyNorm: '',
-        }}
-        validationSchema={SettingSchema}
-        onSubmit={handleSubmit}
-        validateOnBlur={false}
-        validateOnChange={false}
-      >
-        {({ errors, touched, setFieldTouched }) => (
-          <Form className={css.modalBody}>
-            <div className={css.avatarBlock}>
-              <h2 className={css.title}>Setting</h2>
-              <div className={css.avatarWrapper}>
+    <Formik
+      initialValues={{
+        name: username,
+        email: userEmail,
+        weight: userWeight,
+        dailySportTime: userDailySportTime,
+        avatar: '',
+        gender: userGender,
+        dailyNorm: userDailyNorm / 1000,
+      }}
+      validationSchema={SettingSchema}
+      onSubmit={handleSubmit}
+      validateOnBlur={false}
+      validateOnChange={false}
+    >
+      {({ errors, touched, setFieldTouched }) => (
+        <Form className={css.modalBody}>
+          <div className={css.avatarBlock}>
+            <h2 className={css.title}>Setting</h2>
+            <div className={css.avatarWrapper}>
+              {isLoading ? (
+                <ClipLoader size={50} color="#9BE1A0" />
+              ) : (
                 <img src={userAvatar} alt="avatar" />
+              )}
+            </div>
+            <div className={css.uploadWrapper}>
+              <label className={css.uploadLabel}>
+                <svg className={css.uploadIcon}>
+                  <use href="/images/icons.svg#icon-upload"></use>
+                </svg>
+                Upload a photo
+                <Field
+                  type="file"
+                  className={css.uploadBtn}
+                  onChange={handleAvatarUpload}
+                  accept="image/*"
+                  name="avatar"
+                />
+              </label>
+            </div>
+          </div>
+          <div className={css.infoBlock}>
+            <div className={css.leftBlock}>
+              <div className={css.genderBlock}>
+                <p className={css.title}>Your gender identity</p>
+                <div className={css.radioBtns}>
+                  <label>
+                    <Field type="radio" name="gender" value="female" />
+                    <span className={css.customRadio}></span>
+                    Woman
+                  </label>
+                  <label>
+                    <Field type="radio" name="gender" value="male" />
+                    <span className={css.customRadio}></span>
+                    Man
+                  </label>
+                </div>
               </div>
               <div className={css.uploadWrapper}>
                 <label className={css.uploadLabel}>
