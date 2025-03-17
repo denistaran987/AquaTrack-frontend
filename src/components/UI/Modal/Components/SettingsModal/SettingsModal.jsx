@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import css from './SettingsModal.module.css';
@@ -23,6 +23,27 @@ const SettingsModal = () => {
   const userId = useSelector(selectUserId);
   const userAvatar = useSelector(selectUserAvatarUrl);
   const userGender = useSelector(selectUserGender);
+
+  const [weight, setWeight] = useState(0);
+  const [dailySportTime, setDailySportTime] = useState(0);
+  const [dailyNorm, setDailyNorm] = useState(0);
+
+  const handleChangeWeight = event => {
+    setWeight(event.target.value);
+  };
+
+  const handleChangeDailySportTime = event => {
+    setDailySportTime(event.target.value);
+  };
+
+  useEffect(() => {
+    console.log(dailyNorm);
+    if (userGender === 'female') {
+      setDailyNorm(weight * 0.03 + dailySportTime * 0.4);
+      return;
+    }
+    setDailyNorm(weight * 0.04 + dailySportTime * 0.6);
+  }, [weight, dailySportTime, userGender, dailyNorm]);
 
   const nameId = useId();
   const emailId = useId();
@@ -215,6 +236,8 @@ const SettingsModal = () => {
                     id={weightId}
                     className={`${touched.weight && errors.weight ? css.errorInput : ''}`}
                     onBlur={() => setFieldTouched('weight', true)}
+                    value={weight}
+                    onChange={handleChangeWeight}
                   />
                   <ErrorMessage className={css.errorMessage} name="weight" component="div" />
                 </div>
@@ -226,6 +249,8 @@ const SettingsModal = () => {
                     id={timeId}
                     className={`${touched.time && errors.time ? css.errorInput : ''}`}
                     onBlur={() => setFieldTouched('dailySportTime', true)}
+                    value={dailySportTime}
+                    onChange={handleChangeDailySportTime}
                   />
                   <ErrorMessage
                     className={css.errorMessage}
@@ -236,8 +261,10 @@ const SettingsModal = () => {
               </div>
               <div className={css.inputBlock}>
                 <div className={css.resultBlock}>
-                  <p>The required amount of water in liters per day:</p>
-                  <p className={css.result}>1.8 L</p>
+                  <p>
+                    The required amount of water in liters per day:{' '}
+                    <span className={css.result}>{`${dailyNorm.toFixed(1)}L`}</span>
+                  </p>
                 </div>
                 <div className={css.block}>
                   <label htmlFor={waterIntakeId} className={css.title}>
