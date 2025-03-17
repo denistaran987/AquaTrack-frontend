@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleModal } from '../../../../../redux/modal/slice.js';
 import * as Yup from 'yup';
 import styles from './WaterForm.module.css';
 import { addWaterEntry, editWaterEntry } from '../../../../../redux/water/operations.js';
 import toast from 'react-hot-toast';
+import { selectWaterId } from '../../../../../redux/water/selectors.js';
 
 const validationSchema = Yup.object({
   date: Yup.string()
@@ -18,6 +19,7 @@ const validationSchema = Yup.object({
 });
 
 const WaterForm = ({ type, initialData }) => {
+  const WaterId = useSelector(selectWaterId);
   const dispatch = useDispatch();
   const [currentTime, setCurrentTime] = useState('');
 
@@ -62,7 +64,7 @@ const WaterForm = ({ type, initialData }) => {
     }
 
     if (type === 'edit') {
-      dispatch(editWaterEntry({ id: initialData.id, entryData: payload }))
+      dispatch(editWaterEntry({ entryId: WaterId, entryData: payload }))
         .unwrap()
         .then(() => {
           toast.success(`Your entry has been successfully updated!`, {

@@ -55,8 +55,8 @@ export const addWaterEntry = createAsyncThunk(
 
     try {
       setAuthHeader(token);
-      const response = await axios.post('/water', entryData); 
-      return response.data;
+      const response = await axios.post('/water', entryData);
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -73,8 +73,8 @@ export const editWaterEntry = createAsyncThunk(
 
     try {
       setAuthHeader(token);
-      const response = await axios.put(`/water/${entryId}`, entryData); 
-      return response.data;
+      const response = await axios.patch(`/water/${entryId}`, entryData);
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }

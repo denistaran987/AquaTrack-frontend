@@ -15,7 +15,7 @@ const WaterList = () => {
           <WaterPlaceholder />
         ) : (
           waterNotesArray.map(({ _id, date, amount }) => (
-            <li key={crypto.randomUUID()}>
+            <li key={_id}>
               <WaterItem id={_id} amount={amount} date={date} />
             </li>
           ))
