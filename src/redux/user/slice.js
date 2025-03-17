@@ -3,7 +3,7 @@ import { fetchUserInfo, updateUserAvatar, updateUserInfo } from './operations';
 
 const initialState = {
   _id: '',
-  name: 'User',
+  name: '',
   email: '',
   gender: '',
   dailyNorm: 1500,

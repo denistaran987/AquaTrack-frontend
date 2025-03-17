@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleModal } from '../../../../../redux/modal/slice.js';
 import * as Yup from 'yup';
 import styles from './WaterForm.module.css';
 import { addWaterEntry, editWaterEntry } from '../../../../../redux/water/operations.js';
+import toast from 'react-hot-toast';
+import {
+  selectWaterCurrentDate,
+  selectWaterId,
+  selectWaterItemInfo,
+} from '../../../../../redux/water/selectors.js';
 
 const validationSchema = Yup.object({
   date: Yup.string()
@@ -17,6 +23,9 @@ const validationSchema = Yup.object({
 });
 
 const WaterForm = ({ type, initialData }) => {
+  const WaterId = useSelector(selectWaterId);
+  const waterItem = useSelector(state => selectWaterItemInfo(state, WaterId));
+  const currentDate = useSelector(selectWaterCurrentDate);
   const dispatch = useDispatch();
   const [currentTime, setCurrentTime] = useState('');
 
@@ -28,12 +37,15 @@ const WaterForm = ({ type, initialData }) => {
   }, []);
 
   const defaultValues = {
-    date: type === 'add' ? currentTime : initialData?.date?.slice(11, 16) || '07:00',
-    amount: initialData?.amount || 50,
+    date:
+      type === 'add'
+        ? currentTime
+        : initialData?.date?.slice(11, 16) || waterItem.date.slice(11, 16),
+    amount: type === 'add' ? 50 : initialData?.amount || waterItem.amount,
   };
 
   const handleSubmit = values => {
-    const formattedDate = new Date().toISOString().slice(0, 10) + `T${values.date}:00.000Z`;
+    const formattedDate = currentDate.slice(0, 10) + `T${values.date}:00.000Z`;
 
     const payload = {
       ...values,
@@ -41,11 +53,38 @@ const WaterForm = ({ type, initialData }) => {
     };
 
     if (type === 'add') {
-      dispatch(addWaterEntry(payload));
-    } else if (type === 'edit') {
-      dispatch(editWaterEntry({ id: initialData.id, entryData: payload }));
+      dispatch(addWaterEntry(payload))
+        .unwrap()
+        .then(() => {
+          toast.success(`Successfully added water record!`, {
+            style: { backgroundColor: '#9be1a0', fontWeight: 'medium' },
+            iconTheme: { primary: 'white', secondary: 'black' },
+          });
+          dispatch(toggleModal());
+        })
+        .catch(() => {
+          toast.error('Sorry something went wrong', {
+            style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' },
+          });
+        });
     }
-    dispatch(toggleModal());
+
+    if (type === 'edit') {
+      dispatch(editWaterEntry({ entryId: WaterId, entryData: payload }))
+        .unwrap()
+        .then(() => {
+          toast.success(`Your entry has been successfully updated!`, {
+            style: { backgroundColor: '#9be1a0', fontWeight: 'medium' },
+            iconTheme: { primary: 'white', secondary: 'black' },
+          });
+          dispatch(toggleModal());
+        })
+        .catch(() => {
+          toast.error('Oops! Something went wrong while updating.', {
+            style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' },
+          });
+        });
+    }
   };
 
   return (

@@ -6,12 +6,15 @@ import { useSelector } from 'react-redux';
 
 const UserPanel = () => {
   const name = useSelector(selectUserName);
+
+  const userName = name !== ' ' ? name : 'User';
+
   return (
     <div className={css.UserPanelWrapper}>
       <h2 className={css.title}>
-        Hello<span className={css.titleSpan}>, {name}!</span>
+        Hello<span className={css.titleSpan}>, {userName}!</span>
       </h2>
-      <UserBar name={name} />
+      <UserBar name={userName} />
     </div>
   );
 };

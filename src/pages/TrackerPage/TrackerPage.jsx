@@ -28,9 +28,12 @@ const TrackerPage = () => {
 
   useEffect(() => {
     if (!currentDate && token) {
-      dispatch(
-        getWaterByDay({ date: new Date(new Date().setHours(0, 0, 0, 0)).toISOString(), token })
-      );
+      const now = new Date();
+      const offset = now.getTimezoneOffset() * 60 * 1000;
+      const utcDate = new Date(now.getTime() - offset);
+      const formattedDate = utcDate.toISOString();
+
+      dispatch(getWaterByDay({ date: formattedDate, token }));
     }
   }, [dispatch, token, currentDate]);
 

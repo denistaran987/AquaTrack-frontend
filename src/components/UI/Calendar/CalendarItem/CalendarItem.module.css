@@ -34,9 +34,9 @@
   color: var(--color-accent);
 }
 
-.buttonDay:hover .currentDay,
-.buttonDay:focus .currentDay,
-.buttonDay:active .currentDay {
+.buttonDay.currentDay:hover,
+.buttonDay.currentDay:focus,
+.buttonDay.currentDay:active {
   background-color: var(--color-main);
   border: 2px solid var(--color-accent);
   color: var(--color-accent);
@@ -53,14 +53,22 @@
 .buttonDay:hover,
 .buttonDay:focus,
 .buttonDay:active {
-  background-color: #d6d7d6;
+  background-color: var(--color-accent);
   border: 2px solid var(--color-accent);
+  color: var(--color-main);
+}
+
+.overlimit {
+  background-color: #788d99;
+  border: 2px solid #788d99;
+  color: var(--color-main);
 }
 
 .disabled {
   opacity: 0.5;
   background-color: #838584;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .infoText {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import css from './UserBar.module.css';
 import UserBarPopover from '../UserBarPopover/UserBarPopover.jsx';
 import { clsx } from 'clsx';
@@ -8,11 +8,28 @@ import { selectUserAvatarUrl } from '../../../../redux/user/selectors.js';
 const UserBar = ({ name }) => {
   const userAvatarUrl = useSelector(selectUserAvatarUrl);
   const [isOpen, setIsOpen] = useState(false);
+  const wrapperRef = useRef(null);
 
-  if (!userAvatarUrl) return;
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
+
+  if (!userAvatarUrl) return null;
 
   return (
-    <div className={css.wrapper}>
+    <div className={css.wrapper} ref={wrapperRef}>
       <button onClick={() => setIsOpen(!isOpen)} className={css.button}>
         <p className={css.name}>{name}</p>
         <img className={css.image} src={userAvatarUrl} alt="User image" />
@@ -20,7 +37,7 @@ const UserBar = ({ name }) => {
           <use href="/images/icons.svg#icon-right"></use>
         </svg>
       </button>
-      <UserBarPopover isOpen={isOpen} />
+      {isOpen && <UserBarPopover isOpen={isOpen} />}
     </div>
   );
 };

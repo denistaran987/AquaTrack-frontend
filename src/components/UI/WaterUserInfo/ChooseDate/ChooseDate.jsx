@@ -2,20 +2,22 @@ import React from 'react';
 import css from './ChooseDate.module.css';
 import { selectWaterCurrentDate } from '../../../../redux/water/selectors.js';
 import { useSelector } from 'react-redux';
+import { parseISO } from 'date-fns';
 
 const ChooseDate = () => {
   const dateString = useSelector(selectWaterCurrentDate);
 
-  const date = new Date(dateString);
-  console.log(date);
-  const today = new Date();
+  const now = new Date();
+  const offset = now.getTimezoneOffset() * 60 * 1000;
+  const utcDate = new Date(now.getTime() - offset);
+  const formatDate = utcDate.toISOString().slice(0, 10);
+  const formattedDateString = dateString.slice(0, 10);
 
-  const isToday =
-    date.getUTCFullYear() === today.getUTCFullYear() &&
-    date.getUTCMonth() === today.getUTCMonth() &&
-    date.getUTCDate() === today.getUTCDate();
+  const today = formattedDateString === formatDate;
 
-  const formattedDate = isToday
+  const date = parseISO(dateString);
+
+  const formattedDate = today
     ? 'Today'
     : `${date.toLocaleDateString('en-GB', {
         day: 'numeric',

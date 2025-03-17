@@ -53,8 +53,6 @@ const SignUpPage = () => {
         }, 2000);
       })
       .catch(error => {
-        console.error('Error in sign-in:', error);
-
         const errorMessages = {
           400: 'Bad request. Invalid input data.',
           401: 'Unauthorized. Session not found.',

@@ -2,11 +2,14 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import s from './WelcomeSection.module.css';
 import clsx from 'clsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../../redux/auth/selectors';
+import { setPosition, toggleModal } from '../../../redux/modal/slice';
 
 const WelcomeSection = () => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return (
     <section className={s.section}>
       <Logo />
@@ -28,9 +31,17 @@ const WelcomeSection = () => {
           </ul>
         </nav>
       ) : (
-        <Link className={clsx(s.link, s.first)} to="/tracker">
-          My tracker
-        </Link>
+        <div className={s['button-container']}>
+          <Link className={clsx(s.link, s.first)} to="/tracker">
+            My tracker
+          </Link>
+          <button
+            className={s.confirmBtn}
+            onClick={() => dispatch(toggleModal('Logout'), dispatch(setPosition('null')))}
+          >
+            Log out
+          </button>
+        </div>
       )}
     </section>
   );

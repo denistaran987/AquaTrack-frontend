@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-// import css from './ChartContainer.module.css'
 import {
   AreaChart,
   Area,
@@ -16,21 +15,11 @@ const ChartContainer = () => {
   const currentDate = useSelector(selectWaterCurrentDate);
   const monthWaterData = useSelector(selectMonthWaterData);
   console.log('monthWaterData :>> ', monthWaterData);
-  // const data = [
-  //   { date: 1, ml: 2400 },
-  //   { name: 2, pv: 2210 },
-  //   { name: 3, pv: 2290 },
-  //   { name: 4, pv: 2000 },
-  //   { name: 5, pv: 2181 },
-  //   { name: 6, pv: 2500 },
-  //   { name: 7, pv: 2100 },
-  // ];
 
   function getWeekDates(dateStr) {
     let date = new Date(dateStr);
-    let dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    let dayOfWeek = date.getDay();
 
-    // Adjust to get Monday as the start of the week
     let startOfWeek = new Date(date);
     startOfWeek.setDate(date.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
 
@@ -38,7 +27,7 @@ const ChartContainer = () => {
     for (let i = 0; i < 7; i++) {
       let currentDate = new Date(startOfWeek);
       currentDate.setDate(startOfWeek.getDate() + i);
-      dates.push(currentDate.toISOString().split('T')[0]); // Format YYYY-MM-DD
+      dates.push(currentDate.toISOString().split('T')[0]);
     }
 
     return dates;
@@ -46,7 +35,6 @@ const ChartContainer = () => {
 
   const weekDates = getWeekDates(currentDate).map(date => {
     const findDayInfo = monthWaterData.find(monthData => {
-
       return monthData.date.split('T')[0] === date;
     });
 
