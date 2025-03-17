@@ -1,11 +1,18 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import css from './CalendarPagination.module.css';
 
 const CalendarHeader = ({ monthsName, year, monthForwards, monthPrevious, setIsChart }) => {
+  const [title, setTitle] = useState('Month'); 
+
+  const toggleChart = () => {
+    setIsChart(prev => !prev);
+    setTitle(prevTitle => (prevTitle === 'Statistics' ? 'Month' : 'Statistics'));
+  };
+
   return (
     <div className={css.monthBox}>
       <div className={css.oneMonthContainer}>
-        <h2 className={css.monthTitle}>Month</h2>
+        <h2 className={css.monthTitle}>{title}</h2> 
 
         <div className={css.oneMonthWrapper}>
           <button className={css.buttonPrevious} type="button" onClick={monthPrevious}>
@@ -14,7 +21,6 @@ const CalendarHeader = ({ monthsName, year, monthForwards, monthPrevious, setIsC
             </svg>
           </button>
           <span className={css.monthDescription}>
-            {' '}
             {monthsName}, {year}
           </span>
           <button className={css.buttonNext} type="button" onClick={monthForwards}>
@@ -23,7 +29,8 @@ const CalendarHeader = ({ monthsName, year, monthForwards, monthPrevious, setIsC
             </svg>
           </button>
         </div>
-        <button className={css.button} type="button" onClick={() => setIsChart(prev => !prev)}>
+
+        <button className={css.button} type="button" onClick={toggleChart}>
           <svg className={css.iconChart}>
             <use xlinkHref={`/images/icons.svg#icon-pie-chart`} />
           </svg>
@@ -34,3 +41,5 @@ const CalendarHeader = ({ monthsName, year, monthForwards, monthPrevious, setIsC
 };
 
 export default memo(CalendarHeader);
+
+
