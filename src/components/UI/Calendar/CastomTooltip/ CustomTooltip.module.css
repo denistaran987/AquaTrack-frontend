@@ -1,0 +1,22 @@
+.customTooltip {
+  background-color: transparent;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+  color: var(--color-main);
+  font-family: var( --font-family-secondary);
+  font-size: 14px;
+}
+
+.tooltipLabel {
+  font-weight: bold;
+  color: #5f7d73;
+}
+
+.tooltipValue {
+  margin-top: 4px;
+  color: var(--color-main);
+}
+
+
+
