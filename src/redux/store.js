@@ -14,6 +14,7 @@ import authReducer from './auth/slice';
 import userReducer from './user/slice';
 import waterReducer from './water/slice';
 import modalReducer from './modal/slice';
+import themeReducer from './theme/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -29,6 +30,7 @@ export const store = configureStore({
     user: userReducer,
     modal: modalReducer,
     water: waterReducer,
+    theme: themeReducer,
   },
 
   middleware: getDefaultMiddleware =>

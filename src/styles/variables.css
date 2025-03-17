@@ -34,3 +34,11 @@
     --container-padding-x: 32px;
   }
 }
+
+[data-theme='dark'] {
+  --color-main: #323f47;
+  --color-secondary: #d0d0d0;
+  --color-light: #0d0d0d;
+  --color-accent: #9be1a0;
+  --color-gray: #1a1a1a;
+}

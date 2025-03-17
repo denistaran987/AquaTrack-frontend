@@ -3,6 +3,7 @@ import UserBar from '../UserBar/UserBar.jsx';
 import css from './UserPanel.module.css';
 import { selectUserName } from '../../../../redux/user/selectors.js';
 import { useSelector } from 'react-redux';
+import ThemeToggle from '../../ThemeToggle/ThemeToggle.jsx';
 
 const UserPanel = () => {
   const name = useSelector(selectUserName);
@@ -14,6 +15,7 @@ const UserPanel = () => {
       <h2 className={css.title}>
         Hello<span className={css.titleSpan}>, {userName}!</span>
       </h2>
+      <ThemeToggle />
       <UserBar name={userName} />
     </div>
   );
