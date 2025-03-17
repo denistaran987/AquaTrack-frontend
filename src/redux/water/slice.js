@@ -66,7 +66,7 @@ export const slice = createSlice({
         state.isLoading = true;
       })
       .addCase(editWaterEntry.fulfilled, (state, { payload }) => {
-        const index = state.consumedWaterData.findIndex(entry => entry.id === payload.id);
+        const index = state.consumedWaterData.findIndex(entry => entry._id === payload._id);
         if (index !== -1) {
           state.consumedWaterData[index] = payload;
         }
