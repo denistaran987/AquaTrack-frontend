@@ -41,7 +41,7 @@ const WaterForm = ({ type, initialData }) => {
       type === 'add'
         ? currentTime
         : initialData?.date?.slice(11, 16) || waterItem.date.slice(11, 16),
-    amount: initialData?.amount || waterItem.amount,
+    amount: type === 'add' ? 50 : initialData?.amount || waterItem.amount,
   };
 
   const handleSubmit = values => {
