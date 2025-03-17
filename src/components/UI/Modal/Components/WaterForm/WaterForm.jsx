@@ -36,10 +36,7 @@ const WaterForm = ({ type, initialData }) => {
   };
 
   const handleSubmit = values => {
-    const now = new Date();
-    const offset = now.getTimezoneOffset() * 60 * 1000;
-    const utcDate = new Date(now.getTime() - offset);
-    const formattedDate = utcDate.toISOString();
+    const formattedDate = new Date().toISOString().slice(0, 10) + `T${values.date}:00.000Z`;
 
     const payload = {
       ...values,
