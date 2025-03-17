@@ -42,7 +42,7 @@ const SettingsModal = () => {
       setDailyNorm(weight * 0.03 + dailySportTime * 0.4);
       return;
     }
-    setDailyNorm({ weight } * 0.04 + { dailySportTime } * 0.6);
+    setDailyNorm(weight * 0.04 + dailySportTime * 0.6);
   }, [weight, dailySportTime, userGender, dailyNorm]);
 
   const nameId = useId();
