@@ -16,6 +16,8 @@ const CalendarItem = ({ day, totalDayWater, isCurrentDate, token, date, isFuture
 
   const dayStyle = isCurrentDate
     ? `${css.buttonDay} ${css.currentDay}`
+    : percents > 100
+    ? `${css.buttonDay} ${css.overlimit}`
     : percents > 0
     ? `${css.buttonDay} ${css.normed}`
     : css.buttonDay;
