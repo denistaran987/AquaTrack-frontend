@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { logout, refreshUser, registerUser, signInUser } from './operations.js';
+import { getTotalUsers, logout, refreshUser, registerUser, signInUser } from './operations.js';
 
 const initialState = {
   email: '',
@@ -21,6 +21,9 @@ export const slice = createSlice({
 
   extraReducers: builder => {
     builder
+    .addCase(getTotalUsers.fulfilled, (state, { payload }) => {
+      state.lastUsers = payload.data;
+    })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.email = action.payload.email;
         state.token = action.payload.accessToken;

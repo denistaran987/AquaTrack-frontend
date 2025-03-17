@@ -1,7 +1,17 @@
 import clsx from 'clsx';
 import s from './AdvantagesSection.module.css';
-
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect} from "react";
+import { selectTotalUsers } from '../../../redux/auth/selectors.js';
+import { getTotalUsers } from '../../../redux/auth/operations.js';
 const AdvantagesSection = () => {
+  const totalUsers = useSelector(selectTotalUsers);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTotalUsers());
+  }, [dispatch]);
+
   return (
     <section className={s.section}>
       <picture>
@@ -47,6 +57,7 @@ const AdvantagesSection = () => {
               loading="lazy"
               style={{ zIndex: 1 }}
             />
+            <div>+{totalUsers}</div>
             <h2 className={s['advantages-title']}>
               Our <span className={s.accent}>happy</span> customers
             </h2>

@@ -11,7 +11,17 @@ export const setAuthHeader = token => {
 export const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
-
+export const getTotalUsers = createAsyncThunk(
+  "auth/getLTotalUsers",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get("/auth/totalUsers");
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.response?.data);
+    }
+  }
+);
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (userData, { rejectWithValue }) => {
