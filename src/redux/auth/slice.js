@@ -21,6 +21,9 @@ export const slice = createSlice({
 
   extraReducers: builder => {
     builder
+    .addCase(getTotalUsers.fulfilled, (state, { payload }) => {
+      state.lastUsers = payload.data;
+    })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.email = action.payload.email;
         state.token = action.payload.accessToken;
@@ -51,9 +54,6 @@ export const slice = createSlice({
       })
       .addCase(logout.rejected, state => {
         state.token = null;
-      })
-      .addCase(getTotalUsers.fulfilled, (state, { payload }) => {
-        state.toalUsers = payload.data;
       })
       .addMatcher(isAnyOf(registerUser.pending, signInUser.pending), state => {
         state.isLoading = true;

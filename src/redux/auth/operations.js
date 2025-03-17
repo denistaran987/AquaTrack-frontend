@@ -12,7 +12,7 @@ export const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 export const getTotalUsers = createAsyncThunk(
-  "auth/getTotalUsers",
+  "auth/getLTotalUsers",
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/auth/totalUsers");

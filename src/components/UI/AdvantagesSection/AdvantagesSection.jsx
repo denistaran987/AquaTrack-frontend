@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import s from './AdvantagesSection.module.css';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect} from "react";
 import { selectTotalUsers } from '../../../redux/auth/selectors.js';
 import { getTotalUsers } from '../../../redux/auth/operations.js';
-
 const AdvantagesSection = () => {
   const totalUsers = useSelector(selectTotalUsers);
   const dispatch = useDispatch();
