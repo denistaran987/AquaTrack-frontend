@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { logout, refreshUser, registerUser, signInUser } from './operations.js';
+import { getTotalUsers, logout, refreshUser, registerUser, signInUser } from './operations.js';
 
 const initialState = {
   email: '',
@@ -51,6 +51,9 @@ export const slice = createSlice({
       })
       .addCase(logout.rejected, state => {
         state.token = null;
+      })
+      .addCase(getTotalUsers.fulfilled, (state, { payload }) => {
+        state.toalUsers = payload.data;
       })
       .addMatcher(isAnyOf(registerUser.pending, signInUser.pending), state => {
         state.isLoading = true;
