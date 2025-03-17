@@ -55,6 +55,9 @@ p {
 }
 
 .avatarWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto 10px auto;
   width: 75px;
   height: 75px;
