@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getTotalUsers, logout, refreshUser, registerUser, signInUser } from './operations.js';
+import { getTotalUsers, logout, refreshUser, registerUser, signInUser, signInWithGoogle } from './operations.js';
 
 const initialState = {
   email: '',
@@ -35,6 +35,11 @@ export const slice = createSlice({
         state.isLoading = false;
         state.isLoggedIn = true;
       })
+      .addCase(signInWithGoogle.fulfilled, (state, action) => {
+        state.token = action.payload.data.accessToken;
+        state.isLoading = false;
+        state.isLoggedIn = true;
+      })
       .addCase(refreshUser.pending, state => {
         state.isRefreshing = true;
       })
@@ -56,11 +61,11 @@ export const slice = createSlice({
       .addCase(logout.rejected, state => {
         state.token = null;
       })
-      .addMatcher(isAnyOf(registerUser.pending, signInUser.pending), state => {
+      .addMatcher(isAnyOf(registerUser.pending, signInUser.pending, signInWithGoogle.pending), state => {
         state.isLoading = true;
         state.isLoggedIn = false;
       })
-      .addMatcher(isAnyOf(registerUser.rejected, signInUser.rejected), (state, action) => {
+      .addMatcher(isAnyOf(registerUser.rejected, signInUser.rejected, signInWithGoogle.pending), (state, action) => {
         state.error = action.payload;
         state.isLoading = false;
         state.isLoggedIn = false;

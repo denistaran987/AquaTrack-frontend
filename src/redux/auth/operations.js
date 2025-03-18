@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://aquatrack-backend-1b8z.onrender.com';
+axios.defaults.baseURL = 'http://localhost:3000';
 axios.defaults.withCredentials = true;
 
 export const setAuthHeader = token => {
@@ -107,6 +107,30 @@ export const resetPassword = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to reset password');
+    }
+  }
+);
+
+export const getGoogleUrl = createAsyncThunk(
+  'auth/getGoogleUrl',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get('/auth/get-oauth-url');
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to send URL');
+    }
+  }
+);
+
+export const signInWithGoogle = createAsyncThunk(
+  'auth/signInWithGoogle',
+  async ({ code }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/auth/confirm-oauth', { code });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to send URL');
     }
   }
 );

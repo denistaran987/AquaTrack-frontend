@@ -9,6 +9,7 @@ import { registerUser } from '../../../redux/auth/operations';
 import toast from 'react-hot-toast';
 import Loader from '../../Utils/Loader/Loader';
 import { selectIsLoading } from '../../../redux/auth/selectors';
+import { FcGoogle } from 'react-icons/fc';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -163,6 +164,10 @@ const SignUpPage = () => {
               <button type="submit" className={styles.signupBtn}>
                 Sign Up
               </button>
+              <Link to="#" className={styles.googlelink}>
+                <FcGoogle />
+                Sign up with Google
+              </Link>
             </Form>
           )}
         </Formik>

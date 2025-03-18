@@ -5,10 +5,30 @@ import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../../redux/auth/selectors';
 import { setPosition, toggleModal } from '../../../redux/modal/slice';
+import { FcGoogle } from 'react-icons/fc';
+import { getGoogleUrl } from '../../../redux/auth/operations';
+import toast from 'react-hot-toast';
 
 const WelcomeSection = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  const handleGoogleSignIn = () => {
+    dispatch(getGoogleUrl())
+      .unwrap()
+      .then(res => {
+        window.location.href = res?.data?.url;
+      })
+      .catch(error => {
+        const errorMessages = {
+          400: 'Bad request. Invalid input data.',
+          500: 'Something went wrong. Please try again later.',
+        };
+
+        const message = errorMessages[error?.status] || 'An unknown error occurred.';
+        toast.error(message, { style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' } });
+      });
+  };
 
   return (
     <section className={s.section}>
@@ -27,6 +47,11 @@ const WelcomeSection = () => {
               <Link className={clsx(s.link, s.second)} to="/signin">
                 Sign In
               </Link>
+            </li>
+            <li>
+              <button className={clsx(s.link, s.third)} onClick={handleGoogleSignIn}>
+                <FcGoogle />
+              </button>
             </li>
           </ul>
         </nav>
