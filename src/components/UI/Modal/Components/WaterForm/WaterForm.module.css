@@ -13,8 +13,8 @@
 }
 
 .fixedValue {
-  background-color: #323f47;
-  color: white;
+  background-color: var(--color-main);
+  color: var(--color-light);
   border-radius: 30px;
   padding: 10px 20px;
   font-size: 1rem;
@@ -24,7 +24,7 @@
 }
 
 .inputlight1 {
-  background-color: white;
+  background-color: var(--color-light);
   color: black;
   border: 1px solid #ccc;
   border-radius: 15px;
@@ -34,7 +34,7 @@
 }
 
 .inputlight2 {
-  background-color: white;
+  background-color: var(--color-light);
   color: black;
   border: 1px solid #ccc;
   border-radius: 15px;
@@ -58,17 +58,18 @@
   width: 40px;
   height: 40px;
   stroke: currentColor;
-  fill: white;
-  color: #323f47;
+  fill: var(--color-light);
+  color: var(--color-main);
+  transition: stroke 0.2s ease-in-out;
 }
 
 .icon:hover {
-  color: var(--color-accent);
+  stroke: var(--color-accent);
 }
 
 .saveButton {
-  background-color: #9be1a0;
-  color: #323f47;
+  background-color: var(--color-accent);
+  color: var(--color-main);
   border: none;
   padding: 14px 40px;
   border-radius: 30px;

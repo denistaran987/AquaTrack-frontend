@@ -55,6 +55,9 @@ p {
 }
 
 .avatarWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto 10px auto;
   width: 75px;
   height: 75px;
@@ -82,6 +85,26 @@ p {
   justify-content: center;
   gap: 8px;
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.uploadLabel:hover {
+  color: var(--color-accent);
+}
+
+.uploadIcon {
+  transition: fill 0.2s ease-in-out;
+  width: 18px;
+  height: 18px;
+
+  @media screen and (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.uploadLabel:hover .uploadIcon {
+  fill: var(--color-accent);
 }
 
 .uploadBtn {
@@ -91,16 +114,6 @@ p {
     width: 151px;
     height: 24px;
     font-size: 16px;
-  }
-}
-
-.uploadIcon {
-  width: 18px;
-  height: 18px;
-
-  @media screen and (min-width: 768px) {
-    width: 20px;
-    height: 20px;
   }
 }
 

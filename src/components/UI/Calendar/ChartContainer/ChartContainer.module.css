@@ -1,0 +1,13 @@
+.container {
+  margin-top: 47px;
+}
+@media (min-width: 768px) {
+  .container {
+    margin-top: 62px;
+  }
+}
+@media (min-width: 1440px) {
+  .container {
+    margin-top: 77px;
+  }
+}

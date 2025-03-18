@@ -6,12 +6,16 @@
 }
 
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-family-main);
   font-weight: 400;
   line-height: 1.5;
   color: var(--color-main);
   background-color: var(--color-light);
   min-height: 100vh;
+  max-width: 100%;
 }
 
 a,

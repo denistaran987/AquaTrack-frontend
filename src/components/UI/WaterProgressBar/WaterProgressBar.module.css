@@ -19,6 +19,7 @@
 }
 
 .activePercent {
+  padding-left: 3px;
   position: absolute;
   top: 28px;
   font-size: 10px;
@@ -70,6 +71,7 @@
   }
 
   .activePercent {
+    padding-left: 7px;
     top: 32px;
     font-size: 12px;
   }

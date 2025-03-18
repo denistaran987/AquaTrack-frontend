@@ -42,7 +42,11 @@ const Modal = ({ children, toggleModal, isOpen }) => {
 
   return createPortal(
     <div
-      className={clsx(css.backdrop, { [css.active]: isOpen, [css.hidden]: !isAnimating })}
+      className={clsx(
+        css.backdrop,
+        { [css.active]: isOpen, [css.hidden]: !isAnimating },
+        { [css.topPositionBackDrop]: position === 'top' }
+      )}
       onClick={handleClickBackdrop}
     >
       <div className={clsx(css.modalContent, { [css.topPosition]: position === 'top' })}>

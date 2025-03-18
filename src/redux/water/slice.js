@@ -56,6 +56,7 @@ export const slice = createSlice({
       })
       .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
         state.consumedWaterData.push(payload);
+        state.todayProgress += payload.amount;
         state.isLoading = false;
       })
       .addCase(addWaterEntry.rejected, (state, { payload }) => {
@@ -66,9 +67,11 @@ export const slice = createSlice({
         state.isLoading = true;
       })
       .addCase(editWaterEntry.fulfilled, (state, { payload }) => {
-        const index = state.consumedWaterData.findIndex(entry => entry._id === payload._id);
+        const index = state.consumedWaterData.findIndex(entry => entry.id === payload.id);
         if (index !== -1) {
+          const oldAmount = state.consumedWaterData[index].amount;
           state.consumedWaterData[index] = payload;
+          state.todayProgress += payload.amount - oldAmount;
         }
         state.isLoading = false;
       })

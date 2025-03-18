@@ -10,7 +10,7 @@
   grid-template-rows: 1fr 1fr;
   row-gap: 8px;
   align-self: flex-end;
-  width: 311px;
+  width: 100%;
   height: 112px;
 }
 
@@ -26,8 +26,14 @@
 
 .advantages-left-wrapper {
   background-color: var(--color-light);
-  max-width: 160px;
+  min-width: 160px;
+  max-width: 0px;
   border-radius: 30px;
+  transition: max-width 0.1s ease;
+}
+
+.advantages-left-wrapper:hover {
+  max-width: 190px;
 }
 
 .advantages-left-content {
@@ -46,6 +52,26 @@
 
 .advantages-img:not(:first-child) {
   margin-left: -8.5px;
+}
+
+.advantages-left-content .totalUsers {
+  transform: scaleY(0);
+  opacity: 0;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.advantages-left-content:hover .totalUsers {
+  transform: scaleY(1);
+  opacity: 1;
+  font-size: 12px;
+  font-weight: 700;
+  width: 50px;
+  padding: 2px;
+  color: var(--color-main);
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
 }
 
 .advantages-title {
@@ -128,6 +154,12 @@
 
   .advantages-left-wrapper {
     min-width: 237px;
+    max-width: 0;
+  }
+
+  .advantages-left-wrapper:hover {
+    max-width: 277px;
+    cursor: pointer;
   }
 
   .advantages-right-wrapper {
@@ -145,6 +177,16 @@
 
   .advantages-img:not(:first-child) {
     margin-left: -19px;
+  }
+
+  .advantages-left-content:hover .totalUsers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    padding: 4px;
+    width: 100px;
+    height: 37px;
   }
 
   .advantages-title {
