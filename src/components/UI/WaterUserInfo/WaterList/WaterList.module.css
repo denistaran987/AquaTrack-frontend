@@ -13,7 +13,7 @@
 ::-webkit-scrollbar {
   height: 8px;
   border-radius: 9px;
-  background-color: white;
+  background-color: var(--color-light);
 }
 
 ::-webkit-scrollbar-thumb {
