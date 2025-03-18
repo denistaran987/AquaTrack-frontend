@@ -3,6 +3,7 @@ import UserBar from '../UserBar/UserBar.jsx';
 import css from './UserPanel.module.css';
 import { selectUserName } from '../../../../redux/user/selectors.js';
 import { useSelector } from 'react-redux';
+import ThemeToggle from '../../ThemeToggle/ThemeToggle.jsx';
 
 const UserPanel = () => {
   const name = useSelector(selectUserName);

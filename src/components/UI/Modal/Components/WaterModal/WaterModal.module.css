@@ -9,7 +9,7 @@
 
 .waterModal h2 {
   font-size: 20px;
-  color: #2c3e50;
+  color: var(--color-main);
   font-weight: 700;
   line-height: 24px;
   letter-spacing: -1%;
@@ -17,7 +17,7 @@
 
 .waterModal h3 {
   font-size: 16px;
-  color: #2c3e50;
+  color: var(--color-main);
   font-weight: 700;
   line-height: 20px;
   letter-spacing: -1%;
