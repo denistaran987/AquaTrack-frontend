@@ -15,7 +15,6 @@ const UserPanel = () => {
       <h2 className={css.title}>
         Hello<span className={css.titleSpan}>, {userName}!</span>
       </h2>
-      <ThemeToggle />
       <UserBar name={userName} />
     </div>
   );

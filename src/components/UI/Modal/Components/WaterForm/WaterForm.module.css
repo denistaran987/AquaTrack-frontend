@@ -1,5 +1,5 @@
 .p {
-  color: #2f2f2f;
+  color: var(--color-secondary);
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
@@ -25,7 +25,7 @@
 
 .inputlight1 {
   background-color: var(--color-light);
-  color: black;
+  color: var(--color-secondary);
   border: 1px solid #ccc;
   border-radius: 15px;
   padding: 10px;
@@ -35,7 +35,7 @@
 
 .inputlight2 {
   background-color: var(--color-light);
-  color: black;
+  color: var(--color-secondary);
   border: 1px solid #ccc;
   border-radius: 15px;
   padding: 10px;

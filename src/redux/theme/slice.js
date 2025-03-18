@@ -8,8 +8,6 @@ export const slice = createSlice({
   reducers: {
     toggleTheme: state => {
       state.theme = state.theme === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', state.theme);
-      localStorage.setItem('theme', state.theme);
     },
   },
 });

@@ -4,6 +4,25 @@
   --color-light: #ffffff;
   --color-accent: #9be1a0;
   --color-gray: #f0eff4;
+  --color-bottle: #ffffff;
+  --color-progressBarCont: #ffffff;
+  --color-bottleSection: #9be1a0;
+  --color-bcgButton: #323f47;
+  --color-clrButton: #ffffff;
+  --color-buttonHover: #9be1a0;
+  --color-iconDay: #323f4733;
+  --color-iconDayInteger: #323f47;
+  --color-currentDayBG: #323f47;
+  --color-currentDayBG-hover: #323f47;
+  --color-currentDayCl: #9be1a0;
+  --color-iconGraf: none;
+  --color-logout: #d0d0d0;
+  --color-logout-hover: #323f47;
+  --color-addButton-icon: #323f47;
+  --color-addButton-icon-hover: #323f47;
+  --color-waterItem-time: #d0d0d0;
+  --color-settingsBg: #f0eff4;
+  --color-settingsInput: #ffffff;
 
   --font-family-main: 'Poppins', sans-serif;
   --font-family-secondary: 'Gilroy', sans-serif;
@@ -36,9 +55,23 @@
 }
 
 [data-theme='dark'] {
-  --color-main: #323f47;
+  --color-main: #f2f2f2;
   --color-secondary: #d0d0d0;
-  --color-light: #0d0d0d;
+  --color-light: #1a1a1a;
   --color-accent: #9be1a0;
-  --color-gray: #1a1a1a;
+  --color-gray: #333333;
+  --color-bottle: #333333;
+  --color-progressBarCont: #cccccc;
+  --color-bottleSection: #72a874;
+  --color-buttonHover: #72a874;
+  --color-bcgButton: #323f47;
+  --color-iconDay: #323f47;
+  --color-iconDayInteger: #d3d3d3;
+  --color-currentDayBG-hover: #323f47;
+  --color-currentDayCl: #d3d3d3;
+  --color-iconGraf: #ffff;
+  --color-logout-hover: #72a874;
+  --color-addButton-icon-hover: #72a874;
+  --color-settingsBg: #323f47;
+  --color-settingsInput: #d3d3d3;
 }
