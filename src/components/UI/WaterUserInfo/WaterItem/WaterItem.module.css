@@ -42,7 +42,7 @@
 .time {
   font-size: 12px;
   line-height: 100%;
-  color: rgba(47, 47, 47, 0.6);
+  color: var(--color-waterItem-time);
 }
 
 .svgWrapper {

@@ -23,6 +23,8 @@
   --color-waterItem-time: #d0d0d0;
   --color-settingsBg: #f0eff4;
   --color-settingsInput: #ffffff;
+  --color-cancelBtnClr: #d0d0d0;
+  --color-cancelBtnHoverClr: #323f47;
 
   --font-family-main: 'Poppins', sans-serif;
   --font-family-secondary: 'Gilroy', sans-serif;
@@ -74,4 +76,6 @@
   --color-addButton-icon-hover: #72a874;
   --color-settingsBg: #323f47;
   --color-settingsInput: #d3d3d3;
+  --color-cancelBtnClr: #f0eff4;
+  --color-cancelBtnHoverClr: #72a874;
 }
