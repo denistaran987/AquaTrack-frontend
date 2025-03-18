@@ -71,6 +71,7 @@ h2 {
   top: 16px;
   right: 16px;
   background-color: transparent;
+  fill: var(--color-main);
   border: none;
   cursor: pointer;
   z-index: 10;

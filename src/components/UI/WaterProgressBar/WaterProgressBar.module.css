@@ -5,7 +5,7 @@
   width: 198px;
   height: 83px;
   padding: 12px;
-  background-color: var(--color-light);
+  background-color: var(--color-bottle);
   border-radius: 15px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   transform: translate(-50%);
@@ -30,7 +30,7 @@
 
 .progressBarContainer {
   position: relative;
-  background-color: var(--color-gray);
+  background-color: var(--color-progressBarCont);
   border-radius: 9px;
   height: 6px;
   width: 100%;

@@ -16,7 +16,7 @@
   letter-spacing: -0.01em;
   padding: 5px 10px;
   text-align: center;
-  color: var(--color-main);
+  color: var(--color-iconDayInteger);
   border: none;
   border-radius: 50%;
   width: 28px;
@@ -25,19 +25,19 @@
 }
 
 .normed {
-  background-color: rgba(50, 63, 71, 0.2);
+  background-color: var(--color-iconDay);
 }
 
 .currentDay {
-  background-color: var(--color-main);
+  background-color: var(--color-currentDayBG);
   border: 2px solid var(--color-accent);
-  color: var(--color-accent);
+  color: var(--color-currentDayCl);
 }
 
 .buttonDay.currentDay:hover,
 .buttonDay.currentDay:focus,
 .buttonDay.currentDay:active {
-  background-color: var(--color-main);
+  background-color: var(--color-currentDayBG-hover);
   border: 2px solid var(--color-accent);
   color: var(--color-accent);
 }
