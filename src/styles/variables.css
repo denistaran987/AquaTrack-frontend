@@ -4,6 +4,7 @@
   --color-light: #ffffff;
   --color-accent: #9be1a0;
   --color-gray: #f0eff4;
+  --color-logo: #323f47;
   --color-bottle: #ffffff;
   --color-progressBarCont: #f0eff4;
   --color-bottleSection: #9be1a0;
@@ -25,6 +26,8 @@
   --color-settingsInput: #ffffff;
   --color-cancelBtnClr: #d0d0d0;
   --color-cancelBtnHoverClr: #323f47;
+  --color-buttonLightTheme: #72a874;
+  --color-modalBUtton: #87d28d;
 
   --font-family-main: 'Poppins', sans-serif;
   --font-family-secondary: 'Gilroy', sans-serif;
@@ -57,17 +60,18 @@
 }
 
 [data-theme='dark'] {
-  --color-main: #f2f2f2;
+  --color-main: #d0d0d0;
   --color-secondary: #d0d0d0;
-  --color-light: #1a1a1a;
+  --color-light: #323f47;
   --color-accent: #9be1a0;
   --color-gray: #333333;
+  --color-logo: #fafafa;
   --color-bottle: #333333;
   --color-progressBarCont: #cccccc;
   --color-bottleSection: #72a874;
   --color-buttonHover: #72a874;
   --color-bcgButton: #323f47;
-  --color-iconDay: #323f47;
+  --color-iconDay: #4d5e69;
   --color-iconDayInteger: #d3d3d3;
   --color-currentDayBG-hover: #323f47;
   --color-currentDayCl: #d3d3d3;
@@ -78,4 +82,5 @@
   --color-settingsInput: #d3d3d3;
   --color-cancelBtnClr: #f0eff4;
   --color-cancelBtnHoverClr: #72a874;
+  --color-buttonLightThemeDark: #4e724b;
 }

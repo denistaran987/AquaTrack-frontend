@@ -9,6 +9,7 @@ import { registerUser } from '../../../redux/auth/operations';
 import toast from 'react-hot-toast';
 import Loader from '../../Utils/Loader/Loader';
 import { selectIsLoading } from '../../../redux/auth/selectors';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -83,6 +84,7 @@ const SignUpPage = () => {
     <section className={styles.section}>
       {isLoading && <Loader />}
       <Logo />
+      <ThemeToggle />
       <section className={styles.signupSection}>
         <h2 className={styles.title}>Sign Up</h2>
         <Formik

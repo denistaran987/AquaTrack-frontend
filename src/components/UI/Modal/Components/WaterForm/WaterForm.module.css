@@ -69,7 +69,7 @@
 
 .saveButton {
   background-color: var(--color-accent);
-  color: var(--color-main);
+  color: var(--color-bcgButton);
   border: none;
   padding: 14px 40px;
   border-radius: 30px;

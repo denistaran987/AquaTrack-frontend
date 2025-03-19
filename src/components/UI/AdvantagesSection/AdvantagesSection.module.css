@@ -115,6 +115,7 @@
 
 .green {
   background-color: var(--color-accent);
+  color: var(--color-bcgButton);
 }
 
 .white {
@@ -124,7 +125,7 @@
 .circle {
   width: 8px;
   height: 8px;
-  background-color: #a0e29a;
+  background-color: var(--color-bottleSection);
   border-radius: 50%;
   margin-right: 4px;
 }

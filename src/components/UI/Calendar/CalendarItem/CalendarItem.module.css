@@ -53,8 +53,8 @@
 .buttonDay:hover,
 .buttonDay:focus,
 .buttonDay:active {
-  background-color: var(--color-accent);
-  border: 2px solid var(--color-accent);
+  background-color: var(--color-buttonHover);
+  border: 2px solid var(--color-buttonHover);
   color: var(--color-main);
 }
 

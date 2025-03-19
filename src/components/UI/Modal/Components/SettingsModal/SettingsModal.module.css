@@ -145,7 +145,7 @@ p {
 
 .infoBlock::-webkit-scrollbar-thumb {
   border-radius: 30px;
-  background-color: var(--color-gray);
+  background-color: var(--color-logout);
 }
 
 .leftBlock,
@@ -342,12 +342,12 @@ p {
   padding: 14px 40px;
   width: 116px;
   height: 46px;
-  background: var(--color-accent);
+  background-color: var(--color-accent);
   font-weight: 700;
   line-height: 1.28571;
   letter-spacing: -0.01em;
   text-align: center;
-  color: var(--color-main);
+  color: var(--color-bcgButton);
   cursor: pointer;
   @media screen and (min-width: 768px) {
     padding: 16px 50px;

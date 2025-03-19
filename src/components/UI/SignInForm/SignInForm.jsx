@@ -11,6 +11,7 @@ import { selectIsLoading } from '../../../redux/auth/selectors';
 import Loader from '../../Utils/Loader/Loader';
 
 import { setPosition, toggleModal } from '../../../redux/modal/slice';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -57,6 +58,7 @@ const SignInPage = () => {
     <section className={styles.section}>
       {isLoading && <Loader />}
       <Logo />
+      <ThemeToggle />
       <section className={styles.signinSection}>
         <h2 className={styles.title}>Sign In</h2>
         <Formik

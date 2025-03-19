@@ -8,6 +8,7 @@
   letter-spacing: -0.01em;
   text-transform: uppercase;
   text-align: center;
+  color: var(--color-logo);
 }
 
 @media (min-width: 767.98px) {

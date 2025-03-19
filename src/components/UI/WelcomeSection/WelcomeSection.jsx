@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../../redux/auth/selectors';
 import { setPosition, toggleModal } from '../../../redux/modal/slice';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 const WelcomeSection = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const WelcomeSection = () => {
   return (
     <section className={s.section}>
       <Logo />
+      <ThemeToggle />
       <p className={s.subtitle}>Record daily water intake and track</p>
       <h1 className={s.title}>Water consumption tracker</h1>
       {!isLoggedIn ? (

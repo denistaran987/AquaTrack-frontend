@@ -15,18 +15,39 @@
 }
 
 .circle {
+  position: absolute;
+  left: 4px;
   width: 20px;
   height: 20px;
-  background-color: white;
+  background-color: var(--color-buttonLightTheme);
   border-radius: 50%;
-  position: absolute;
-  left: 3px;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .dark {
-  transform: translateX(25px);
-  background-color: var(--color-accent);
+  transform: translateX(24px);
+  background-color: var(--color-buttonLightThemeDark);
+}
+
+.circle::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: transparent;
+  z-index: 10;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out 0.1s;
+}
+
+[data-theme='dark'] .circle::before {
+  opacity: 1;
+  transform: scale(1);
+  background-color: #ddd;
 }
 
 .toggleButton[data-theme='dark'] {

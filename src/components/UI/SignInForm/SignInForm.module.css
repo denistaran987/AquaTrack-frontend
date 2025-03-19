@@ -85,7 +85,7 @@ button.signinBtn {
   font-size: 14px;
   line-height: 18px;
   font-weight: 700;
-  color: var(--color-main);
+  color: var(--color-bcgButton);
   cursor: pointer;
   margin-top: 16px;
 }
