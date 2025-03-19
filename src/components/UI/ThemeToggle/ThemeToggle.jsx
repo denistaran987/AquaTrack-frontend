@@ -12,14 +12,6 @@ const ThemeToggle = () => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      dispatch(toggleTheme(savedTheme));
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    }
-  }, [dispatch]);
-
   return (
     <button onClick={() => dispatch(toggleTheme())} className={css.toggleButton}>
       <div className={`${css.circle} ${theme === 'dark' ? css.dark : ''}`}></div>{' '}
