@@ -8,6 +8,7 @@ import Loader from './Utils/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsisRefreshing } from '../redux/auth/selectors';
 import { refreshUser } from '../redux/auth/operations';
+import GoogleAuth from '../pages/GoogleAuth/GoogleAuth';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage'));
@@ -52,6 +53,14 @@ function App() {
             element={
               <RestrictedRoute redirectTo="/tracker">
                 <SignInPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="confirm-google-auth"
+            element={
+              <RestrictedRoute redirectTo="/tracker">
+                <GoogleAuth />
               </RestrictedRoute>
             }
           />

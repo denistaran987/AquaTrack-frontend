@@ -11,6 +11,7 @@ import { selectIsLoading } from '../../../redux/auth/selectors';
 import Loader from '../../Utils/Loader/Loader';
 
 import { setPosition, toggleModal } from '../../../redux/modal/slice';
+import { FcGoogle } from 'react-icons/fc';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -122,6 +123,10 @@ const SignInPage = () => {
 
               <button type="submit" className={styles.signinBtn}>
                 Sign In
+              </button>
+              <button to="#" className={styles.googlelink}>
+                <FcGoogle />
+                Sign in with Google
               </button>
             </Form>
           )}
