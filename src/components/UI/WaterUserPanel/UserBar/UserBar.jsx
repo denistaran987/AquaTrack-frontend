@@ -39,7 +39,7 @@ const UserBar = ({ name }) => {
           <use href="/images/icons.svg#icon-right"></use>
         </svg>
       </button>
-      {isOpen && <UserBarPopover isOpen={isOpen} />}
+      <UserBarPopover isOpen={isOpen} />
     </div>
   );
 };
