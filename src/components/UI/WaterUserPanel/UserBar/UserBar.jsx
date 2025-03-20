@@ -28,10 +28,12 @@ const UserBar = ({ name }) => {
 
   if (!userAvatarUrl) return null;
 
+  const formattedUserName = name.length > 10 ? `${name.slice(0, 10)}...` : `${name}`;
+
   return (
     <div className={css.wrapper} ref={wrapperRef}>
       <button onClick={() => setIsOpen(!isOpen)} className={css.button}>
-        <p className={css.name}>{name}</p>
+        <p className={css.name}>{formattedUserName}</p>
         <img className={css.image} src={userAvatarUrl} alt="User image" />
         <svg className={clsx(css.svg, isOpen && css.svgOpen)}>
           <use href="/images/icons.svg#icon-right"></use>

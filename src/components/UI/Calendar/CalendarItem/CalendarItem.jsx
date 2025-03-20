@@ -10,13 +10,13 @@ const CalendarItem = ({ day, totalDayWater, isCurrentDate, token, date, isFuture
   const dailyNorm = useSelector(selectWaterNorm);
 
   const percents = useMemo(
-    () => (totalDayWater ? Math.round((totalDayWater / dailyNorm) * 100) : 0),
+    () => Math.min(100, totalDayWater ? Math.round((totalDayWater / dailyNorm) * 100) : 0),
     [totalDayWater, dailyNorm]
   );
 
   const dayStyle = isCurrentDate
     ? `${css.buttonDay} ${css.currentDay}`
-    : percents > 100
+    : percents === 100
     ? `${css.buttonDay} ${css.overlimit}`
     : percents > 0
     ? `${css.buttonDay} ${css.normed}`

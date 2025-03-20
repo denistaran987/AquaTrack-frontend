@@ -1,10 +1,11 @@
-import { useEffect, useId, useState } from 'react';
+import { useId } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import css from './SettingsModal.module.css';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { updateUserInfo, updateUserAvatar } from '../../../../../redux/user/operations';
 import {
+  selectDailyNorm,
   selectUserAvatarUrl,
   selectUserDailyNorm,
   selectUserDailySportTime,
@@ -17,7 +18,8 @@ import {
 } from '../../../../../redux/user/selectors';
 import { toggleModal } from '../../../../../redux/modal/slice';
 import toast from 'react-hot-toast';
-import { ClipLoader, ClockLoader } from 'react-spinners';
+import { ClipLoader } from 'react-spinners';
+import { setDailySportTime, setGender, setWeight } from '../../../../../redux/user/slice';
 
 const SettingsModal = () => {
   const dispatch = useDispatch();
@@ -29,38 +31,34 @@ const SettingsModal = () => {
 
   const userId = useSelector(selectUserId);
   const userAvatar = useSelector(selectUserAvatarUrl);
-  const username = useSelector(selectUserName);
+  const userName = useSelector(selectUserName);
   const userEmail = useSelector(selectUserEmail);
   const userWeight = useSelector(selectUserWeight);
   const userDailySportTime = useSelector(selectUserDailySportTime);
   const userGender = useSelector(selectUserGender);
   const userDailyNorm = useSelector(selectUserDailyNorm);
   const isLoading = useSelector(selectUserIsLoading);
+  const recommendedDailyUserNorm = useSelector(selectDailyNorm);
 
-  const [weight, setWeight] = useState(0);
-  const [dailySportTime, setDailySportTime] = useState(0);
-  const [dailyNorm, setDailyNorm] = useState(0);
-  const [gender, setGender] = useState(userGender);
-
-  const handleChangeWeight = event => {
-    setWeight(event.target.value);
+  const handleChangeWeight = (e, setFieldValue) => {
+    const value = e.target.value === '' ? '' : +e.target.value;
+    setFieldValue('weight', value);
+    console.log(value);
+    dispatch(setWeight(value));
   };
 
-  const handleChangeDailySportTime = event => {
-    setDailySportTime(event.target.value);
+  const handleChangeDailySportTime = (e, setFieldValue) => {
+    const value = e.target.value === '' ? '' : +e.target.value;
+    setFieldValue('dailySportTime', value);
+    console.log(value);
+    dispatch(setDailySportTime(value));
   };
 
-  const handleGenderChange = event => {
-    setGender(event.target.value);
+  const handleGenderChange = (e, setFieldValue) => {
+    const value = e.target.value;
+    setFieldValue('gender', value);
+    dispatch(setGender(value));
   };
-
-  useEffect(() => {
-    if (gender === 'female') {
-      setDailyNorm(weight * 0.03 + dailySportTime * 0.4);
-      return;
-    }
-    setDailyNorm(weight * 0.04 + dailySportTime * 0.6);
-  }, [weight, dailySportTime, dailyNorm, gender]);
 
   const nameId = useId();
   const emailId = useId();
@@ -69,11 +67,11 @@ const SettingsModal = () => {
   const waterIntakeId = useId();
 
   const SettingSchema = Yup.object().shape({
-    name: Yup.string().max(10).required(),
-    email: Yup.string().email('Invalid email').required(),
+    name: Yup.string().max(20).required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
     weight: Yup.number().min(0, 'Can not be negative').max(500, 'Weight must be realistic'),
     dailySportTime: Yup.number().min(0, 'Can not be negative').max(24, 'Can not exceed 24 hours'),
-    dailyNorm: Yup.number().min(0, 'Can not be negative').max(5, 'Can not be more than 5'),
+    dailyNorm: Yup.number().min(0.5, 'Must be at least 0.5 L').max(5, 'Can not be more than 5 L'),
   });
 
   const handleSubmit = async values => {
@@ -88,17 +86,9 @@ const SettingsModal = () => {
       /* eslint-disable no-unused-vars */
       const filteredValues = Object.fromEntries(
         Object.entries(updatedValues).filter(
-          ([_, value]) => value !== '' && value !== null && value !== undefined
+          ([_, value]) => value !== '' && value !== 0 && value !== null && value !== undefined
         )
       );
-
-      if (Object.keys(filteredValues).length === 1) {
-        toast.error('No changes detected. Please fill in at least one field.', {
-          style: errorStyle,
-          iconTheme: errorIconTheme,
-        });
-        return;
-      }
 
       await dispatch(updateUserInfo(filteredValues)).unwrap();
       toast.success('Successfully updated!', {
@@ -139,7 +129,7 @@ const SettingsModal = () => {
   return (
     <Formik
       initialValues={{
-        name: username,
+        name: userName,
         email: userEmail,
         weight: userWeight,
         dailySportTime: userDailySportTime,
@@ -152,7 +142,7 @@ const SettingsModal = () => {
       validateOnBlur={false}
       validateOnChange={false}
     >
-      {({ errors, touched, setFieldTouched }) => (
+      {({ errors, touched, setFieldTouched, setFieldValue }) => (
         <Form className={css.modalBody}>
           <div className={css.avatarBlock}>
             <h2 className={css.title}>Setting</h2>
@@ -189,8 +179,8 @@ const SettingsModal = () => {
                       type="radio"
                       name="gender"
                       value="female"
-                      checked={gender === 'female'}
-                      onChange={handleGenderChange}
+                      checked={userGender === 'female'}
+                      onChange={e => handleGenderChange(e, setFieldValue)}
                     />
                     <span className={css.customRadio}></span>
                     Woman
@@ -200,8 +190,8 @@ const SettingsModal = () => {
                       type="radio"
                       name="gender"
                       value="male"
-                      checked={gender === 'male'}
-                      onChange={handleGenderChange}
+                      checked={userGender === 'male'}
+                      onChange={e => handleGenderChange(e, setFieldValue)}
                     />
                     <span className={css.customRadio}></span>
                     Man
@@ -274,8 +264,9 @@ const SettingsModal = () => {
                     id={weightId}
                     className={`${touched.weight && errors.weight ? css.errorInput : ''}`}
                     onBlur={() => setFieldTouched('weight', true)}
-                    value={weight}
-                    onChange={handleChangeWeight}
+                    value={userWeight}
+                    // onChange={handleChangeWeight}
+                    onChange={e => handleChangeWeight(e, setFieldValue)}
                   />
                   <ErrorMessage className={css.errorMessage} name="weight" component="div" />
                 </div>
@@ -287,8 +278,9 @@ const SettingsModal = () => {
                     id={timeId}
                     className={`${touched.time && errors.time ? css.errorInput : ''}`}
                     onBlur={() => setFieldTouched('dailySportTime', true)}
-                    value={dailySportTime}
-                    onChange={handleChangeDailySportTime}
+                    value={userDailySportTime}
+                    // onChange={handleChangeDailySportTime}
+                    onChange={e => handleChangeDailySportTime(e, setFieldValue)}
                   />
                   <ErrorMessage
                     className={css.errorMessage}
@@ -301,7 +293,7 @@ const SettingsModal = () => {
                 <div className={css.resultBlock}>
                   <p>
                     The required amount of water in liters per day:{' '}
-                    <span className={css.result}>{`${dailyNorm.toFixed(1)}L`}</span>
+                    <span className={css.result}>{recommendedDailyUserNorm}</span>
                   </p>
                 </div>
                 <div className={css.block}>

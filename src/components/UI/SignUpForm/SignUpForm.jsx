@@ -12,7 +12,13 @@ import { selectIsLoading } from '../../../redux/auth/selectors';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 const SignUpSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
+  email: Yup.string()
+    .email('Invalid email')
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      'Invalid email format. Example: userexample@mail.com'
+    )
+    .required('Required'),
   password: Yup.string().min(6, 'Too short!').required('Required'),
   repeatPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')

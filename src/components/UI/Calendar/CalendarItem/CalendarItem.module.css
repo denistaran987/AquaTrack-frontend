@@ -59,9 +59,9 @@
 }
 
 .overlimit {
-  background-color: #788d99;
-  border: 2px solid #788d99;
-  color: var(--color-main);
+  background-color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  color: var(--color-currentDayBG);
 }
 
 .disabled {

@@ -27,7 +27,17 @@ const handleRejected = (state, action) => {
 export const slice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setGender: (state, action) => {
+      state.gender = action.payload;
+    },
+    setWeight: (state, action) => {
+      state.weight = action.payload;
+    },
+    setDailySportTime: (state, action) => {
+      state.dailySportTime = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchUserInfo.pending, handlePending)
@@ -59,5 +69,7 @@ export const slice = createSlice({
       .addCase(updateUserAvatar.rejected, handleRejected);
   },
 });
+
+export const { setGender, setWeight, setDailySportTime } = slice.actions;
 
 export default slice.reducer;
