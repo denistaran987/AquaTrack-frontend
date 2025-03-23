@@ -10,6 +10,8 @@ import toast from 'react-hot-toast';
 import Loader from '../../Utils/Loader/Loader';
 import { selectIsLoading } from '../../../redux/auth/selectors';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import axios from 'axios';
+import { FcGoogle } from 'react-icons/fc';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string()
@@ -84,6 +86,17 @@ const SignUpPage = () => {
           },
         });
       });
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await axios.get('/auth/get-oauth-url');
+      const url = response.data.data.url;
+
+      window.location.href = url;
+    } catch (e) {
+      console.log('Error during getting OAuth url:', e);
+    }
   };
 
   return (
@@ -174,6 +187,10 @@ const SignUpPage = () => {
             </Form>
           )}
         </Formik>
+        <button onClick={handleGoogleLogin} className={styles.googlelink}>
+          <FcGoogle />
+          Sign in with Google
+        </button>
         <p className={styles.signinLink}>
           Already have account?
           <Link to="/signin" className={styles.signinLinkText}>

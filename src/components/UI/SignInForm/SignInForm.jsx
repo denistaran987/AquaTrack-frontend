@@ -12,6 +12,8 @@ import Loader from '../../Utils/Loader/Loader';
 
 import { setPosition, toggleModal } from '../../../redux/modal/slice';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import axios from 'axios';
+import { FcGoogle } from 'react-icons/fc';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -52,6 +54,17 @@ const SignInPage = () => {
         const message = errorMessages[error?.status] || 'An unknown error occurred.';
         toast.error(message, { style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' } });
       });
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await axios.get('/auth/get-oauth-url');
+      const url = response.data.data.url;
+
+      window.location.href = url;
+    } catch (e) {
+      console.log('Error during getting OAuth url:', e);
+    }
   };
 
   return (
@@ -128,7 +141,10 @@ const SignInPage = () => {
             </Form>
           )}
         </Formik>
-
+        <button onClick={handleGoogleLogin} className={styles.googlelink}>
+          <FcGoogle />
+          Sign in with Google
+        </button>
         <p className={styles.signupLink}>
           Don't have an account?{' '}
           <Link to="/signup" className={styles.signupLinkText}>
