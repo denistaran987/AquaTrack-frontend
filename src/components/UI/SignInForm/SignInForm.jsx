@@ -59,7 +59,11 @@ const SignInPage = () => {
   const handleGoogleLogin = async () => {
     try {
       const response = await axios.get('/auth/get-oauth-url');
-      const url = response.data.data.url;
+      let url = response.data.data.url;
+
+      url = url.includes('prompt=')
+        ? url.replace(/prompt=\w+/, 'prompt=select_account')
+        : `${url}&prompt=select_account`;
 
       window.location.href = url;
     } catch (e) {
@@ -141,7 +145,7 @@ const SignInPage = () => {
             </Form>
           )}
         </Formik>
-        <button onClick={handleGoogleLogin} className={styles.googlelink}>
+        <button type="button" onClick={handleGoogleLogin} className={styles.googlelink}>
           <FcGoogle />
           Sign in with Google
         </button>

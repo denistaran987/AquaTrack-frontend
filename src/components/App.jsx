@@ -56,9 +56,9 @@ function App() {
               </RestrictedRoute>
             }
           />
-          <Route path="/confirm-google-auth" element={<GooglePage />} />
-          <Route path="/reset-pwd" element={<ResetPasswordPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/reset-pwd" element={<ResetPasswordPage />} />
+          <Route path="/confirm-google-auth" element={<GooglePage />} />
         </Route>
       </Routes>
     </Suspense>
