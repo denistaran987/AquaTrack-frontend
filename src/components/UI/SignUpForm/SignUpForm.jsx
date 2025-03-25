@@ -10,6 +10,8 @@ import toast from 'react-hot-toast';
 import Loader from '../../Utils/Loader/Loader';
 import { selectIsLoading } from '../../../redux/auth/selectors';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import { useTranslation } from 'react-i18next';
+import LanguageBtn from '../LanguageBtn/languageBtn';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,6 +35,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
+  const { t } = useTranslation();
 
   const togglePasswordVisibility = field => {
     setShowPassword(prev => ({
@@ -74,7 +77,7 @@ const SignUpPage = () => {
         }
 
         const status = error?.status;
-        const message = errorMessages[status] || 'An unknown error occurred.';
+        const message = errorMessages[status] || t('validation.unknow');
 
         toast.error(message, {
           style: { backgroundColor: '#FFCCCC', fontWeight: 'semibold' },
@@ -91,8 +94,9 @@ const SignUpPage = () => {
       {isLoading && <Loader />}
       <Logo />
       <ThemeToggle />
+      <LanguageBtn />
       <section className={styles.signupSection}>
-        <h2 className={styles.title}>Sign Up</h2>
+        <h2 className={styles.title}>{t('common.sign_up')}</h2>
         <Formik
           initialValues={{ email: '', password: '', repeatPassword: '' }}
           validationSchema={SignUpSchema}
@@ -102,11 +106,11 @@ const SignUpPage = () => {
         >
           {({ errors, touched, handleSubmit, setFieldTouched }) => (
             <Form className={styles.signupForm} noValidate onSubmit={handleSubmit}>
-              <label className={styles.label}>Email</label>
+              <label className={styles.label}>{t('common.email')}</label>
               <Field
                 name="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('notifications.email_placeholder')}
                 className={`${styles.input} ${
                   touched.email && errors.email ? styles.errorInput : ''
                 }`}
@@ -114,12 +118,12 @@ const SignUpPage = () => {
               />
               <ErrorMessage name="email" component="div" className={styles.errorMessage} />
 
-              <label className={styles.label}>Password</label>
+              <label className={styles.label}>{t('common.password')}</label>
               <div className={styles.passwordWrapper}>
                 <Field
                   name="password"
                   type={showPassword.password ? 'text' : 'password'}
-                  placeholder="Enter your password"
+                  placeholder={t('notifications.password_placeholder')}
                   className={`${styles.input} ${
                     touched.password && errors.password ? styles.errorInput : ''
                   }`}
@@ -141,12 +145,12 @@ const SignUpPage = () => {
               </div>
               <ErrorMessage name="password" component="div" className={styles.errorMessage} />
 
-              <label className={styles.label}>Repeat password</label>
+              <label className={styles.label}>{t('common.repeat_password')}</label>
               <div className={styles.passwordWrapper}>
                 <Field
                   name="repeatPassword"
                   type={showPassword.repeatPassword ? 'text' : 'password'}
-                  placeholder="Repeat password"
+                  placeholder={t('notifications.repeat_password_placeholder')}
                   className={`${styles.input} ${
                     touched.repeatPassword && errors.repeatPassword ? styles.errorInput : ''
                   }`}
@@ -169,15 +173,15 @@ const SignUpPage = () => {
               <ErrorMessage name="repeatPassword" component="div" className={styles.errorMessage} />
 
               <button type="submit" className={styles.signupBtn}>
-                Sign Up
+                {t('common.sign_up')}
               </button>
             </Form>
           )}
         </Formik>
         <p className={styles.signinLink}>
-          Already have account?
+          {t('signUpForm.have_account')}
           <Link to="/signin" className={styles.signinLinkText}>
-            Sign In
+            {t('common.sign_in')}
           </Link>
         </p>
       </section>

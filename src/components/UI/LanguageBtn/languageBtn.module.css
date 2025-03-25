@@ -1,0 +1,5 @@
+.language_wrapper {
+    display: flex;
+    gap: 5px;
+    max-width: 60px;
+}

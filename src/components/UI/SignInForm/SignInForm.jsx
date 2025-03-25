@@ -12,9 +12,11 @@ import Loader from '../../Utils/Loader/Loader';
 
 import { setPosition, toggleModal } from '../../../redux/modal/slice';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import LanguageBtn from '../LanguageBtn/languageBtn';
+import { useTranslation } from 'react-i18next';
 
 const SignInSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
+  email: Yup.string().email('Enter a valid email').required('Required'),
   password: Yup.string().min(6, 'Too short!').required('Required'),
 });
 
@@ -23,6 +25,7 @@ const SignInPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
+  const { t } = useTranslation();
 
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev);
@@ -32,7 +35,7 @@ const SignInPage = () => {
     dispatch(signInUser(values))
       .unwrap()
       .then(() => {
-        toast.success(`Welcome, User!`, {
+        toast.success(t(`notifications.welcome`), {
           style: { backgroundColor: '#9be1a0', fontWeight: 'medium' },
           iconTheme: { primary: 'white', secondary: 'black' },
         });
@@ -49,7 +52,7 @@ const SignInPage = () => {
           500: 'Something went wrong. Please try again later.',
         };
 
-        const message = errorMessages[error?.status] || 'An unknown error occurred.';
+        const message = errorMessages[error?.status] || t('validation.unknow');
         toast.error(message, { style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' } });
       });
   };
@@ -60,7 +63,8 @@ const SignInPage = () => {
       <Logo />
       <ThemeToggle />
       <section className={styles.signinSection}>
-        <h2 className={styles.title}>Sign In</h2>
+        <LanguageBtn />
+        <h2 className={styles.title}>{t('common.sign_in')}</h2>
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={SignInSchema}
@@ -70,11 +74,11 @@ const SignInPage = () => {
         >
           {({ errors, touched, handleSubmit, setFieldTouched }) => (
             <Form className={styles.signinForm} noValidate onSubmit={handleSubmit}>
-              <label className={styles.label}>Email</label>
+              <label className={styles.label}>{t('common.email')}</label>
               <Field
                 name="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('notifications.email_placeholder')}
                 className={`${styles.input} ${
                   touched.email && errors.email ? styles.errorInput : ''
                 }`}
@@ -82,12 +86,12 @@ const SignInPage = () => {
               />
               <ErrorMessage name="email" component="div" className={styles.errorMessage} />
 
-              <label className={styles.label}>Password</label>
+              <label className={styles.label}>{t('common.password')}</label>
               <div className={styles.passwordWrapper}>
                 <Field
                   name="password"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter your password"
+                  placeholder={t('notifications.password_placeholder')}
                   className={`${styles.input} ${
                     touched.password && errors.password ? styles.errorInput : ''
                   }`}
@@ -108,7 +112,7 @@ const SignInPage = () => {
               <ErrorMessage name="password" component="div" className={styles.errorMessage} />
 
               <p className={styles.forgotPassword}>
-                Forgot your password?{' '}
+                {t('signInForm.forgot_password')}{' '}
                 <a
                   href="#"
                   onClick={e => {
@@ -117,22 +121,22 @@ const SignInPage = () => {
                   }}
                   className={styles.forgotPasswordLink}
                 >
-                  Click here
+                  {t('signInForm.click_here')}
                 </a>{' '}
-                to reset your password.
+                {t('signInForm.reset_password')}
               </p>
 
               <button type="submit" className={styles.signinBtn}>
-                Sign In
+                {t('common.sign_in')}
               </button>
             </Form>
           )}
         </Formik>
 
         <p className={styles.signupLink}>
-          Don't have an account?{' '}
+          {t('signInForm.have_account')}{' '}
           <Link to="/signup" className={styles.signupLinkText}>
-            Sign Up
+            {t('common.sign_up')}
           </Link>
         </p>
       </section>

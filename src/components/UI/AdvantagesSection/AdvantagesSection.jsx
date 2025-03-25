@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 import { selectTotalUsers } from '../../../redux/auth/selectors.js';
 import { getTotalUsers } from '../../../redux/auth/operations.js';
+import { useTranslation } from 'react-i18next';
 const AdvantagesSection = () => {
   const totalUsers = useSelector(selectTotalUsers);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(getTotalUsers());
@@ -59,17 +61,21 @@ const AdvantagesSection = () => {
             />
             <div className={s.totalUsers}>+{totalUsers}</div>
             <h2 className={s['advantages-title']}>
-              Our <span className={s.accent}>happy</span> customers
+              {t('advantagesSection.our')}
+              <span className={s.accent}>{t('advantagesSection.happy')}</span>{' '}
+              {t('advantagesSection.customers')}
             </h2>
           </div>
         </div>
         <div className={s['advantages-right-wrapper']}>
           <div className={clsx(s.item, s.dark)}>
             <span className={s.circle}></span>
-            Habit drive
+            {t('advantagesSection.habit_drive')}
           </div>
-          <div className={clsx(s.item, s.green)}>View statistics</div>
-          <div className={clsx(s.item, s.white)}>Personal rate setting</div>
+          <div className={clsx(s.item, s.green)}>{t('advantagesSection.view_statistic')}</div>
+          <div className={clsx(s.item, s.white)}>
+            {t('advantagesSection.personal_rate_setting')}
+          </div>
         </div>
       </div>
     </section>
