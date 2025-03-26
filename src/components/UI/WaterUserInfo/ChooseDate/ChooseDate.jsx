@@ -27,6 +27,7 @@ const ChooseDate = () => {
         timeZone: 'UTC',
       })}`;
 
+  if (formattedDate === 'Invalid Date, Invalid Date') return;
   return <p className={css.text}>{formattedDate}</p>;
 };
 

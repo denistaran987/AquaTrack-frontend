@@ -9,11 +9,12 @@ import { signInUser } from '../../../redux/auth/operations';
 import toast from 'react-hot-toast';
 import { selectIsLoading } from '../../../redux/auth/selectors';
 import Loader from '../../Utils/Loader/Loader';
-
 import { setPosition, toggleModal } from '../../../redux/modal/slice';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import LanguageBtn from '../LanguageBtn/languageBtn';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import { FcGoogle } from 'react-icons/fc';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email('Enter a valid email').required('Required'),
@@ -55,6 +56,21 @@ const SignInPage = () => {
         const message = errorMessages[error?.status] || t('validation.unknow');
         toast.error(message, { style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' } });
       });
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await axios.get('/auth/get-oauth-url');
+      let url = response.data.data.url;
+
+      url = url.includes('prompt=')
+        ? url.replace(/prompt=\w+/, 'prompt=select_account')
+        : `${url}&prompt=select_account`;
+
+      window.location.href = url;
+    } catch (e) {
+      console.log('Error during getting OAuth url:', e);
+    }
   };
 
   return (
@@ -132,7 +148,10 @@ const SignInPage = () => {
             </Form>
           )}
         </Formik>
-
+        <button type="button" onClick={handleGoogleLogin} className={styles.googlelink}>
+          <FcGoogle />
+          Sign in with Google
+        </button>
         <p className={styles.signupLink}>
           {t('signInForm.have_account')}{' '}
           <Link to="/signup" className={styles.signupLinkText}>

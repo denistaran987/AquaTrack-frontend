@@ -9,6 +9,9 @@
 }
 
 .link {
+  position: fixed;
+  top: 20px;
+  left: 20px;
   display: flex;
   align-items: center;
   column-gap: 4px;
@@ -27,6 +30,7 @@
 .image {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   object-fit: contain;

@@ -88,6 +88,7 @@ button.signinBtn {
   color: var(--color-bcgButton);
   cursor: pointer;
   margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 button.signinBtn:hover {
@@ -136,6 +137,29 @@ a.signupLinkText {
   text-decoration: underline;
 }
 
+.googlelink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #87cefa;
+  border: none;
+  border-radius: 30px;
+  width: 100%;
+  height: 60px;
+}
+
+.googlelink:hover {
+  background-color: #76b8e1;
+}
+
+.googlelink svg {
+  width: 2em;
+  height: 2em;
+}
+
 .passwordWrapper {
   position: relative;
   display: flex;
@@ -176,7 +200,7 @@ a.signupLinkText {
 
 .forgotPassword {
   font-size: 14px;
-  text-align: left;
+  text-align: center;
   margin-top: 5px;
 }
 

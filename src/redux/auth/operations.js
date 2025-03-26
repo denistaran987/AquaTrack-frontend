@@ -116,3 +116,15 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
+export const signInWithGoogle = createAsyncThunk(
+  'auth/signInWithGoogle',
+  async (code, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('auth/confirm-oauth', { code });
+      return response.data.data.accessToken;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to send URL');
+    }
+  }
+);

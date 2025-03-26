@@ -1,5 +1,12 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getTotalUsers, logout, refreshUser, registerUser, signInUser } from './operations.js';
+import {
+  getTotalUsers,
+  logout,
+  refreshUser,
+  registerUser,
+  signInUser,
+  signInWithGoogle,
+} from './operations.js';
 
 const initialState = {
   email: '',
@@ -24,6 +31,11 @@ export const slice = createSlice({
     builder
       .addCase(getTotalUsers.fulfilled, (state, { payload }) => {
         state.totalUsers = payload.totalUsers;
+      })
+      .addCase(signInWithGoogle.fulfilled, (state, { payload }) => {
+        if (!payload || !payload.length) state.isLoggedIn = false;
+        state.token = payload;
+        state.isLoggedIn = true;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.email = action.payload.email;

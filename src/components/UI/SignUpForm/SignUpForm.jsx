@@ -12,6 +12,8 @@ import { selectIsLoading } from '../../../redux/auth/selectors';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import { useTranslation } from 'react-i18next';
 import LanguageBtn from '../LanguageBtn/languageBtn';
+import axios from 'axios';
+import { FcGoogle } from 'react-icons/fc';
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string()
@@ -87,6 +89,21 @@ const SignUpPage = () => {
           },
         });
       });
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await axios.get('/auth/get-oauth-url');
+      let url = response.data.data.url;
+
+      url = url.includes('prompt=')
+        ? url.replace(/prompt=\w+/, 'prompt=select_account')
+        : `${url}&prompt=select_account`;
+
+      window.location.href = url;
+    } catch (e) {
+      console.log('Error during getting OAuth url:', e);
+    }
   };
 
   return (
@@ -178,6 +195,10 @@ const SignUpPage = () => {
             </Form>
           )}
         </Formik>
+        <button type="button" onClick={handleGoogleLogin} className={styles.googlelink}>
+          <FcGoogle />
+          Sign in with Google
+        </button>
         <p className={styles.signinLink}>
           {t('signUpForm.have_account')}
           <Link to="/signin" className={styles.signinLinkText}>
