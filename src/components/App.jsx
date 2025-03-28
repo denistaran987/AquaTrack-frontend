@@ -8,6 +8,7 @@ import Loader from './Utils/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsisRefreshing } from '../redux/auth/selectors';
 import { refreshUser } from '../redux/auth/operations';
+import '../i18n/index';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage'));
@@ -15,6 +16,7 @@ const SignInPage = lazy(() => import('../pages/SignInPage/SignInPage'));
 const TrackerPage = lazy(() => import('../pages/TrackerPage/TrackerPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
 const ResetPasswordPage = lazy(() => import('../pages/ResetPasswordPage/ResetPasswordPage'));
+const GooglePage = lazy(() => import('../pages/GooglePage/GooglePage'));
 
 function App() {
   const dispatch = useDispatch();

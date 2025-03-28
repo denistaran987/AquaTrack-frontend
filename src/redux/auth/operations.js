@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 axios.defaults.baseURL = 'https://aquatrack-backend-1b8z.onrender.com';
 axios.defaults.withCredentials = true;
@@ -16,17 +16,16 @@ export const clearAuthHeader = () => {
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (userData, { rejectWithValue }) => {
-    const { t } = useTranslation();
     try {
       const response = await axios.post('/auth/signup', userData);
       return response.data.data;
     } catch (error) {
       if (!error.response) {
-        return rejectWithValue(t('validation.network_error'));
+        return rejectWithValue('Network error. Please check your connection.');
       }
 
       const status = error.response.status;
-      const message = error.response.data?.message || t('validation.error_login');
+      const message = error.response.data?.message || i18n.t('validation.error_signup');
 
       return rejectWithValue({ status, message });
     }
@@ -36,17 +35,16 @@ export const registerUser = createAsyncThunk(
 export const signInUser = createAsyncThunk(
   'auth/signInUser',
   async (userData, { rejectWithValue }) => {
-    const { t } = useTranslation();
     try {
       const response = await axios.post('/auth/signin', userData, { withCredentials: true });
       return response.data;
     } catch (error) {
       if (!error.response) {
-        return rejectWithValue(t('validation.network_error'));
+        return rejectWithValue('Network error. Please check your connection.');
       }
 
       const status = error.response.status;
-      const message = error.response.data?.message || t('validation.error_login');
+      const message = error.response.data?.message || i18n.t('validation. error_signin:');
 
       return rejectWithValue({ status, message });
     }
@@ -69,8 +67,7 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
   const persistedToken = state.auth.token;
 
   if (!persistedToken) {
-    const { t } = useTranslation();
-    return thunkAPI.rejectWithValue(t('validation.unable_fetch_user'));
+    return thunkAPI.rejectWithValue('Unable to fetch user');
   }
 
   try {
@@ -94,12 +91,11 @@ export const getTotalUsers = createAsyncThunk('auth/getLTotalUsers', async (_, t
 export const sendResetEmail = createAsyncThunk(
   'auth/sendResetEmail',
   async (email, { rejectWithValue }) => {
-    const { t } = useTranslation();
     try {
       const response = await axios.post('/auth/send-reset-email', { email });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || t('validation.reset_email'));
+      return rejectWithValue(error.response?.data?.message || i18n.t('validation.error_reset_email'));
     }
   }
 );
@@ -107,12 +103,11 @@ export const sendResetEmail = createAsyncThunk(
 export const resetPassword = createAsyncThunk(
   'auth/resetPassword',
   async ({ token, password }, { rejectWithValue }) => {
-    const { t } = useTranslation();
     try {
       const response = await axios.post('/auth/reset-pwd', { token, password });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || t('validation.reset_password'));
+      return rejectWithValue(error.response?.data?.message || i18n.t('validation.error_reset_password'));
     }
   }
 );
@@ -124,7 +119,7 @@ export const signInWithGoogle = createAsyncThunk(
       const response = await axios.post('auth/confirm-oauth', { code });
       return response.data.data.accessToken;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to send URL');
+      return rejectWithValue(error.response?.data?.message || i18n.t('validation.error_signIn_with_google'));
     }
   }
 );

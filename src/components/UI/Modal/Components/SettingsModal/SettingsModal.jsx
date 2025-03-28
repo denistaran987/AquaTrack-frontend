@@ -20,9 +20,11 @@ import { toggleModal } from '../../../../../redux/modal/slice';
 import toast from 'react-hot-toast';
 import { ClipLoader } from 'react-spinners';
 import { setDailySportTime, setGender, setWeight } from '../../../../../redux/user/slice';
+import { useTranslation } from 'react-i18next';
 
 const SettingsModal = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const successStyle = { backgroundColor: '#9be1a0', fontWeight: 'medium' };
   const errorStyle = { backgroundColor: '#FFCCCC', fontWeight: 'medium' };
@@ -67,11 +69,17 @@ const SettingsModal = () => {
   const waterIntakeId = useId();
 
   const SettingSchema = Yup.object().shape({
-    name: Yup.string().max(20).required('Required'),
-    email: Yup.string().email('Invalid email').required('Required'),
-    weight: Yup.number().min(0, 'Can not be negative').max(500, 'Weight must be realistic'),
-    dailySportTime: Yup.number().min(0, 'Can not be negative').max(24, 'Can not exceed 24 hours'),
-    dailyNorm: Yup.number().min(0.5, 'Must be at least 0.5 L').max(5, 'Can not be more than 5 L'),
+    name: Yup.string().max(20).required(t('validation.required')),
+    email: Yup.string().email(t('validation.valid_email')).required(t('validation.required')),
+    weight: Yup.number()
+      .min(0, t('validation.negative'))
+      .max(500, t('validation.weight_realistic')),
+    dailySportTime: Yup.number()
+      .min(0, t('validation.negative'))
+      .max(24, t('validation.max_hours')),
+    dailyNorm: Yup.number()
+      .min(0.5, t('validation.min_daily_norm'))
+      .max(5, t('validation.max_daily_norm')),
   });
 
   const handleSubmit = async values => {
@@ -91,7 +99,7 @@ const SettingsModal = () => {
       );
 
       await dispatch(updateUserInfo(filteredValues)).unwrap();
-      toast.success('Successfully updated!', {
+      toast.success(t('notifications.successfully_updated'), {
         style: successStyle,
         iconTheme: successIconTheme,
       });
@@ -113,7 +121,7 @@ const SettingsModal = () => {
 
       try {
         await dispatch(updateUserAvatar(formData)).unwrap();
-        toast.success('Successfully updated avatar!', {
+        toast.success(t('notifications.avatar'), {
           style: successStyle,
           iconTheme: successIconTheme,
         });
@@ -145,7 +153,7 @@ const SettingsModal = () => {
       {({ errors, touched, setFieldTouched, setFieldValue }) => (
         <Form className={css.modalBody}>
           <div className={css.avatarBlock}>
-            <h2 className={css.title}>Setting</h2>
+            <h2 className={css.title}>{t('common.setting')}</h2>
             <div className={css.avatarWrapper}>
               {isLoading ? (
                 <ClipLoader size={50} color="#9BE1A0" />
@@ -158,7 +166,7 @@ const SettingsModal = () => {
                 <svg className={css.uploadIcon}>
                   <use href="/images/icons.svg#icon-upload"></use>
                 </svg>
-                Upload a photo
+                {t('settingModal.photo')}
                 <Field
                   type="file"
                   className={css.uploadBtn}
@@ -172,7 +180,7 @@ const SettingsModal = () => {
           <div className={css.infoBlock}>
             <div className={css.leftBlock}>
               <div className={css.genderBlock}>
-                <p className={css.title}>Your gender identity</p>
+                <p className={css.title}>{t('settingModal.gender')}</p>
                 <div className={css.radioBtns}>
                   <label>
                     <Field
@@ -183,7 +191,7 @@ const SettingsModal = () => {
                       onChange={e => handleGenderChange(e, setFieldValue)}
                     />
                     <span className={css.customRadio}></span>
-                    Woman
+                    {t('settingModal.woman')}
                   </label>
                   <label>
                     <Field
@@ -194,14 +202,14 @@ const SettingsModal = () => {
                       onChange={e => handleGenderChange(e, setFieldValue)}
                     />
                     <span className={css.customRadio}></span>
-                    Man
+                    {t('settingModal.man')}
                   </label>
                 </div>
               </div>
               <div className={css.inputBlock}>
                 <div className={css.block}>
                   <label htmlFor={nameId} className={css.title}>
-                    Your name
+                    {t('settingModal.name')}
                   </label>
                   <Field
                     type="text"
@@ -214,7 +222,7 @@ const SettingsModal = () => {
                 </div>
                 <div className={css.block}>
                   <label htmlFor={emailId} className={css.title}>
-                    Email
+                    {t('settingModal.email')}
                   </label>
                   <Field
                     type="text"
@@ -227,37 +235,35 @@ const SettingsModal = () => {
                 </div>
               </div>
               <div className={css.normaBlock}>
-                <p className={css.title}>My daily norma</p>
+                <p className={css.title}>{t('settingModal.daily_norma')}</p>
                 <div className={css.formulaBlock}>
                   <div className={css.formulaWrapper}>
-                    <p>For woman:</p>
+                    <p>{t('settingModal.for_woman')}</p>
                     <p className={css.formula}>V=(M*0,03) + (T*0,4)</p>
                   </div>
                   <div className={css.formulaWrapper}>
-                    <p>For man:</p>
+                    <p>{t('settingModal.for_woman')}</p>
                     <p className={css.formula}>V=(M*0,04) + (T*0,6)</p>
                   </div>
                 </div>
                 <div className={css.formulaInfo}>
                   <p className={css.text}>
-                    <span className={css.asterisk}>*</span> V is the volume of the water norm in
-                    liters per day, M is your body weight, T is the time of active sports, or
-                    another type of activity commensurate in terms of loads (in the absence of
-                    these, you must set 0)
+                    <span className={css.asterisk}>*</span>
+                    {t('settingModal.text')}
                   </p>
                 </div>
                 <p className={css.mainText}>
                   <svg className={css.icon}>
                     <use href="./images/icons.svg#icon-exclamation-mark"></use>
                   </svg>
-                  Active time in hours
+                  {t('settingModal.active_time')}
                 </p>
               </div>
             </div>
             <div className={css.rightBlock}>
               <div className={css.inputBlock}>
                 <div className={css.block}>
-                  <label htmlFor={weightId}>Your weight in kilograms:</label>
+                  <label htmlFor={weightId}>{t('settingModal.your_weight')}</label>
                   <Field
                     type="number"
                     name="weight"
@@ -271,7 +277,7 @@ const SettingsModal = () => {
                   <ErrorMessage className={css.errorMessage} name="weight" component="div" />
                 </div>
                 <div className={css.block}>
-                  <label htmlFor={timeId}>The time of active participation in sports:</label>
+                  <label htmlFor={timeId}>{t('settingModal.sport_time')}</label>
                   <Field
                     type="number"
                     name="dailySportTime"
@@ -292,13 +298,13 @@ const SettingsModal = () => {
               <div className={css.inputBlock}>
                 <div className={css.resultBlock}>
                   <p>
-                    The required amount of water in liters per day:{' '}
+                    {t('settingModal.recommend_water_intake')}{' '}
                     <span className={css.result}>{recommendedDailyUserNorm}</span>
                   </p>
                 </div>
                 <div className={css.block}>
                   <label htmlFor={waterIntakeId} className={css.title}>
-                    Write down how much water you will drink:
+                    {t('settingModal.how_much_will_drink')}
                   </label>
                   <Field type="number" name="dailyNorm" id={waterIntakeId} />
                   <ErrorMessage className={css.errorMessage} name="dailyNorm" component="div" />

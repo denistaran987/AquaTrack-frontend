@@ -16,17 +16,20 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { FcGoogle } from 'react-icons/fc';
 
-const SignInSchema = Yup.object().shape({
-  email: Yup.string().email('Enter a valid email').required('Required'),
-  password: Yup.string().min(6, 'Too short!').required('Required'),
-});
-
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const { t } = useTranslation();
+
+  const SignInSchema = Yup.object().shape({
+    email: Yup.string().email(t('validation.valid_email')).required(t('validation.required')),
+    password: Yup.string()
+      .min(6, t('validation.password_min'))
+      .max(20, t('validation.password_max'))
+      .required(t('validation.required')),
+  });
 
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev);
@@ -36,7 +39,8 @@ const SignInPage = () => {
     dispatch(signInUser(values))
       .unwrap()
       .then(() => {
-        toast.success(t(`notifications.welcome`), {
+        const username = values.email.split('@')[0];
+        toast.success(t(`notifications.welcome`, { email: username }), {
           style: { backgroundColor: '#9be1a0', fontWeight: 'medium' },
           iconTheme: { primary: 'white', secondary: 'black' },
         });
@@ -150,7 +154,7 @@ const SignInPage = () => {
         </Formik>
         <button type="button" onClick={handleGoogleLogin} className={styles.googlelink}>
           <FcGoogle />
-          Sign in with Google
+          {t('common.sing_up_google')}
         </button>
         <p className={styles.signupLink}>
           {t('signInForm.have_account')}{' '}

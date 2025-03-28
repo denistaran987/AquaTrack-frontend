@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import constans from '../../../../constans/constans';
+// import i18next from 'i18next';
 
 const LAST_MONTH_NUMBER = constans.LAST_MONTH_NUMBER;
 const FIRST_MONTH_NUMBER = constans.FIRST_MONTH_NUMBER;
@@ -39,7 +40,7 @@ const useGetPaginationData = () => {
     } else setMonthNumber(prev => prev - 1);
   }, [monthNumber]);
 
-  const monthsName = useMemo(()=>months[monthNumber],[monthNumber, months]);
+  const monthsName = useMemo(() => months[monthNumber], [monthNumber, months]);
 
   return [monthNumber, year, monthForvards, monthPrevios, monthsName];
 };

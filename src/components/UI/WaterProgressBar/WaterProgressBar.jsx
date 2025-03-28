@@ -3,10 +3,12 @@ import s from './WaterProgressBar.module.css';
 import { useSelector } from 'react-redux';
 import { selectTodayProgress } from '../../../redux/water/selectors';
 import { selectWaterNorm } from '../../../redux/user/selectors';
+import { useTranslation } from 'react-i18next';
 
 const WaterProgressBar = () => {
   const progress = useSelector(selectTodayProgress);
   const dailyNorm = useSelector(selectWaterNorm);
+  const { t } = useTranslation();
   const getProgressBarWidthCoefficient = () => {
     if (window.innerWidth >= 768) {
       return 2.55;
@@ -35,7 +37,7 @@ const WaterProgressBar = () => {
 
   return (
     <div className={s.progressBar}>
-      <h2 className={s.today}>Today</h2>
+      <h2 className={s.today}>{t('waterMAinInfo.today_norma')}</h2>
       <span
         className={s.activePercent}
         style={{

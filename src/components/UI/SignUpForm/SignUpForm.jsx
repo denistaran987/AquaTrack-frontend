@@ -15,20 +15,6 @@ import LanguageBtn from '../LanguageBtn/languageBtn';
 import axios from 'axios';
 import { FcGoogle } from 'react-icons/fc';
 
-const SignUpSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Invalid email')
-    .matches(
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      'Invalid email format. Example: userexample@mail.com'
-    )
-    .required('Required'),
-  password: Yup.string().min(6, 'Too short!').required('Required'),
-  repeatPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Required'),
-});
-
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState({
     password: false,
@@ -38,6 +24,20 @@ const SignUpPage = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const { t } = useTranslation();
+
+  const SignUpSchema = Yup.object().shape({
+    email: Yup.string()
+      .email(t('validation.valid_email'))
+      .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, t('validation.email_example'))
+      .required(t('validation.required')),
+    password: Yup.string()
+      .min(6, t('validation.password_min'))
+      .max(20, t('validation.password_max'))
+      .required(t('validation.required')),
+    repeatPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], t('validation.password_match'))
+      .required(t('validation.required')),
+  });
 
   const togglePasswordVisibility = field => {
     setShowPassword(prev => ({
@@ -53,7 +53,8 @@ const SignUpPage = () => {
     dispatch(registerUser(userData))
       .unwrap()
       .then(() => {
-        toast.success(`Registration successful! Welcome, User!`, {
+        const username = values.email.split('@')[0];
+        toast.success(t('notifications.register', { email: username }), {
           style: { backgroundColor: '#9be1a0', fontWeight: 'semibold' },
           iconTheme: { primary: 'white', secondary: 'black' },
         });
@@ -197,7 +198,7 @@ const SignUpPage = () => {
         </Formik>
         <button type="button" onClick={handleGoogleLogin} className={styles.googlelink}>
           <FcGoogle />
-          Sign in with Google
+          {t('common.sing_up_google')}
         </button>
         <p className={styles.signinLink}>
           {t('signUpForm.have_account')}

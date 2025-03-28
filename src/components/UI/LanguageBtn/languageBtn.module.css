@@ -1,5 +1,34 @@
 .language_wrapper {
+    position: absolute;
+    top: 24px;
+    right: 62px;
     display: flex;
-    gap: 5px;
-    max-width: 60px;
+}
+
+.btn {
+    height: fit-content;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-main);
+    background-color: transparent;
+    border: none;
+    transition: none;
+
+    &:disabled {
+        color: var(--color-currentDayBG);
+        background-color: var(--color-languageButtons);
+        border-radius: 8px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .language_wrapper {
+        top: 32px;
+        right: 94px;
+        gap: 5px;
+    }
+
+    .btn {
+        font-size: 16px;
+    }
 }

@@ -7,7 +7,7 @@ const LanguageBtn = () => {
   return (
     <div className={s.language_wrapper}>
       <button
-        disabled={i18next.language === LOCALS.UK}
+        // disabled={i18next.language === LOCALS.UK}
         className={s.btn}
         onClick={() => {
           onHandleChange(LOCALS.UK);
@@ -16,7 +16,7 @@ const LanguageBtn = () => {
         UA
       </button>
       <button
-        disabled={i18next.language === LOCALS.EN}
+        // disabled={i18next.language === LOCALS.EN}
         className={s.btn}
         onClick={() => {
           onHandleChange(LOCALS.EN);
