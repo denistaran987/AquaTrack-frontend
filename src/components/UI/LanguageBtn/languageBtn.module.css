@@ -1,7 +1,7 @@
 .language_wrapper {
     position: absolute;
     top: 24px;
-    right: 62px;
+    right: 85px;
     display: flex;
 }
 
@@ -13,6 +13,7 @@
     background-color: transparent;
     border: none;
     transition: none;
+
 
     &:disabled {
         color: var(--color-currentDayBG);
