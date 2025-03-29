@@ -91,8 +91,13 @@ export const en = {
             failed_reset_password: 'Failed to reset password',
             register: 'Registration successful! Welcome, {{email}}!',
             successfully_updated: 'Successfully updated!',
-            // check_fields: 'Please check all the fields',
             avatar: 'Successfully updated avatar!',
+
+            400: 'Bad request. Invalid input data.',
+            401: 'Unauthorized. Session not found.',
+            404: 'Resource not found.',
+            409: 'A contact with this email already exists.',
+            500: 'Something went wrong. Please try again later.',
         },
 
         signInForm: {
@@ -155,6 +160,11 @@ export const en = {
             sport_time: 'The time of active participation in sports',
             recommend_water_intake: 'Your recommended water intake per day',
             how_much_will_drink: 'Write down how much water you will drink',
+        },
+
+        CalendarPagination: {
+            month: 'Month',
+            statistics: 'Statistic',
         },
 
         months: {
