@@ -313,7 +313,7 @@ const SettingsModal = () => {
             </div>
           </div>
           <button type="submit" className={css.saveBtn}>
-            Save
+            {t('common.save')}
           </button>
         </Form>
       )}

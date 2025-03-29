@@ -71,7 +71,7 @@ export const en = {
         },
 
         notifications: {
-            hello: 'Привіт',
+            hello: 'Hello',
             user_name: 'User',
             welcome: 'Welcome, {{email}}!',
             email_placeholder: 'Enter your email',
@@ -92,6 +92,8 @@ export const en = {
             register: 'Registration successful! Welcome, {{email}}!',
             successfully_updated: 'Successfully updated!',
             avatar: 'Successfully updated avatar!',
+            water_error: 'Failed to fetch water intake data. Please try again.',
+            water_success: 'Water intake data successfully retrieved!',
 
             400: 'Bad request. Invalid input data.',
             401: 'Unauthorized. Session not found.',
@@ -112,7 +114,7 @@ export const en = {
         },
 
         waterUserInfo: {
-            ml: 'мл',
+            ml: 'ml',
             list: 'Your list is empty',
             text: 'Hydration is important! Add your first entry and stay healthy.',
         },

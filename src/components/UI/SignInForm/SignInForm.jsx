@@ -50,11 +50,11 @@ const SignInPage = () => {
       })
       .catch(error => {
         const errorMessages = {
-          400: 'Bad request. Invalid input data.',
-          401: 'Unauthorized. Session not found.',
-          404: 'User not found.',
-          409: 'A contact with this email already exists.',
-          500: 'Something went wrong. Please try again later.',
+          400: t('notifications.400'),
+          401: t('notifications.401'),
+          404: t('notifications.404'),
+          409: t('notifications.409'),
+          500: t('notifications.500'),
         };
 
         const message = errorMessages[error?.status] || t('validation.unknow');

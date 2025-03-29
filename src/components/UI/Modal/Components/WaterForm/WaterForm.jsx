@@ -13,16 +13,6 @@ import {
 } from '../../../../../redux/water/selectors.js';
 import { useTranslation } from 'react-i18next';
 
-// const validationSchema = Yup.object({
-//   date: Yup.string()
-//     .matches(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Time must be in HH:mm format (00:00 - 23:59)')
-//     .required('Incorrect time'),
-//   amount: Yup.number()
-//     .min(50, 'Min Value - 50 ml')
-//     .max(1500, 'Max value - 1500 ml')
-//     .required('This field is required'),
-// });
-
 const WaterForm = ({ type, initialData }) => {
   const WaterId = useSelector(selectWaterId);
   const waterItem = useSelector(state => selectWaterItemInfo(state, WaterId));
@@ -92,7 +82,7 @@ const WaterForm = ({ type, initialData }) => {
           dispatch(toggleModal());
         })
         .catch(() => {
-          toast.error(t('notificationswrong_update'), {
+          toast.error(t('notifications.wrong_update'), {
             style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' },
           });
         });

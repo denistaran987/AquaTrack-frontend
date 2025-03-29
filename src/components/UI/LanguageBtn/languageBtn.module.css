@@ -1,7 +1,7 @@
 .language_wrapper {
     position: absolute;
     top: 24px;
-    right: 85px;
+    right: 62px;
     display: flex;
 }
 
@@ -23,7 +23,7 @@
 }
 
 @media screen and (min-width: 768px) {
-    .language_buttons_wrapper {
+    .language_wrapper {
         top: 32px;
         right: 94px;
         gap: 5px;
