@@ -7,7 +7,7 @@
   align-items: flex-start;
   justify-content: center;
   height: 54px;
-  width: 102px;
+  width: 106px;
   padding: 12px;
   background-color: var(--color-bottle);
   border-radius: 15px;
@@ -31,7 +31,7 @@
 @media (min-width: 768px) {
   .waterDailyNorma {
     height: 78px;
-    width: 129px;
+    width: 135px;
     top: 157px;
     left: 32px;
     padding: 14px 18px;

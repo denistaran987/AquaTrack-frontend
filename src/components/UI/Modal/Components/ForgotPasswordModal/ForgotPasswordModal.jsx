@@ -22,11 +22,16 @@ const ForgotPasswordModal = () => {
     setIsSubmitting(true);
     try {
       await dispatch(sendResetEmail(values.email)).unwrap();
-      toast.success(t('notifications.reset_link'));
+      toast.success(t('notifications.reset_link'), {
+        style: { backgroundColor: '#9be1a0', fontWeight: 'medium' },
+        iconTheme: { primary: 'white', secondary: 'black' },
+      });
       resetForm();
       dispatch(toggleModal());
     } catch (error) {
-      toast.error(error.message || t('notifications.failed_reset_link'));
+      toast.error(error.message || t('notifications.failed_reset_link'), {
+        style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' },
+      });
     } finally {
       setIsSubmitting(false);
     }

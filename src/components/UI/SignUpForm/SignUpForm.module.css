@@ -302,6 +302,14 @@ a.signinLinkText {
     font-size: 16px;
     line-height: 24px;
   }
+
+  button.signupBtn {
+    font-size: 16px;
+  }
+
+  .googlelink {
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 1440px) {

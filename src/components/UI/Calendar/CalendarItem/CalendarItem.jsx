@@ -37,7 +37,7 @@ const CalendarItem = ({ day, totalDayWater, isCurrentDate, token, date, isFuture
         });
       })
       .catch(() => {
-        toast.error('Failed to fetch water intake data. Please try again.', {
+        toast.error(t('notifications.get_data_day'), {
           style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' },
         });
       });

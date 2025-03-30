@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from 'react';
-import constans from '../../../../constans/constans';
+import constants from '../../../../constants/constants';
 import { useTranslation } from 'react-i18next';
 
-const LAST_MONTH_NUMBER = constans.LAST_MONTH_NUMBER;
-const FIRST_MONTH_NUMBER = constans.FIRST_MONTH_NUMBER;
+const LAST_MONTH_NUMBER = constants.LAST_MONTH_NUMBER;
+const FIRST_MONTH_NUMBER = constants.FIRST_MONTH_NUMBER;
 
 const useGetPaginationData = () => {
   const { t } = useTranslation();

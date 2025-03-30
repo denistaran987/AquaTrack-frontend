@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setAuthHeader } from '../auth/operations';
+import i18next from 'i18next';
 
 export const fetchUserInfo = createAsyncThunk('user/fetchUserInfo', async (token, thunkAPI) => {
   if (!token) {
@@ -23,6 +24,9 @@ export const updateUserInfo = createAsyncThunk(
       const response = await axios.patch('/users', formData);
       return response.data.data;
     } catch (error) {
+      if (!error.response) {
+        return thunkAPI.rejectWithValue(i18next.t('notifications.500'));
+      }
       return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
     }
   }
@@ -39,6 +43,9 @@ export const updateUserAvatar = createAsyncThunk(
       });
       return response.data.data;
     } catch (error) {
+      if (!error.response) {
+        return thunkAPI.rejectWithValue(i18next.t('notifications.500'));
+      }
       return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
     }
   }

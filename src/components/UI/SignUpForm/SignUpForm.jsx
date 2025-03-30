@@ -71,19 +71,23 @@ const SignUpPage = () => {
       .catch(error => {
         const errorMessages = {
           400: t('notifications.400'),
-          401: t('notifications.401'),
-          404: t('notifications.404'),
           409: t('notifications.409'),
           500: t('notifications.500'),
         };
 
         if (typeof error === 'string') {
-          toast.error(error);
+          toast.error(error, {
+            style: { backgroundColor: '#FFCCCC', fontWeight: 'semibold' },
+            iconTheme: {
+              primary: 'white',
+              secondary: 'red',
+            },
+          });
           return;
         }
 
         const status = error?.status;
-        const message = errorMessages[status] || t('validation.unknow');
+        const message = errorMessages[status] || t('validation.unknown');
 
         toast.error(message, {
           style: { backgroundColor: '#FFCCCC', fontWeight: 'semibold' },

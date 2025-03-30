@@ -98,7 +98,7 @@ const WaterForm = ({ type, initialData }) => {
     >
       {({ setFieldValue, values }) => (
         <Form>
-          <label>
+          <label className={styles.label}>
             <p className={styles.p}>{t('waterModal.water_amount')}</p>
             <div className={styles.inputContainer}>
               <button

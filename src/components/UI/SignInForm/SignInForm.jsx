@@ -53,11 +53,21 @@ const SignInPage = () => {
           400: t('notifications.400'),
           401: t('notifications.401'),
           404: t('notifications.404'),
-          409: t('notifications.409'),
           500: t('notifications.500'),
         };
 
-        const message = errorMessages[error?.status] || t('validation.unknow');
+        if (typeof error === 'string') {
+          toast.error(error, {
+            style: { backgroundColor: '#FFCCCC', fontWeight: 'semibold' },
+            iconTheme: {
+              primary: 'white',
+              secondary: 'red',
+            },
+          });
+          return;
+        }
+
+        const message = errorMessages[error?.status] || t('validation.unknown');
         toast.error(message, { style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' } });
       });
   };

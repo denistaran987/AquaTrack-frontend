@@ -94,7 +94,8 @@ const SettingsModal = () => {
       /* eslint-disable no-unused-vars */
       const filteredValues = Object.fromEntries(
         Object.entries(updatedValues).filter(
-          ([_, value]) => value !== '' && value !== 0 && value !== null && value !== undefined
+          ([_, value]) =>
+            value !== '' && value !== ' ' && value !== 0 && value !== null && value !== undefined
         )
       );
 
@@ -105,7 +106,7 @@ const SettingsModal = () => {
       });
       dispatch(toggleModal());
     } catch (error) {
-      toast.error(`${error}: Please check all the fields!`, {
+      toast.error(error, {
         style: errorStyle,
         iconTheme: errorIconTheme,
       });
@@ -126,7 +127,7 @@ const SettingsModal = () => {
           iconTheme: successIconTheme,
         });
       } catch (error) {
-        toast.error(`${error}: Failed to update avatar`, {
+        toast.error(error, {
           style: errorStyle,
           iconTheme: errorIconTheme,
         });
