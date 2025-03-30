@@ -1,10 +1,13 @@
 import React from 'react';
 import WaterForm from '../WaterForm/WaterForm.jsx';
 import styles from './WaterModal.module.css';
+import i18n from 'i18next';
 
 const WaterModal = ({ type, initialData }) => {
-  const title = type === 'add' ? 'Add water' : 'Edit the entered amount of water';
-  const subtitle = type === 'add' ? 'Choose a value' : 'Correct entered data:';
+  const title =
+    type === 'add' ? i18n.t('common.add_water') : i18n.t('waterModal.edit_entered_amount');
+  const subtitle =
+    type === 'add' ? i18n.t('waterModal.entered_data') : i18n.t('waterModal.choose_value');
 
   return (
     <div className={`${styles.waterModal}`}>

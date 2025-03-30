@@ -26,7 +26,8 @@
 }
 
 .link {
-  display: inline-block;
+  /* display: inline-block; */
+  max-width: 100%;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.28571;
@@ -37,7 +38,7 @@
 }
 
 .first {
-  width: 116px;
+  width: 130px;
   padding: 14px 19px;
   background-color: var(--color-accent);
   color: var(--color-currentDayBG);

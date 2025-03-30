@@ -15,11 +15,13 @@
   @media screen and (min-width: 375px) {
     width: 343px;
   }
+
   @media screen and (min-width: 768px) {
     padding: 40px 16px 40px 40px;
     width: 648px;
     font-size: 16px;
   }
+
   @media screen and (min-width: 1400px) {
     width: 920px;
   }
@@ -30,6 +32,7 @@
   border-radius: 15px;
   padding: 14px;
   background-color: var(--color-settingsInput);
+
   @media screen and (min-width: 768px) {
     padding: 16px;
   }
@@ -44,6 +47,7 @@ p {
 .avatarBlock .title {
   margin-bottom: 20px;
   font-size: 20px;
+
   @media screen and (min-width: 768px) {
     font-size: 28px;
   }
@@ -66,6 +70,7 @@ p {
   height: 75px;
   border-radius: 50%;
   overflow: hidden;
+
   @media screen and (min-width: 768px) {
     width: 100px;
     height: 100px;
@@ -128,6 +133,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 24px;
+
   @media screen and (min-width: 1400px) {
     padding-right: 16px;
     flex-wrap: wrap;
@@ -138,6 +144,7 @@ p {
 
 .infoBlock::-webkit-scrollbar {
   width: 6px;
+
   @media screen and (min-width: 768px) {
     width: 8px;
   }
@@ -153,6 +160,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 24px;
+
   @media screen and (min-width: 1400px) {
     width: 400px;
   }
@@ -223,7 +231,7 @@ p {
   transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.radioBtns input:checked + .customRadio::before {
+.radioBtns input:checked+.customRadio::before {
   background-color: var(--color-accent);
   transform: translate(-50%, -50%) scale(1);
 }
@@ -264,6 +272,7 @@ p {
 .normaBlock .icon {
   height: 18px;
   width: 18px;
+
   @media screen and (min-width: 768px) {
     width: 22px;
     height: 22px;
@@ -282,6 +291,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 12px;
+
   @media screen and (min-width: 768px) {
     flex-direction: row;
     gap: 28px;
@@ -300,6 +310,7 @@ p {
   line-height: 1.5;
   letter-spacing: -0.01em;
   color: #9be1a0;
+
   @media screen and (min-width: 768px) {
     font-size: 16px;
   }
@@ -325,6 +336,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 5px;
+
   @media screen and (min-width: 768px) {
     flex-direction: row;
   }
@@ -339,7 +351,7 @@ p {
 .saveBtn {
   border: none;
   border-radius: 30px;
-  padding: 14px 40px;
+  padding: 14px 24px;
   width: 116px;
   height: 46px;
   background-color: var(--color-accent);
@@ -349,8 +361,9 @@ p {
   text-align: center;
   color: var(--color-bcgButton);
   cursor: pointer;
+
   @media screen and (min-width: 768px) {
-    padding: 16px 50px;
+    padding: 16px 30px;
     width: 141px;
     height: 56px;
   }
