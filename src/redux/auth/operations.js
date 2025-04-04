@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import i18next from 'i18next';
+import i18n from 'i18next';
 
 axios.defaults.baseURL = 'https://aquatrack-backend-1b8z.onrender.com';
 axios.defaults.withCredentials = true;
@@ -20,11 +22,11 @@ export const registerUser = createAsyncThunk(
       return response.data.data;
     } catch (error) {
       if (!error.response) {
-        return rejectWithValue('Network error. Please check your connection.');
+        return rejectWithValue(i18next.t('notifications.500'));
       }
 
       const status = error.response.status;
-      const message = error.response.data?.message || 'An error occurred during login';
+      const message = error.response.data?.message || i18n.t('validation.error_signup');
 
       return rejectWithValue({ status, message });
     }
@@ -39,11 +41,11 @@ export const signInUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (!error.response) {
-        return rejectWithValue('Network error. Please check your connection.');
+        return rejectWithValue(i18next.t('notifications.500'));
       }
 
       const status = error.response.status;
-      const message = error.response.data?.message || 'An error occurred during login';
+      const message = error.response.data?.message || i18n.t('validation.error_signin');
 
       return rejectWithValue({ status, message });
     }
@@ -94,7 +96,9 @@ export const sendResetEmail = createAsyncThunk(
       const response = await axios.post('/auth/send-reset-email', { email });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to send reset email');
+      return rejectWithValue(
+        error.response?.data?.message || i18n.t('validation.error_reset_email')
+      );
     }
   }
 );
@@ -106,7 +110,23 @@ export const resetPassword = createAsyncThunk(
       const response = await axios.post('/auth/reset-pwd', { token, password });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to reset password');
+      return rejectWithValue(
+        error.response?.data?.message || i18n.t('validation.error_reset_password')
+      );
+    }
+  }
+);
+
+export const signInWithGoogle = createAsyncThunk(
+  'auth/signInWithGoogle',
+  async (code, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('auth/confirm-oauth', { code });
+      return response.data.data.accessToken;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || i18n.t('validation.error_signIn_with_google')
+      );
     }
   }
 );

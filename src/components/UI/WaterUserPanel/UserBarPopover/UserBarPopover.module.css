@@ -27,7 +27,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-
+  min-width: 78px;
   font-weight: 700;
   font-size: 14px;
   line-height: 129%;
@@ -42,15 +42,15 @@
 }
 
 .item-logout {
-  color: rgba(50, 63, 71, 0.4);
-  stroke: rgba(50, 63, 71, 0.4);
+  color: var(--color-logout);
+  stroke: var(--color-logout);
   fill: none;
   transition-duration: 0.3s;
 }
 
 .item-logout:hover {
-  stroke: var(--color-main);
-  color: var(--color-main);
+  stroke: var(--color-logout-hover);
+  color: var(--color-logout-hover);
 }
 
 svg use {

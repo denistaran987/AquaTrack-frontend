@@ -11,16 +11,7 @@ import {
   selectWaterId,
   selectWaterItemInfo,
 } from '../../../../../redux/water/selectors.js';
-
-const validationSchema = Yup.object({
-  date: Yup.string()
-    .matches(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Time must be in HH:mm format (00:00 - 23:59)')
-    .required('Incorrect time'),
-  amount: Yup.number()
-    .min(50, 'Min Value - 50 ml')
-    .max(1500, 'Max value - 1500 ml')
-    .required('This field is required'),
-});
+import { useTranslation } from 'react-i18next';
 
 const WaterForm = ({ type, initialData }) => {
   const WaterId = useSelector(selectWaterId);
@@ -28,6 +19,17 @@ const WaterForm = ({ type, initialData }) => {
   const currentDate = useSelector(selectWaterCurrentDate);
   const dispatch = useDispatch();
   const [currentTime, setCurrentTime] = useState('');
+  const { t } = useTranslation();
+
+  const validationSchema = Yup.object({
+    date: Yup.string()
+      .matches(/^([01]\d|2[0-3]):([0-5]\d)$/, t('validation.wrong_time'))
+      .required(t('validation.incorrect_time')),
+    amount: Yup.number()
+      .min(50, t('validation.min_value_ml', { value: 50 }))
+      .max(1500, t('validation.max_value_ml', { value: 1500 }))
+      .required(t('validation.required')),
+  });
 
   useEffect(() => {
     const now = new Date();
@@ -56,14 +58,14 @@ const WaterForm = ({ type, initialData }) => {
       dispatch(addWaterEntry(payload))
         .unwrap()
         .then(() => {
-          toast.success(`Successfully added water record!`, {
+          toast.success(t('notifications.water_added'), {
             style: { backgroundColor: '#9be1a0', fontWeight: 'medium' },
             iconTheme: { primary: 'white', secondary: 'black' },
           });
           dispatch(toggleModal());
         })
         .catch(() => {
-          toast.error('Sorry something went wrong', {
+          toast.error(t('notifications.wrong_message'), {
             style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' },
           });
         });
@@ -73,14 +75,14 @@ const WaterForm = ({ type, initialData }) => {
       dispatch(editWaterEntry({ entryId: WaterId, entryData: payload }))
         .unwrap()
         .then(() => {
-          toast.success(`Your entry has been successfully updated!`, {
+          toast.success(t('notifications.water_updated'), {
             style: { backgroundColor: '#9be1a0', fontWeight: 'medium' },
             iconTheme: { primary: 'white', secondary: 'black' },
           });
           dispatch(toggleModal());
         })
         .catch(() => {
-          toast.error('Oops! Something went wrong while updating.', {
+          toast.error(t('notifications.wrong_update'), {
             style: { backgroundColor: '#FFCCCC', fontWeight: 'medium' },
           });
         });
@@ -96,8 +98,8 @@ const WaterForm = ({ type, initialData }) => {
     >
       {({ setFieldValue, values }) => (
         <Form>
-          <label>
-            <p className={styles.p}>Amount of water:</p>
+          <label className={styles.label}>
+            <p className={styles.p}>{t('waterModal.water_amount')}</p>
             <div className={styles.inputContainer}>
               <button
                 type="button"
@@ -111,7 +113,9 @@ const WaterForm = ({ type, initialData }) => {
                   <use href="/images/icons.svg#icon-minus-circle" />
                 </svg>
               </button>
-              <span className={styles.fixedValue}>{values.amount} ml</span>
+              <span className={styles.fixedValue}>
+                {values.amount} {t('waterUserInfo.ml')}
+              </span>
               <button
                 type="button"
                 onClick={() => {
@@ -127,12 +131,12 @@ const WaterForm = ({ type, initialData }) => {
             </div>
           </label>
           <label>
-            <p className={styles.p}>Recording time:</p>
+            <p className={styles.p}>{t('waterModal.record_time')}</p>
             <Field type="text" name="date" className={styles.inputlight1} />
             <ErrorMessage name="date" component="div" className={styles.error} />
           </label>
           <label>
-            <h3>Enter the value of the water used:</h3>
+            <h3>{t('waterModal.enter_water_value')}</h3>
             <Field
               type="number"
               name="amount"
@@ -155,7 +159,7 @@ const WaterForm = ({ type, initialData }) => {
           </label>
 
           <button type="submit" className={styles.saveButton}>
-            Save
+            {t('common.save')}
           </button>
         </Form>
       )}

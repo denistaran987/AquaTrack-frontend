@@ -59,7 +59,7 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   text-align: center;
-  color: var(--color-main);
+  color: var(--color-currentDayBG);
   transition: background-color 0.3s ease;
 }
 
@@ -87,16 +87,16 @@
   line-height: 1.29;
   letter-spacing: -0.01em;
   text-align: center;
-  color: rgba(50, 63, 71, 0.3);
+  color: var(--color-cancelBtnClr);
   transition: color 0.3s ease;
 }
 
 .cancelBtn:hover {
-  color: var(--color-main);
+  color: var(--color-cancelBtnHoverClr);
 }
 
 .cancelBtn:focus {
-  color: var(--color-main);
+  color: var(--color-cancelBtnHoverClr);
 }
 
 @media (min-width: 375px) {

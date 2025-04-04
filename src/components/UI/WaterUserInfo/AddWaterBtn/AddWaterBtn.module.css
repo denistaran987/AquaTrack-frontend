@@ -21,13 +21,13 @@
   transition: 0.2s;
 }
 .svg {
-  stroke: var(--color-main);
+  stroke: var(--color-addButton-icon);
   transition: 0.2s;
 }
 
 .button:hover {
   .svgWrapper {
-    background-color: var(--color-main);
+    background-color: var(--color-addButton-icon-hover);
   }
   .svg {
     stroke: var(--color-light);

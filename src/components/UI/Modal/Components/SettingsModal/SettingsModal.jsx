@@ -5,15 +5,26 @@ import css from './SettingsModal.module.css';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { updateUserInfo, updateUserAvatar } from '../../../../../redux/user/operations';
 import {
+  selectDailyNorm,
   selectUserAvatarUrl,
+  selectUserDailyNorm,
+  selectUserDailySportTime,
+  selectUserEmail,
   selectUserGender,
   selectUserId,
+  selectUserIsLoading,
+  selectUserName,
+  selectUserWeight,
 } from '../../../../../redux/user/selectors';
 import { toggleModal } from '../../../../../redux/modal/slice';
 import toast from 'react-hot-toast';
+import { ClipLoader } from 'react-spinners';
+import { setDailySportTime, setGender, setWeight } from '../../../../../redux/user/slice';
+import { useTranslation } from 'react-i18next';
 
 const SettingsModal = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const successStyle = { backgroundColor: '#9be1a0', fontWeight: 'medium' };
   const errorStyle = { backgroundColor: '#FFCCCC', fontWeight: 'medium' };
@@ -22,7 +33,34 @@ const SettingsModal = () => {
 
   const userId = useSelector(selectUserId);
   const userAvatar = useSelector(selectUserAvatarUrl);
+  const userName = useSelector(selectUserName);
+  const userEmail = useSelector(selectUserEmail);
+  const userWeight = useSelector(selectUserWeight);
+  const userDailySportTime = useSelector(selectUserDailySportTime);
   const userGender = useSelector(selectUserGender);
+  const userDailyNorm = useSelector(selectUserDailyNorm);
+  const isLoading = useSelector(selectUserIsLoading);
+  const recommendedDailyUserNorm = useSelector(selectDailyNorm);
+
+  const handleChangeWeight = (e, setFieldValue) => {
+    const value = e.target.value === '' ? '' : +e.target.value;
+    setFieldValue('weight', value);
+    console.log(value);
+    dispatch(setWeight(value));
+  };
+
+  const handleChangeDailySportTime = (e, setFieldValue) => {
+    const value = e.target.value === '' ? '' : +e.target.value;
+    setFieldValue('dailySportTime', value);
+    console.log(value);
+    dispatch(setDailySportTime(value));
+  };
+
+  const handleGenderChange = (e, setFieldValue) => {
+    const value = e.target.value;
+    setFieldValue('gender', value);
+    dispatch(setGender(value));
+  };
 
   const nameId = useId();
   const emailId = useId();
@@ -31,40 +69,44 @@ const SettingsModal = () => {
   const waterIntakeId = useId();
 
   const SettingSchema = Yup.object().shape({
-    name: Yup.string().max(10),
-    email: Yup.string().email('Invalid email'),
-    weight: Yup.number().max(500, 'Weight must be realistic'),
-    dailySportTime: Yup.number().min(0, 'Can not be negative').max(24, 'Can not exceed 24 hours'),
-    dailyNorm: Yup.number().min(0, 'Can not be negative').max(5000, 'Can not be more than 5000'),
+    name: Yup.string().max(20).required(t('validation.required')),
+    email: Yup.string().email(t('validation.valid_email')).required(t('validation.required')),
+    weight: Yup.number()
+      .min(0, t('validation.negative'))
+      .max(500, t('validation.weight_realistic')),
+    dailySportTime: Yup.number()
+      .min(0, t('validation.negative'))
+      .max(24, t('validation.max_hours')),
+    dailyNorm: Yup.number()
+      .min(0.5, t('validation.min_daily_norm'))
+      .max(5, t('validation.max_daily_norm')),
   });
 
   const handleSubmit = async values => {
     try {
-      const { avatar: _avatar, ...valuesToSend } = values;
+      const { avatar: _avatar, dailyNorm, ...valuesToSend } = values;
+
+      const updatedValues = {
+        ...valuesToSend,
+        dailyNorm: dailyNorm * 1000,
+      };
 
       /* eslint-disable no-unused-vars */
       const filteredValues = Object.fromEntries(
-        Object.entries(valuesToSend).filter(
-          ([_, value]) => value !== '' && value !== null && value !== undefined
+        Object.entries(updatedValues).filter(
+          ([_, value]) =>
+            value !== '' && value !== ' ' && value !== 0 && value !== null && value !== undefined
         )
       );
 
-      if (Object.keys(filteredValues).length === 1) {
-        toast.error('No changes detected. Please fill in at least one field.', {
-          style: errorStyle,
-          iconTheme: errorIconTheme,
-        });
-        return;
-      }
-
       await dispatch(updateUserInfo(filteredValues)).unwrap();
-      toast.success('Successfully updated!', {
+      toast.success(t('notifications.successfully_updated'), {
         style: successStyle,
         iconTheme: successIconTheme,
       });
       dispatch(toggleModal());
     } catch (error) {
-      toast.error(`${error}: Please check all the fields!`, {
+      toast.error(error, {
         style: errorStyle,
         iconTheme: errorIconTheme,
       });
@@ -80,12 +122,12 @@ const SettingsModal = () => {
 
       try {
         await dispatch(updateUserAvatar(formData)).unwrap();
-        toast.success('Successfully updated avatar!', {
+        toast.success(t('notifications.avatar'), {
           style: successStyle,
           iconTheme: successIconTheme,
         });
       } catch (error) {
-        toast.error(`${error}: Failed to update avatar`, {
+        toast.error(error, {
           style: errorStyle,
           iconTheme: errorIconTheme,
         });
@@ -96,32 +138,36 @@ const SettingsModal = () => {
   return (
     <Formik
       initialValues={{
-        name: '',
-        email: '',
-        weight: '',
-        dailySportTime: '',
+        name: userName,
+        email: userEmail,
+        weight: userWeight,
+        dailySportTime: userDailySportTime,
         avatar: '',
         gender: userGender,
-        dailyNorm: '',
+        dailyNorm: userDailyNorm / 1000,
       }}
       validationSchema={SettingSchema}
       onSubmit={handleSubmit}
       validateOnBlur={false}
       validateOnChange={false}
     >
-      {({ errors, touched, setFieldTouched }) => (
+      {({ errors, touched, setFieldTouched, setFieldValue }) => (
         <Form className={css.modalBody}>
           <div className={css.avatarBlock}>
-            <h2 className={css.title}>Setting</h2>
+            <h2 className={css.title}>{t('common.setting')}</h2>
             <div className={css.avatarWrapper}>
-              <img src={userAvatar} alt="avatar" />
+              {isLoading ? (
+                <ClipLoader size={50} color="#9BE1A0" />
+              ) : (
+                <img src={userAvatar} alt="avatar" />
+              )}
             </div>
             <div className={css.uploadWrapper}>
               <label className={css.uploadLabel}>
                 <svg className={css.uploadIcon}>
                   <use href="/images/icons.svg#icon-upload"></use>
                 </svg>
-                Upload a photo
+                {t('settingModal.photo')}
                 <Field
                   type="file"
                   className={css.uploadBtn}
@@ -135,24 +181,36 @@ const SettingsModal = () => {
           <div className={css.infoBlock}>
             <div className={css.leftBlock}>
               <div className={css.genderBlock}>
-                <p className={css.title}>Your gender identity</p>
+                <p className={css.title}>{t('settingModal.gender')}</p>
                 <div className={css.radioBtns}>
                   <label>
-                    <Field type="radio" name="gender" value="female" />
+                    <Field
+                      type="radio"
+                      name="gender"
+                      value="female"
+                      checked={userGender === 'female'}
+                      onChange={e => handleGenderChange(e, setFieldValue)}
+                    />
                     <span className={css.customRadio}></span>
-                    Woman
+                    {t('settingModal.woman')}
                   </label>
                   <label>
-                    <Field type="radio" name="gender" value="male" />
+                    <Field
+                      type="radio"
+                      name="gender"
+                      value="male"
+                      checked={userGender === 'male'}
+                      onChange={e => handleGenderChange(e, setFieldValue)}
+                    />
                     <span className={css.customRadio}></span>
-                    Man
+                    {t('settingModal.man')}
                   </label>
                 </div>
               </div>
               <div className={css.inputBlock}>
                 <div className={css.block}>
                   <label htmlFor={nameId} className={css.title}>
-                    Your name
+                    {t('settingModal.name')}
                   </label>
                   <Field
                     type="text"
@@ -165,7 +223,7 @@ const SettingsModal = () => {
                 </div>
                 <div className={css.block}>
                   <label htmlFor={emailId} className={css.title}>
-                    Email
+                    {t('settingModal.email')}
                   </label>
                   <Field
                     type="text"
@@ -178,54 +236,58 @@ const SettingsModal = () => {
                 </div>
               </div>
               <div className={css.normaBlock}>
-                <p className={css.title}>My daily norma</p>
+                <p className={css.title}>{t('settingModal.daily_norma')}</p>
                 <div className={css.formulaBlock}>
                   <div className={css.formulaWrapper}>
-                    <p>For woman:</p>
+                    <p>{t('settingModal.for_woman')}</p>
                     <p className={css.formula}>V=(M*0,03) + (T*0,4)</p>
                   </div>
                   <div className={css.formulaWrapper}>
-                    <p>For man:</p>
+                    <p>{t('settingModal.for_woman')}</p>
                     <p className={css.formula}>V=(M*0,04) + (T*0,6)</p>
                   </div>
                 </div>
                 <div className={css.formulaInfo}>
                   <p className={css.text}>
-                    <span className={css.asterisk}>*</span> V is the volume of the water norm in
-                    liters per day, M is your body weight, T is the time of active sports, or
-                    another type of activity commensurate in terms of loads (in the absence of
-                    these, you must set 0)
+                    <span className={css.asterisk}>*</span>
+                    {t('settingModal.text')}
                   </p>
                 </div>
                 <p className={css.mainText}>
                   <svg className={css.icon}>
                     <use href="./images/icons.svg#icon-exclamation-mark"></use>
                   </svg>
-                  Active time in hours
+                  {t('settingModal.active_time')}
                 </p>
               </div>
             </div>
             <div className={css.rightBlock}>
               <div className={css.inputBlock}>
                 <div className={css.block}>
-                  <label htmlFor={weightId}>Your weight in kilograms:</label>
+                  <label htmlFor={weightId}>{t('settingModal.your_weight')}</label>
                   <Field
                     type="number"
                     name="weight"
                     id={weightId}
                     className={`${touched.weight && errors.weight ? css.errorInput : ''}`}
                     onBlur={() => setFieldTouched('weight', true)}
+                    value={userWeight}
+                    // onChange={handleChangeWeight}
+                    onChange={e => handleChangeWeight(e, setFieldValue)}
                   />
                   <ErrorMessage className={css.errorMessage} name="weight" component="div" />
                 </div>
                 <div className={css.block}>
-                  <label htmlFor={timeId}>The time of active participation in sports:</label>
+                  <label htmlFor={timeId}>{t('settingModal.sport_time')}</label>
                   <Field
                     type="number"
                     name="dailySportTime"
                     id={timeId}
                     className={`${touched.time && errors.time ? css.errorInput : ''}`}
                     onBlur={() => setFieldTouched('dailySportTime', true)}
+                    value={userDailySportTime}
+                    // onChange={handleChangeDailySportTime}
+                    onChange={e => handleChangeDailySportTime(e, setFieldValue)}
                   />
                   <ErrorMessage
                     className={css.errorMessage}
@@ -236,12 +298,14 @@ const SettingsModal = () => {
               </div>
               <div className={css.inputBlock}>
                 <div className={css.resultBlock}>
-                  <p>The required amount of water in liters per day:</p>
-                  <p className={css.result}>1.8 L</p>
+                  <p>
+                    {t('settingModal.recommend_water_intake')}{' '}
+                    <span className={css.result}>{recommendedDailyUserNorm}</span>
+                  </p>
                 </div>
                 <div className={css.block}>
                   <label htmlFor={waterIntakeId} className={css.title}>
-                    Write down how much water you will drink:
+                    {t('settingModal.how_much_will_drink')}
                   </label>
                   <Field type="number" name="dailyNorm" id={waterIntakeId} />
                   <ErrorMessage className={css.errorMessage} name="dailyNorm" component="div" />
@@ -250,7 +314,7 @@ const SettingsModal = () => {
             </div>
           </div>
           <button type="submit" className={css.saveBtn}>
-            Save
+            {t('common.save')}
           </button>
         </Form>
       )}

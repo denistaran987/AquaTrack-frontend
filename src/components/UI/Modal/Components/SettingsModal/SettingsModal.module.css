@@ -10,15 +10,18 @@
   overflow: hidden;
   padding: 40px 20px;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  background-color: var(--color-settingsBg);
 
   @media screen and (min-width: 375px) {
     width: 343px;
   }
+
   @media screen and (min-width: 768px) {
     padding: 40px 16px 40px 40px;
     width: 648px;
     font-size: 16px;
   }
+
   @media screen and (min-width: 1400px) {
     width: 920px;
   }
@@ -28,6 +31,8 @@
   border: 1px solid rgba(47, 47, 47, 0.15);
   border-radius: 15px;
   padding: 14px;
+  background-color: var(--color-settingsInput);
+
   @media screen and (min-width: 768px) {
     padding: 16px;
   }
@@ -36,11 +41,13 @@
 p {
   margin: 0;
   padding: 0;
+  color: var(--color-main);
 }
 
 .avatarBlock .title {
   margin-bottom: 20px;
   font-size: 20px;
+
   @media screen and (min-width: 768px) {
     font-size: 28px;
   }
@@ -55,11 +62,15 @@ p {
 }
 
 .avatarWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto 10px auto;
   width: 75px;
   height: 75px;
   border-radius: 50%;
   overflow: hidden;
+
   @media screen and (min-width: 768px) {
     width: 100px;
     height: 100px;
@@ -82,6 +93,26 @@ p {
   justify-content: center;
   gap: 8px;
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.uploadLabel:hover {
+  color: var(--color-accent);
+}
+
+.uploadIcon {
+  transition: fill 0.2s ease-in-out;
+  width: 18px;
+  height: 18px;
+
+  @media screen and (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.uploadLabel:hover .uploadIcon {
+  fill: var(--color-accent);
 }
 
 .uploadBtn {
@@ -94,16 +125,6 @@ p {
   }
 }
 
-.uploadIcon {
-  width: 18px;
-  height: 18px;
-
-  @media screen and (min-width: 768px) {
-    width: 20px;
-    height: 20px;
-  }
-}
-
 .infoBlock {
   /* outline: 1px solid rgb(62, 104, 243); */
   overflow-y: auto;
@@ -112,6 +133,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 24px;
+
   @media screen and (min-width: 1400px) {
     padding-right: 16px;
     flex-wrap: wrap;
@@ -122,6 +144,7 @@ p {
 
 .infoBlock::-webkit-scrollbar {
   width: 6px;
+
   @media screen and (min-width: 768px) {
     width: 8px;
   }
@@ -129,7 +152,7 @@ p {
 
 .infoBlock::-webkit-scrollbar-thumb {
   border-radius: 30px;
-  background-color: var(--color-gray);
+  background-color: var(--color-logout);
 }
 
 .leftBlock,
@@ -137,6 +160,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 24px;
+
   @media screen and (min-width: 1400px) {
     width: 400px;
   }
@@ -207,7 +231,7 @@ p {
   transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.radioBtns input:checked + .customRadio::before {
+.radioBtns input:checked+.customRadio::before {
   background-color: var(--color-accent);
   transform: translate(-50%, -50%) scale(1);
 }
@@ -248,6 +272,7 @@ p {
 .normaBlock .icon {
   height: 18px;
   width: 18px;
+
   @media screen and (min-width: 768px) {
     width: 22px;
     height: 22px;
@@ -266,6 +291,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 12px;
+
   @media screen and (min-width: 768px) {
     flex-direction: row;
     gap: 28px;
@@ -284,6 +310,7 @@ p {
   line-height: 1.5;
   letter-spacing: -0.01em;
   color: #9be1a0;
+
   @media screen and (min-width: 768px) {
     font-size: 16px;
   }
@@ -309,6 +336,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 5px;
+
   @media screen and (min-width: 768px) {
     flex-direction: row;
   }
@@ -323,18 +351,19 @@ p {
 .saveBtn {
   border: none;
   border-radius: 30px;
-  padding: 14px 40px;
+  padding: 14px 24px;
   width: 116px;
   height: 46px;
-  background: var(--color-accent);
+  background-color: var(--color-accent);
   font-weight: 700;
   line-height: 1.28571;
   letter-spacing: -0.01em;
   text-align: center;
-  color: var(--color-main);
+  color: var(--color-bcgButton);
   cursor: pointer;
+
   @media screen and (min-width: 768px) {
-    padding: 16px 50px;
+    padding: 16px 30px;
     width: 141px;
     height: 56px;
   }

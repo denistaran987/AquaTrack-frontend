@@ -3,9 +3,12 @@ import css from './ChooseDate.module.css';
 import { selectWaterCurrentDate } from '../../../../redux/water/selectors.js';
 import { useSelector } from 'react-redux';
 import { parseISO } from 'date-fns';
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
 const ChooseDate = () => {
   const dateString = useSelector(selectWaterCurrentDate);
+  const { t } = useTranslation();
 
   const now = new Date();
   const offset = now.getTimezoneOffset() * 60 * 1000;
@@ -18,15 +21,16 @@ const ChooseDate = () => {
   const date = parseISO(dateString);
 
   const formattedDate = today
-    ? 'Today'
+    ? t('waterMAinInfo.today_norma')
     : `${date.toLocaleDateString('en-GB', {
         day: 'numeric',
         timeZone: 'UTC',
-      })}, ${date.toLocaleDateString('en-GB', {
+      })}, ${date.toLocaleDateString(i18next.language, {
         month: 'long',
         timeZone: 'UTC',
       })}`;
 
+  if (formattedDate === 'Invalid Date, Invalid Date') return;
   return <p className={css.text}>{formattedDate}</p>;
 };
 
