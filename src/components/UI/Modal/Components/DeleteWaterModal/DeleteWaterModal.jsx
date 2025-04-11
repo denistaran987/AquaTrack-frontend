@@ -3,12 +3,17 @@ import css from './DeleteWaterModal.module.css';
 import { deleteWaterEntry } from '../../../../../redux/water/operations.js';
 import toast from 'react-hot-toast';
 import { toggleModal } from '../../../../../redux/modal/slice.js';
-import { selectWaterId } from '../../../../../redux/water/selectors.js';
+import { selectConsumedWaterData, selectWaterId } from '../../../../../redux/water/selectors.js';
 import { useTranslation } from 'react-i18next';
+import { removeTotalDayWater } from '../../../../../redux/water/slice';
 
-const DeleteWaterModal = () => {
+const DeleteWaterModal = ({ date }) => {
+  const waterNotesArray = useSelector(selectConsumedWaterData);
+  console.log('waterNotesArray :>> ', waterNotesArray);
+
   const dispatch = useDispatch();
   const waterId = useSelector(selectWaterId);
+  const deletedDayData = waterNotesArray.find(({ _id }) => _id === waterId);
   const { t } = useTranslation();
 
   const successStyle = { backgroundColor: '#9be1a0', fontWeight: 'medium' };
@@ -20,6 +25,7 @@ const DeleteWaterModal = () => {
     try {
       await dispatch(deleteWaterEntry(waterId)).unwrap();
       dispatch(toggleModal());
+      dispatch(removeTotalDayWater(deletedDayData));
 
       toast.success(t('notifications.water_deleted'), {
         style: successStyle,
