@@ -7,14 +7,14 @@ import { selectConsumedWaterData } from '../../../../redux/water/selectors.js';
 
 const WaterList = () => {
   const waterNotesArray = useSelector(selectConsumedWaterData);
-
+  
   return (
     <div className={css.WaterListWrapper}>
       <ul className={css.waterList}>
         {waterNotesArray.length === 0 ? (
           <WaterPlaceholder />
         ) : (
-          waterNotesArray.map(({ _id, date, amount }) => (
+          [...waterNotesArray].sort((a,b)=>new Date(a.date)-new Date(b.date)).map(({ _id, date, amount }) => (
             <li key={_id}>
               <WaterItem id={_id} amount={amount} date={date} />
             </li>

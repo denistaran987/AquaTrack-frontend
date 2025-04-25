@@ -9,7 +9,6 @@ import { removeTotalDayWater } from '../../../../../redux/water/slice';
 
 const DeleteWaterModal = ({ date }) => {
   const waterNotesArray = useSelector(selectConsumedWaterData);
-  console.log('waterNotesArray :>> ', waterNotesArray);
 
   const dispatch = useDispatch();
   const waterId = useSelector(selectWaterId);
