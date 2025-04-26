@@ -12,6 +12,7 @@ import {
   selectWaterItemInfo,
 } from '../../../../../redux/water/selectors.js';
 import { useTranslation } from 'react-i18next';
+import { addTotalDayWater, editTotalDayWater } from '../../../../../redux/water/slice.js';
 
 const WaterForm = ({ type, initialData }) => {
   const WaterId = useSelector(selectWaterId);
@@ -55,7 +56,9 @@ const WaterForm = ({ type, initialData }) => {
     };
 
     if (type === 'add') {
+      dispatch(addTotalDayWater(payload))
       dispatch(addWaterEntry(payload))
+      
         .unwrap()
         .then(() => {
           toast.success(t('notifications.water_added'), {
@@ -72,6 +75,7 @@ const WaterForm = ({ type, initialData }) => {
     }
 
     if (type === 'edit') {
+      dispatch(editTotalDayWater({_id: WaterId, amount: payload.amount, date:payload.date}))
       dispatch(editWaterEntry({ entryId: WaterId, entryData: payload }))
         .unwrap()
         .then(() => {
