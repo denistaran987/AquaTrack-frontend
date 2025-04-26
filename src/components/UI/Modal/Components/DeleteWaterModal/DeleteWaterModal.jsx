@@ -7,7 +7,7 @@ import { selectConsumedWaterData, selectWaterId } from '../../../../../redux/wat
 import { useTranslation } from 'react-i18next';
 import { removeTotalDayWater } from '../../../../../redux/water/slice';
 
-const DeleteWaterModal = ({ date }) => {
+const DeleteWaterModal = () => {
   const waterNotesArray = useSelector(selectConsumedWaterData);
 
   const dispatch = useDispatch();

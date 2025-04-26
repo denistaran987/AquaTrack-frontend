@@ -38,7 +38,7 @@ const WelcomeSection = () => {
       ) : (
         <div className={s['button-container']}>
           <Link className={clsx(s.link, s.first)} to="/tracker">
-            {t('common.try_tracker')}
+            {t('welcomeSection.my_tracker')}
           </Link>
           <button
             className={s.confirmBtn}

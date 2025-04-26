@@ -45,7 +45,7 @@ const TrackerPage = () => {
       </div>
       {isOpen && (
         <Modal isOpen={isOpen} toggleModal={() => dispatch(toggleModal())}>
-          {isOpen === 'deleteWater' && <DeleteWaterModal date={currentDate}/>}
+          {isOpen === 'deleteWater' && <DeleteWaterModal />}
           {isOpen === 'logout' && <LogOutModal />}
           {isOpen === 'settings' && <SettingsModal />}
           {isOpen === 'add' && <WaterModal type={'add'} />}

@@ -3,6 +3,7 @@ export const en = {
     welcomeSection: {
       main_title: 'Water consumption tracker',
       second_title: 'Record daily water intake and track',
+      my_tracker: 'My tracker',
     },
 
     common: {
@@ -58,9 +59,9 @@ export const en = {
       max_value_ml: 'Max value - {{value}} ml',
       required: 'This field is required',
       invalid_email: 'Invalid email',
-      email_example: 'Invalid email format.Example: userexample@mail.com',
+      email_example: 'Invalid email format',
       valid_email: 'Enter a valid email',
-      password_min: 'Password must be at least 3 characters',
+      password_min: 'Password must be at least 6 characters',
       password_max: 'Password cannot exceed 20 characters',
       password_match: 'Passwords must match',
       negative: 'Can not be negative',

@@ -104,42 +104,48 @@ const SignInPage = () => {
         >
           {({ errors, touched, handleSubmit, setFieldTouched }) => (
             <Form className={styles.signinForm} noValidate onSubmit={handleSubmit}>
-              <label className={styles.label}>{t('common.email')}</label>
-              <Field
-                name="email"
-                type="email"
-                placeholder={t('notifications.email_placeholder')}
-                className={`${styles.input} ${
-                  touched.email && errors.email ? styles.errorInput : ''
-                }`}
-                onBlur={() => setFieldTouched('email', true)}
-              />
-              <ErrorMessage name="email" component="div" className={styles.errorMessage} />
-
-              <label className={styles.label}>{t('common.password')}</label>
-              <div className={styles.passwordWrapper}>
+              <label className={styles.label}>
+                {t('common.email')}
                 <Field
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder={t('notifications.password_placeholder')}
+                  name="email"
+                  type="email"
+                  placeholder={t('notifications.email_placeholder')}
                   className={`${styles.input} ${
-                    touched.password && errors.password ? styles.errorInput : ''
+                    touched.email && errors.email ? styles.errorInput : ''
                   }`}
-                  onBlur={() => setFieldTouched('password', true)}
+                  onBlur={() => setFieldTouched('email', true)}
                 />
-                <button
-                  type="button"
-                  onClick={togglePasswordVisibility}
-                  className={styles.togglePassword}
-                >
-                  <svg className={styles.icon} width="24" height="24">
-                    <use
-                      xlinkHref={`/images/icons.svg#${showPassword ? 'icon-eye' : 'icon-eye-off'}`}
-                    />
-                  </svg>
-                </button>
-              </div>
-              <ErrorMessage name="password" component="div" className={styles.errorMessage} />
+                <ErrorMessage name="email" component="div" className={styles.errorMessage} />
+              </label>
+
+              <label className={styles.label}>
+                {t('common.password')}
+                <div className={styles.passwordWrapper}>
+                  <Field
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder={t('notifications.password_placeholder')}
+                    className={`${styles.input} ${
+                      touched.password && errors.password ? styles.errorInput : ''
+                    }`}
+                    onBlur={() => setFieldTouched('password', true)}
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className={styles.togglePassword}
+                  >
+                    <svg className={styles.icon} width="24" height="24">
+                      <use
+                        xlinkHref={`/images/icons.svg#${
+                          showPassword ? 'icon-eye' : 'icon-eye-off'
+                        }`}
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <ErrorMessage name="password" component="div" className={styles.errorMessage} />
+              </label>
 
               <p className={styles.forgotPassword}>
                 {t('signInForm.forgot_password')}{' '}

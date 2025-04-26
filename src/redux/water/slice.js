@@ -8,15 +8,13 @@ import {
 } from './operations';
 
 const initialState = {
-  todayWaterNotesArray: [],
-  noTodayWaterNotesArray: [],
+  consumedWaterData: [],
+  monthWaterData: [],
   waterId: null,
   todayProgress: 0,
   isLoading: false,
   currentDate: '',
-  consumedWaterData: [],
   error: {},
-  monthWaterData: [],
 };
 
 export const slice = createSlice({
@@ -28,29 +26,30 @@ export const slice = createSlice({
     },
     addTotalDayWater: (state, action) => {
       const { date, amount } = action.payload;
-      const isDayExist = state.monthWaterData.find(day=>day.date.split("T")[0] === date.split("T")[0]) 
-      let newMonthWaterData = []
-      if (isDayExist){
-       
-          newMonthWaterData = state.monthWaterData.map(day => {
-        if (day.date.split("T")[0] === date.split("T")[0]) {
-          return { date: day.date, totalDayWater: day.totalDayWater + amount };
-        } else {
-          return day;
-        }
-      }); 
+      const isDayExist = state.monthWaterData.find(
+        day => day.date.split('T')[0] === date.split('T')[0]
+      );
+      let newMonthWaterData = [];
+      if (isDayExist) {
+        newMonthWaterData = state.monthWaterData.map(day => {
+          if (day.date.split('T')[0] === date.split('T')[0]) {
+            return { date: day.date, totalDayWater: day.totalDayWater + amount };
+          } else {
+            return day;
+          }
+        });
       } else {
-        newMonthWaterData = [...state.monthWaterData, {date, totalDayWater:amount}]
+        newMonthWaterData = [...state.monthWaterData, { date, totalDayWater: amount }];
       }
 
       state.monthWaterData = newMonthWaterData;
     },
     removeTotalDayWater: (state, action) => {
       const { date, amount } = action.payload;
-      const targetDate = date.split("T")[0];
-        
+      const targetDate = date.split('T')[0];
+
       const newMonthWaterData = state.monthWaterData.map(day => {
-        if (day.date.split("T")[0] === targetDate) {
+        if (day.date.split('T')[0] === targetDate) {
           const newAmount = day.totalDayWater - amount;
           return {
             ...day,
@@ -65,26 +64,30 @@ export const slice = createSlice({
     },
     editTotalDayWater: (state, action) => {
       const { _id, amount, date } = action.payload;
-        const currentNote = state.consumedWaterData.find((note)=>_id === note._id)
-        currentNote.amount = amount;
-        const waterDataWithoutCurrentNote = state.consumedWaterData.filter((note)=>_id !== note._id);
-        state.consumedWaterData = [...waterDataWithoutCurrentNote, currentNote ];
-        const newProgress = [...waterDataWithoutCurrentNote, currentNote ].reduce((acc,{amount})=>acc+amount,0); 
+      const currentNote = state.consumedWaterData.find(note => _id === note._id);
+      currentNote.amount = amount;
+      currentNote.date = date;
+      const waterDataWithoutCurrentNote = state.consumedWaterData.filter(note => _id !== note._id);
+      state.consumedWaterData = [...waterDataWithoutCurrentNote, currentNote];
+      const newProgress = [...waterDataWithoutCurrentNote, currentNote].reduce(
+        (acc, { amount }) => acc + amount,
+        0
+      );
 
-        const newMonthWaterData = state.monthWaterData.map(day => {
-          if (day.date.split("T")[0] === date.split("T")[0]) {
-            const newAmount = newProgress;
-            return {
-              ...day,
-              totalDayWater: newAmount >= 0 ? newAmount : 0,
-            };
-          }
-          return day;
-        });
+      const newMonthWaterData = state.monthWaterData.map(day => {
+        if (day.date.split('T')[0] === date.split('T')[0]) {
+          const newAmount = newProgress;
+          return {
+            ...day,
+            totalDayWater: newAmount >= 0 ? newAmount : 0,
+          };
+        }
+        return day;
+      });
 
-        state.todayProgress = newProgress;
-        state.totalDayWater = newProgress;
-        state.monthWaterData = newMonthWaterData;  
+      state.todayProgress = newProgress;
+      state.totalDayWater = newProgress;
+      state.monthWaterData = newMonthWaterData;
     },
   },
   extraReducers: builder => {
@@ -126,7 +129,7 @@ export const slice = createSlice({
       .addCase(editWaterEntry.pending, state => {
         state.isLoading = true;
       })
-      .addCase(editWaterEntry.fulfilled, (state) => {
+      .addCase(editWaterEntry.fulfilled, state => {
         state.isLoading = false;
       })
       .addCase(editWaterEntry.rejected, (state, { payload }) => {

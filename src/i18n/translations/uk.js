@@ -3,6 +3,7 @@ export const uk = {
     welcomeSection: {
       main_title: 'Трекер споживання води',
       second_title: 'Фіксуй та стеж за щоденним вживанням води ',
+      my_tracker: 'Мій трекер',
     },
 
     common: {
@@ -58,9 +59,9 @@ export const uk = {
       max_value_ml: 'Максимальне значення - {{value}} мл',
       required: "Це поле є обов'язковим",
       invalid_email: 'Недійсна електронна адреса',
-      email_example: 'Недійсний формат електронної пошти. Приклад: userexample@mail.com',
+      email_example: 'Недійсний формат електронної пошти',
       valid_email: 'Введіть дійсну адресу електронної пошти.',
-      password_min: 'Пароль повинен містити мінімум 6 символи',
+      password_min: 'Пароль повинен містити мін. 6 символів',
       password_max: 'Пароль не може перевищувати 20 символів',
       password_match: 'Паролі мають збігатися',
       negative: 'Не може бути негативним',

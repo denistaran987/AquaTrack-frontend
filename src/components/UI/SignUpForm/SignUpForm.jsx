@@ -131,82 +131,93 @@ const SignUpPage = () => {
         >
           {({ errors, touched, handleSubmit, setFieldTouched }) => (
             <Form className={styles.signupForm} noValidate onSubmit={handleSubmit}>
-              <label className={styles.label}>{t('common.email')}</label>
-              <Field
-                name="email"
-                type="email"
-                placeholder={t('notifications.email_placeholder')}
-                className={`${styles.input} ${
-                  touched.email && errors.email ? styles.errorInput : ''
-                }`}
-                onBlur={() => setFieldTouched('email', true)}
-              />
-              <ErrorMessage name="email" component="div" className={styles.errorMessage} />
-
-              <label className={styles.label}>{t('common.password')}</label>
-              <div className={styles.passwordWrapper}>
+              <label className={styles.label}>
+                {t('common.email')}
                 <Field
-                  name="password"
-                  type={showPassword.password ? 'text' : 'password'}
-                  placeholder={t('notifications.password_placeholder')}
+                  name="email"
+                  type="email"
+                  placeholder={t('notifications.email_placeholder')}
                   className={`${styles.input} ${
-                    touched.password && errors.password ? styles.errorInput : ''
+                    touched.email && errors.email ? styles.errorInput : ''
                   }`}
-                  onBlur={() => setFieldTouched('password', true)}
+                  onBlur={() => setFieldTouched('email', true)}
                 />
-                <button
-                  type="button"
-                  onClick={() => togglePasswordVisibility('password')}
-                  className={styles.togglePassword}
-                >
-                  <svg className={styles.icon} width="24" height="24">
-                    <use
-                      xlinkHref={`/images/icons.svg#${
-                        showPassword.password ? 'icon-eye' : 'icon-eye-off'
-                      }`}
-                    />
-                  </svg>
-                </button>
-              </div>
-              <ErrorMessage name="password" component="div" className={styles.errorMessage} />
+                <ErrorMessage name="email" component="div" className={styles.errorMessage} />
+              </label>
 
-              <label className={styles.label}>{t('common.repeat_password')}</label>
-              <div className={styles.passwordWrapper}>
-                <Field
+              <label className={styles.label}>
+                {t('common.password')}
+                <div className={styles.passwordWrapper}>
+                  <Field
+                    name="password"
+                    type={showPassword.password ? 'text' : 'password'}
+                    placeholder={t('notifications.password_placeholder')}
+                    className={`${styles.input} ${
+                      touched.password && errors.password ? styles.errorInput : ''
+                    }`}
+                    onBlur={() => setFieldTouched('password', true)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => togglePasswordVisibility('password')}
+                    className={styles.togglePassword}
+                  >
+                    <svg className={styles.icon} width="24" height="24">
+                      <use
+                        xlinkHref={`/images/icons.svg#${
+                          showPassword.password ? 'icon-eye' : 'icon-eye-off'
+                        }`}
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <ErrorMessage name="password" component="div" className={styles.errorMessage} />
+              </label>
+
+              <label className={styles.label}>
+                {t('common.repeat_password')}
+                <div className={styles.passwordWrapper}>
+                  <Field
+                    name="repeatPassword"
+                    type={showPassword.repeatPassword ? 'text' : 'password'}
+                    placeholder={t('notifications.repeat_password_placeholder')}
+                    className={`${styles.input} ${
+                      touched.repeatPassword && errors.repeatPassword ? styles.errorInput : ''
+                    }`}
+                    onBlur={() => setFieldTouched('repeatPassword', true)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => togglePasswordVisibility('repeatPassword')}
+                    className={styles.togglePassword}
+                  >
+                    <svg className={styles.icon} width="24" height="24">
+                      <use
+                        xlinkHref={`/images/icons.svg#${
+                          showPassword.repeatPassword ? 'icon-eye' : 'icon-eye-off'
+                        }`}
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <ErrorMessage
                   name="repeatPassword"
-                  type={showPassword.repeatPassword ? 'text' : 'password'}
-                  placeholder={t('notifications.repeat_password_placeholder')}
-                  className={`${styles.input} ${
-                    touched.repeatPassword && errors.repeatPassword ? styles.errorInput : ''
-                  }`}
-                  onBlur={() => setFieldTouched('repeatPassword', true)}
+                  component="div"
+                  className={styles.errorMessage}
                 />
-                <button
-                  type="button"
-                  onClick={() => togglePasswordVisibility('repeatPassword')}
-                  className={styles.togglePassword}
-                >
-                  <svg className={styles.icon} width="24" height="24">
-                    <use
-                      xlinkHref={`/images/icons.svg#${
-                        showPassword.repeatPassword ? 'icon-eye' : 'icon-eye-off'
-                      }`}
-                    />
-                  </svg>
-                </button>
-              </div>
-              <ErrorMessage name="repeatPassword" component="div" className={styles.errorMessage} />
+              </label>
 
               <button type="submit" className={styles.signupBtn}>
                 {t('common.sign_up')}
               </button>
+              <button type="button" onClick={handleGoogleLogin} className={styles.googlelink}>
+                <FcGoogle />
+                {t('common.sing_up_google')}
+              </button>
             </Form>
           )}
         </Formik>
-        <button type="button" onClick={handleGoogleLogin} className={styles.googlelink}>
-          <FcGoogle />
-          {t('common.sing_up_google')}
-        </button>
+
         <p className={styles.signinLink}>
           {t('signUpForm.have_account')}
           <Link to="/signin" className={styles.signinLinkText}>
