@@ -15,11 +15,11 @@ import userReducer from './user/slice';
 import waterReducer from './water/slice';
 import modalReducer from './modal/slice';
 import themeReducer from './theme/slice';
+import { setupInterceptors } from '../utils/axios.config';
 
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whiteList: ['token'],
 };
 
 const persistedReducer = persistReducer(authPersistConfig, authReducer);
@@ -42,3 +42,4 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+setupInterceptors(store.getState, store.dispatch);

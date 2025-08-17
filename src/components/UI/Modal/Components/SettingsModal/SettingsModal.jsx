@@ -45,14 +45,12 @@ const SettingsModal = () => {
   const handleChangeWeight = (e, setFieldValue) => {
     const value = e.target.value === '' ? '' : +e.target.value;
     setFieldValue('weight', value);
-    console.log(value);
     dispatch(setWeight(value));
   };
 
   const handleChangeDailySportTime = (e, setFieldValue) => {
     const value = e.target.value === '' ? '' : +e.target.value;
     setFieldValue('dailySportTime', value);
-    console.log(value);
     dispatch(setDailySportTime(value));
   };
 

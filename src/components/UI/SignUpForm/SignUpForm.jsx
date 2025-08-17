@@ -12,7 +12,6 @@ import { selectIsLoading } from '../../../redux/auth/selectors';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import { useTranslation } from 'react-i18next';
 import LanguageBtn from '../LanguageBtn/languageBtn';
-import axios from 'axios';
 import { FcGoogle } from 'react-icons/fc';
 
 const SignUpPage = () => {
@@ -101,7 +100,7 @@ const SignUpPage = () => {
 
   const handleGoogleLogin = async () => {
     try {
-      const response = await axios.get('/auth/get-oauth-url');
+      const response = await api.get('/auth/get-oauth-url');
       let url = response.data.data.url;
 
       url = url.includes('prompt=')

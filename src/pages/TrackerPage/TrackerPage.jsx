@@ -23,8 +23,8 @@ const TrackerPage = () => {
   const currentDate = useSelector(selectWaterCurrentDate);
 
   useEffect(() => {
-    dispatch(fetchUserInfo(token));
-  }, [dispatch, token]);
+    dispatch(fetchUserInfo());
+  }, [dispatch]);
 
   useEffect(() => {
     if (!currentDate && token) {

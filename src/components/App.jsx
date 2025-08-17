@@ -1,14 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
 import SharedLayout from './Utils/SharedLayout/SharedLayout';
 import PrivateRoute from './Utils/PrivateRoute/PrivateRoute';
 import RestrictedRoute from './Utils/RestrictedRoute/RestrictedRoute';
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import Loader from './Utils/Loader/Loader';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsisRefreshing } from '../redux/auth/selectors';
-import { refreshUser } from '../redux/auth/operations';
-import '../i18n/index';
+
+import '../i18n/index.js';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage'));
@@ -19,16 +16,7 @@ const ResetPasswordPage = lazy(() => import('../pages/ResetPasswordPage/ResetPas
 const GooglePage = lazy(() => import('../pages/GooglePage/GooglePage'));
 
 function App() {
-  const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectIsisRefreshing);
-
-  useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
-
-  return isRefreshing ? (
-    <Loader />
-  ) : (
+  return (
     <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<SharedLayout />}>

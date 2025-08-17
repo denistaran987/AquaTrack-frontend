@@ -13,8 +13,8 @@ import { setPosition, toggleModal } from '../../../redux/modal/slice';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import LanguageBtn from '../LanguageBtn/languageBtn';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
 import { FcGoogle } from 'react-icons/fc';
+import { api } from '../../../utils/axios.config';
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -74,7 +74,7 @@ const SignInPage = () => {
 
   const handleGoogleLogin = async () => {
     try {
-      const response = await axios.get('/auth/get-oauth-url');
+      const response = await api.get('/auth/get-oauth-url');
       let url = response.data.data.url;
 
       url = url.includes('prompt=')
